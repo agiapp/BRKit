@@ -13,6 +13,7 @@
 		C5E29E21208839E700AE642D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5E29E20208839E700AE642D /* Assets.xcassets */; };
 		C5E29E24208839E700AE642D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5E29E22208839E700AE642D /* LaunchScreen.storyboard */; };
 		C5E29E27208839E700AE642D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E26208839E700AE642D /* main.m */; };
+		C5E29E34208847DB00AE642D /* NSString+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E33208847DB00AE642D /* NSString+BRAdd.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		C5E29E23208839E700AE642D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5E29E25208839E700AE642D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5E29E26208839E700AE642D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C5E29E32208847DB00AE642D /* NSString+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+BRAdd.h"; sourceTree = "<group>"; };
+		C5E29E33208847DB00AE642D /* NSString+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+BRAdd.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +78,8 @@
 		C5E29E3120883B0800AE642D /* BRKit */ = {
 			isa = PBXGroup;
 			children = (
+				C5E29E32208847DB00AE642D /* NSString+BRAdd.h */,
+				C5E29E33208847DB00AE642D /* NSString+BRAdd.m */,
 			);
 			path = BRKit;
 			sourceTree = SOURCE_ROOT;
@@ -152,6 +157,7 @@
 				C5E29E1C208839E500AE642D /* ViewController.m in Sources */,
 				C5E29E27208839E700AE642D /* main.m in Sources */,
 				C5E29E19208839E500AE642D /* AppDelegate.m in Sources */,
+				C5E29E34208847DB00AE642D /* NSString+BRAdd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
