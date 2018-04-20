@@ -9,7 +9,7 @@
 #ifndef BRKit_h
 #define BRKit_h
 
-#import <BRMethod.h>
-#import <NSString+BRAdd.h>
+#import "BRMethod.h"
+#import "NSString+BRAdd.h"
 
 #endif /* BRKit_h */

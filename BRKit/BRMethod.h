@@ -16,13 +16,13 @@ static inline UIEdgeInsets br_safeAreaInset(UIView *view) {
     return UIEdgeInsetsZero;
 }
 
-static inline MASConstraint * br_safeAreaBottom(MASConstraintMaker *make,UIView *view) {
-    if (@available(iOS 11.0, *)) {
-        //mas_safeAreaLayoutGuideBottom
-        return make.bottom.equalTo(view.mas_safeAreaLayoutGuideBottom);
-    }
-    return make.bottom.equalTo(view);
-}
+//static inline MASConstraint * br_safeAreaBottom(MASConstraintMaker *make,UIView *view) {
+//    if (@available(iOS 11.0, *)) {
+//        //mas_safeAreaLayoutGuideBottom
+//        return make.bottom.equalTo(view.mas_safeAreaLayoutGuideBottom);
+//    }
+//    return make.bottom.equalTo(view);
+//}
 
 static inline BOOL br_isZeroFloat(float f) {
     const float EPSINON = 0.0001;
@@ -60,7 +60,7 @@ static inline BOOL br_isEmpty(id thing) {
      && [(NSArray *)thing count] == 0);
 }
 
-// 获取非空有效字符串
+// 获取非空字符串
 static inline NSString *br_nonullString(NSString *obj) {
     if (obj == nil ||
         [obj isEqual:[NSNull null]] ||

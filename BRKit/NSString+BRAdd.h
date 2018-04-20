@@ -11,6 +11,15 @@
 
 @interface NSString (BRAdd)
 
+/** 判断是否是有效的(非空/非空白)字符串 */
+- (BOOL)br_isValidString;
+
+/** 判断是否包含指定字符串 */
+- (BOOL)br_containsString:(NSString *)string;
+
+/* 修剪字符串（去掉头尾两边的空格和换行符）*/
+- (NSString *)br_stringByTrim;
+
 /** md5加密 */
 - (NSString *)br_md5String;
 
@@ -44,5 +53,45 @@
  *  @return 文本高度
  */
 - (CGFloat)br_getTextHeight:(UIFont *)font width:(CGFloat)width;
+
+
+///==================================================
+///             正则表达式
+///==================================================
+/** 判断是否是有效的手机号 */
+- (BOOL)br_isValidPhoneNumber;
+
+/** 判断是否是有效的用户密码 */
+- (BOOL)br_isValidPassword;
+
+/** 判断是否是有效的用户名（20位的中文或英文）*/
+- (BOOL)br_isValidUserName;
+
+/** 判断是否是有效的邮箱 */
+- (BOOL)br_isValidEmail;
+
+/** 判断是否是有效的URL */
+- (BOOL)isValidUrl;
+
+/** 判断是否是有效的银行卡号 */
+- (BOOL)br_isValidBankNumber;
+
+/** 判断是否是有效的身份证号 */
+- (BOOL)br_isValidIDCardNumber;
+
+/** 判断是否是有效的IP地址 */
+- (BOOL)br_isValidIPAddress;
+
+/** 判断是否是纯汉字 */
+- (BOOL)br_isValidChinese;
+
+/** 判断是否是邮政编码 */
+- (BOOL)br_isValidPostalcode;
+
+/** 判断是否是工商税号 */
+- (BOOL)br_isValidTaxNo;
+
+/** 判断是否是车牌号 */
+- (BOOL)br_isCarNumber;
 
 @end
