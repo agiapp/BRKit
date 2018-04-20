@@ -17,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C5AD51BE20898D0300E1032B /* BRMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRMethod.h; sourceTree = "<group>"; };
+		C5AD51BF2089927300E1032B /* BRKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRKit.h; sourceTree = "<group>"; };
 		C5E29E14208839E500AE642D /* BRKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5E29E17208839E500AE642D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C5E29E18208839E500AE642D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -78,6 +80,8 @@
 		C5E29E3120883B0800AE642D /* BRKit */ = {
 			isa = PBXGroup;
 			children = (
+				C5AD51BF2089927300E1032B /* BRKit.h */,
+				C5AD51BE20898D0300E1032B /* BRMethod.h */,
 				C5E29E32208847DB00AE642D /* NSString+BRAdd.h */,
 				C5E29E33208847DB00AE642D /* NSString+BRAdd.m */,
 			);
