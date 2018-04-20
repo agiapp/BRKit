@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSString (BRAdd)
 
 /** 判断是否是有效的(非空/非空白)字符串 */
@@ -21,7 +23,7 @@
 - (NSString *)br_stringByTrim;
 
 /** md5加密 */
-- (NSString *)br_md5String;
+- (nullable NSString *)br_md5String;
 
 /**
  *  获取文本的大小
@@ -95,3 +97,5 @@
 - (BOOL)br_isCarNumber;
 
 @end
+
+NS_ASSUME_NONNULL_END

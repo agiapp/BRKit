@@ -8,7 +8,9 @@
 
 #import "NSString+BRAdd.h"
 #include <CommonCrypto/CommonCrypto.h>
-#import "BRMethod.h"
+#import "BRKitMacro.h"
+
+BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 
 @implementation NSString (BRAdd)
 

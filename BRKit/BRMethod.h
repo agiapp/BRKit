@@ -9,6 +9,10 @@
 #ifndef BRMethod_h
 #define BRMethod_h
 
+///==================================================
+///            static inline 内联函数
+///==================================================
+
 static inline UIEdgeInsets br_safeAreaInset(UIView *view) {
     if (@available(iOS 11.0, *)) {
         return view.safeAreaInsets;
