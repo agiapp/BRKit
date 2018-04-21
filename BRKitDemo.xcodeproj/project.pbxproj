@@ -45,6 +45,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C523E28C208B9518008A1508 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				C5AD51BE20898D0300E1032B /* BRMethod.h */,
+				C5E29E32208847DB00AE642D /* NSString+BRAdd.h */,
+				C5E29E33208847DB00AE642D /* NSString+BRAdd.m */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
 		C5E29E0B208839E500AE642D = {
 			isa = PBXGroup;
 			children = (
@@ -83,9 +93,7 @@
 			children = (
 				C5AD51BF2089927300E1032B /* BRKit.h */,
 				C5AD51C02089F79400E1032B /* BRKitMacro.h */,
-				C5AD51BE20898D0300E1032B /* BRMethod.h */,
-				C5E29E32208847DB00AE642D /* NSString+BRAdd.h */,
-				C5E29E33208847DB00AE642D /* NSString+BRAdd.m */,
+				C523E28C208B9518008A1508 /* Foundation */,
 			);
 			path = BRKit;
 			sourceTree = SOURCE_ROOT;
