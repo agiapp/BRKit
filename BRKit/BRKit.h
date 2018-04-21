@@ -11,5 +11,6 @@
 
 #import "BRMethod.h"
 #import "NSString+BRAdd.h"
+#import "NSArray+BRAdd.h"
 
 #endif /* BRKit_h */
