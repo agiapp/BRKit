@@ -13,12 +13,12 @@
 ///            static inline 内联函数
 ///==================================================
 
-static inline UIEdgeInsets br_safeAreaInset(UIView *view) {
-    if (@available(iOS 11.0, *)) {
-        return view.safeAreaInsets;
-    }
-    return UIEdgeInsetsZero;
-}
+//static inline UIEdgeInsets br_safeAreaInset(UIView *view) {
+//    if (@available(iOS 11.0, *)) {
+//        return view.safeAreaInsets;
+//    }
+//    return UIEdgeInsetsZero;
+//}
 
 //static inline MASConstraint * br_safeAreaBottom(MASConstraintMaker *make,UIView *view) {
 //    if (@available(iOS 11.0, *)) {

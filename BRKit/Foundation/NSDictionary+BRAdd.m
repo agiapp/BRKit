@@ -8,6 +8,7 @@
 
 #import "NSDictionary+BRAdd.h"
 #import "BRKitMacro.h"
+#import "BRMethod.h"
 
 BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
 
@@ -43,6 +44,22 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
         result = [result substringToIndex:result.length - 2];
     }
     return result;
+}
+
+@end
+
+
+@implementation NSMutableDictionary (BRAdd)
+
+#pragma mark - 给可变字典添加键值对
+- (void)br_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
+    if (br_isEmpty(aKey)) {
+        return;
+    }
+    if (br_isEmpty(anObject) && ![anObject isEqual:@""]) {
+        return;
+    }
+    [self setObject:anObject forKey:aKey];
 }
 
 @end

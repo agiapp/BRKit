@@ -18,4 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface NSMutableDictionary (BRAdd)
+/** 给可变字典添加键值对 */
+- (void)br_setObject:(id)anObject forKey:(id<NSCopying>)aKey;
+
+@end
+
 NS_ASSUME_NONNULL_END
