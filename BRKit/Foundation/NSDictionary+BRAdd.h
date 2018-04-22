@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSDictionary (BRAdd)
 /** 字典 转 json字符串 */
-- (NSString *)br_toJsonString;
+- (nullable NSString *)br_toJsonString;
+/** 把字典拼成url字符串 */
+- (nullable NSString *)br_toURLString;
 
 @end
+
+NS_ASSUME_NONNULL_END
