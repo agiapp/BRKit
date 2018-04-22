@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C523E28F208B966D008A1508 /* NSArray+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C523E28E208B966D008A1508 /* NSArray+BRAdd.m */; };
+		C580EEA9208CC90C00C240AF /* NSDictionary+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */; };
 		C5E29E19208839E500AE642D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E18208839E500AE642D /* AppDelegate.m */; };
 		C5E29E1C208839E500AE642D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E1B208839E500AE642D /* ViewController.m */; };
 		C5E29E1F208839E500AE642D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5E29E1D208839E500AE642D /* Main.storyboard */; };
@@ -20,6 +21,8 @@
 /* Begin PBXFileReference section */
 		C523E28D208B966D008A1508 /* NSArray+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+BRAdd.h"; sourceTree = "<group>"; };
 		C523E28E208B966D008A1508 /* NSArray+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BRAdd.m"; sourceTree = "<group>"; };
+		C580EEA7208CC90C00C240AF /* NSDictionary+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BRAdd.h"; sourceTree = "<group>"; };
+		C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BRAdd.m"; sourceTree = "<group>"; };
 		C5AD51BE20898D0300E1032B /* BRMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRMethod.h; sourceTree = "<group>"; };
 		C5AD51BF2089927300E1032B /* BRKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRKit.h; sourceTree = "<group>"; };
 		C5AD51C02089F79400E1032B /* BRKitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRKitMacro.h; sourceTree = "<group>"; };
@@ -56,8 +59,17 @@
 				C5E29E33208847DB00AE642D /* NSString+BRAdd.m */,
 				C523E28D208B966D008A1508 /* NSArray+BRAdd.h */,
 				C523E28E208B966D008A1508 /* NSArray+BRAdd.m */,
+				C580EEA7208CC90C00C240AF /* NSDictionary+BRAdd.h */,
+				C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */,
 			);
 			path = Foundation;
+			sourceTree = "<group>";
+		};
+		C580EEA6208CC85000C240AF /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		C5E29E0B208839E500AE642D = {
@@ -80,9 +92,9 @@
 			isa = PBXGroup;
 			children = (
 				C5E29E3120883B0800AE642D /* BRKit */,
-				C5E29E17208839E500AE642D /* AppDelegate.h */,
 				C5E29E18208839E500AE642D /* AppDelegate.m */,
 				C5E29E1A208839E500AE642D /* ViewController.h */,
+				C5E29E17208839E500AE642D /* AppDelegate.h */,
 				C5E29E1B208839E500AE642D /* ViewController.m */,
 				C5E29E1D208839E500AE642D /* Main.storyboard */,
 				C5E29E20208839E700AE642D /* Assets.xcassets */,
@@ -99,6 +111,7 @@
 				C5AD51BF2089927300E1032B /* BRKit.h */,
 				C5AD51C02089F79400E1032B /* BRKitMacro.h */,
 				C523E28C208B9518008A1508 /* Foundation */,
+				C580EEA6208CC85000C240AF /* UIKit */,
 			);
 			path = BRKit;
 			sourceTree = SOURCE_ROOT;
@@ -177,6 +190,7 @@
 				C523E28F208B966D008A1508 /* NSArray+BRAdd.m in Sources */,
 				C5E29E27208839E700AE642D /* main.m in Sources */,
 				C5E29E19208839E500AE642D /* AppDelegate.m in Sources */,
+				C580EEA9208CC90C00C240AF /* NSDictionary+BRAdd.m in Sources */,
 				C5E29E34208847DB00AE642D /* NSString+BRAdd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
