@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /* 修剪字符串（去掉头尾两边的空格和换行符）*/
 - (NSString *)br_stringByTrim;
 
+
 /** md5加密 */
 - (nullable NSString *)br_md5String;
 
@@ -95,6 +96,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 判断是否是车牌号 */
 - (BOOL)br_isCarNumber;
+
+/** 通过身份证获取性别（1:男, 2:女） */
+- (nullable NSNumber *)br_getGenderFromIdcard;
+
+/** 隐藏证件号指定位数字（如：360723********6341） */
+- (nullable NSString *)br_hideCharacters:(NSUInteger)location length:(NSUInteger)length;
 
 @end
 

@@ -8,6 +8,7 @@
 
 #import "NSArray+BRAdd.h"
 #import "BRKitMacro.h"
+#import "BRMethod.h"
 
 BRSYNTH_DUMMY_CLASS(NSArray_BRAdd)
 
@@ -28,17 +29,23 @@ BRSYNTH_DUMMY_CLASS(NSArray_BRAdd)
     return nil;
 }
 
-#pragma mark - 倒序数组
+#pragma mark - 数组倒序
 - (NSArray *)br_reverseArray {
     return [[self reverseObjectEnumerator] allObjects];
 }
 
 @end
 
-
 @implementation NSMutableArray (BRAdd)
+#pragma mark - 添加元素
+- (void)br_addObject:(id)anObject {
+    if (br_isEmpty(anObject)) {
+        return;
+    }
+    [self addObject:anObject];
+}
 
-#pragma mark - 倒序数组
+#pragma mark - 数组倒序
 - (void)br_reverseMutableArray {
     NSUInteger count = self.count;
     int mid = floor(count / 2.0);

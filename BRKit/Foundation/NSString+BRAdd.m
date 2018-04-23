@@ -279,4 +279,27 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return [pre evaluateWithObject:self];
 }
 
+#pragma mark - 通过身份证获取性别
+- (NSNumber *)br_getGenderFromIDCard {
+    if (self.length < 16) return nil;
+    NSUInteger lenght = self.length;
+    NSString *sex = [self substringWithRange:NSMakeRange(lenght - 2, 1)];
+    if ([sex intValue] % 2 == 1) {
+        return @1;
+    }
+    return @2;
+}
+
+#pragma mark - 隐藏证件号指定位数字
+- (NSString *)br_hideCharacters:(NSUInteger)location length:(NSUInteger)length {
+    if (self.length > length && length > 0) {
+        NSMutableString *str = [[NSMutableString alloc]init];
+        for (NSInteger i = 0; i < length; i++) {
+            [str appendString:@"*"];
+        }
+        return [self stringByReplacingCharactersInRange:NSMakeRange(location, length) withString:[str copy]];
+    }
+    return self;
+}
+
 @end
