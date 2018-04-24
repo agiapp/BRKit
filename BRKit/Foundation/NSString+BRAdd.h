@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)br_isCarNumber;
 
 /** 通过身份证获取性别（1:男, 2:女） */
-- (nullable NSNumber *)br_getGenderFromIdcard;
+- (nullable NSNumber *)br_getGenderFromIDCard;
 
 /** 隐藏证件号指定位数字（如：360723********6341） */
 - (nullable NSString *)br_hideCharacters:(NSUInteger)location length:(NSUInteger)length;

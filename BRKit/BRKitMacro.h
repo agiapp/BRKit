@@ -10,13 +10,16 @@
 #define BRKitMacro_h
 
 /**
-    Add this macro before each category implementation, so we don't have to use
-    -all_load or -force_load to load object files from static libraries that only
-    contain categories and no classes.
-    More info: http://developer.apple.com/library/mac/#qa/qa2006/qa1490.html .
+    静态库中编写 Category 时的便利宏，用于解决 Category 方法从静态库中加载需要特别设置的问题。
+    加入这个宏后，不需要再在 Xcode 的 Other Liker Fliags 中设置链接库参数（-Objc / -all_load / -force_load）
     *******************************************************************************
+    使用:在静态库中每个分类的 @implementation 前添加这个宏
     Example:
+        #import "NSString+BRAdd.h"
+ 
         BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
+        @implementation NSString (BRAdd)
+        @end
  */
 #ifndef BRSYNTH_DUMMY_CLASS
 
