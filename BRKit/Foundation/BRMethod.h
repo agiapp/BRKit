@@ -36,7 +36,7 @@ static inline BOOL br_isZeroFloat(float f) {
     return NO;
 }
 
-// 获取字符串（对象转字符串）
+/** 获取字符串（对象转字符串）*/
 static inline NSString *br_stringFromObject(id object) {
     if (object == nil ||
         [object isEqual:[NSNull null]] ||
@@ -52,7 +52,7 @@ static inline NSString *br_stringFromObject(id object) {
     }
 }
 
-// 判断对象是否为空
+/** 判断对象是否为空 */
 static inline BOOL br_isEmpty(id thing) {
     return thing == nil ||
     [thing isEqual:[NSNull null]] ||
@@ -64,7 +64,7 @@ static inline BOOL br_isEmpty(id thing) {
      && [(NSArray *)thing count] == 0);
 }
 
-// 获取非空字符串
+/** 获取非空字符串 */
 static inline NSString *br_nonullString(NSString *obj) {
     if (obj == nil ||
         [obj isEqual:[NSNull null]] ||
