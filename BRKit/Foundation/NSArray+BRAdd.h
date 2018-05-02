@@ -14,15 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 /** 数组/字典 转 json字符串 */
 - (nullable NSString *)br_toJsonString;
 /** 数组倒序 */
-- (NSArray *)br_reverseArray;
+- (NSArray *)br_reverse;
 
 @end
 
 @interface NSMutableArray (BRAdd)
 /** 添加元素 */
 - (void)br_addObject:(id)anObject;
-/** 数组倒序 */
-- (void)br_reverseMutableArray;
 
 @end
 

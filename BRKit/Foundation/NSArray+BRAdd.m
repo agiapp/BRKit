@@ -30,7 +30,7 @@ BRSYNTH_DUMMY_CLASS(NSArray_BRAdd)
 }
 
 #pragma mark - 数组倒序
-- (NSArray *)br_reverseArray {
+- (NSArray *)br_reverse {
     return [[self reverseObjectEnumerator] allObjects];
 }
 
@@ -43,15 +43,6 @@ BRSYNTH_DUMMY_CLASS(NSArray_BRAdd)
         return;
     }
     [self addObject:anObject];
-}
-
-#pragma mark - 数组倒序
-- (void)br_reverseMutableArray {
-    NSUInteger count = self.count;
-    int mid = floor(count / 2.0);
-    for (NSUInteger i = 0; i < mid; i++) {
-        [self exchangeObjectAtIndex:i withObjectAtIndex:(count - (i + 1))];
-    }
 }
 
 @end

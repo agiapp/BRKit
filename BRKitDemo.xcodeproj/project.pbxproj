@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C523E28F208B966D008A1508 /* NSArray+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C523E28E208B966D008A1508 /* NSArray+BRAdd.m */; };
+		C538E6AF20995DD7000B396F /* NSDate+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6AE20995DD7000B396F /* NSDate+BRAdd.m */; };
 		C580EEA9208CC90C00C240AF /* NSDictionary+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */; };
 		C5E29E19208839E500AE642D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E18208839E500AE642D /* AppDelegate.m */; };
 		C5E29E1C208839E500AE642D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E1B208839E500AE642D /* ViewController.m */; };
@@ -21,6 +22,8 @@
 /* Begin PBXFileReference section */
 		C523E28D208B966D008A1508 /* NSArray+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+BRAdd.h"; sourceTree = "<group>"; };
 		C523E28E208B966D008A1508 /* NSArray+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BRAdd.m"; sourceTree = "<group>"; };
+		C538E6AD20995DD7000B396F /* NSDate+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+BRAdd.h"; sourceTree = "<group>"; };
+		C538E6AE20995DD7000B396F /* NSDate+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+BRAdd.m"; sourceTree = "<group>"; };
 		C580EEA7208CC90C00C240AF /* NSDictionary+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BRAdd.h"; sourceTree = "<group>"; };
 		C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BRAdd.m"; sourceTree = "<group>"; };
 		C5AD51BE20898D0300E1032B /* BRMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRMethod.h; sourceTree = "<group>"; };
@@ -61,6 +64,8 @@
 				C523E28E208B966D008A1508 /* NSArray+BRAdd.m */,
 				C580EEA7208CC90C00C240AF /* NSDictionary+BRAdd.h */,
 				C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */,
+				C538E6AD20995DD7000B396F /* NSDate+BRAdd.h */,
+				C538E6AE20995DD7000B396F /* NSDate+BRAdd.m */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 				C523E28F208B966D008A1508 /* NSArray+BRAdd.m in Sources */,
 				C5E29E27208839E700AE642D /* main.m in Sources */,
 				C5E29E19208839E500AE642D /* AppDelegate.m in Sources */,
+				C538E6AF20995DD7000B396F /* NSDate+BRAdd.m in Sources */,
 				C580EEA9208CC90C00C240AF /* NSDictionary+BRAdd.m in Sources */,
 				C5E29E34208847DB00AE642D /* NSString+BRAdd.m in Sources */,
 			);
