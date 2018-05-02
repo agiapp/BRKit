@@ -7,6 +7,9 @@
 //
 
 #import "NSDate+BRAdd.h"
+#import "BRKitMacro.h"
+
+BRSYNTH_DUMMY_CLASS(NSDate_BRAdd)
 
 @implementation NSDate (BRAdd)
 

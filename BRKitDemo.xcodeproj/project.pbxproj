@@ -12,6 +12,8 @@
 		C538E6B220995FDF000B396F /* UIImage+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6B120995FDF000B396F /* UIImage+BRAdd.m */; };
 		C538E6B520996154000B396F /* UIImageView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6B420996154000B396F /* UIImageView+BRAdd.m */; };
 		C538E6B820996212000B396F /* UIButton+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6B720996212000B396F /* UIButton+BRAdd.m */; };
+		C538E6BB2099672D000B396F /* NSNumber+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6BA2099672D000B396F /* NSNumber+BRAdd.m */; };
+		C538E6BE209989CD000B396F /* NSTimer+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6BD209989CD000B396F /* NSTimer+BRAdd.m */; };
 		C580EEA9208CC90C00C240AF /* NSDictionary+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */; };
 		C5E29E19208839E500AE642D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E18208839E500AE642D /* AppDelegate.m */; };
 		C5E29E1C208839E500AE642D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E1B208839E500AE642D /* ViewController.m */; };
@@ -33,6 +35,10 @@
 		C538E6B420996154000B396F /* UIImageView+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BRAdd.m"; sourceTree = "<group>"; };
 		C538E6B620996212000B396F /* UIButton+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+BRAdd.h"; sourceTree = "<group>"; };
 		C538E6B720996212000B396F /* UIButton+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+BRAdd.m"; sourceTree = "<group>"; };
+		C538E6B92099672D000B396F /* NSNumber+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+BRAdd.h"; sourceTree = "<group>"; };
+		C538E6BA2099672D000B396F /* NSNumber+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+BRAdd.m"; sourceTree = "<group>"; };
+		C538E6BC209989CD000B396F /* NSTimer+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimer+BRAdd.h"; sourceTree = "<group>"; };
+		C538E6BD209989CD000B396F /* NSTimer+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+BRAdd.m"; sourceTree = "<group>"; };
 		C580EEA7208CC90C00C240AF /* NSDictionary+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BRAdd.h"; sourceTree = "<group>"; };
 		C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BRAdd.m"; sourceTree = "<group>"; };
 		C5AD51BE20898D0300E1032B /* BRMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRMethod.h; sourceTree = "<group>"; };
@@ -75,6 +81,10 @@
 				C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */,
 				C538E6AD20995DD7000B396F /* NSDate+BRAdd.h */,
 				C538E6AE20995DD7000B396F /* NSDate+BRAdd.m */,
+				C538E6B92099672D000B396F /* NSNumber+BRAdd.h */,
+				C538E6BA2099672D000B396F /* NSNumber+BRAdd.m */,
+				C538E6BC209989CD000B396F /* NSTimer+BRAdd.h */,
+				C538E6BD209989CD000B396F /* NSTimer+BRAdd.m */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -208,7 +218,9 @@
 			files = (
 				C5E29E1C208839E500AE642D /* ViewController.m in Sources */,
 				C538E6B820996212000B396F /* UIButton+BRAdd.m in Sources */,
+				C538E6BB2099672D000B396F /* NSNumber+BRAdd.m in Sources */,
 				C523E28F208B966D008A1508 /* NSArray+BRAdd.m in Sources */,
+				C538E6BE209989CD000B396F /* NSTimer+BRAdd.m in Sources */,
 				C5E29E27208839E700AE642D /* main.m in Sources */,
 				C538E6B220995FDF000B396F /* UIImage+BRAdd.m in Sources */,
 				C538E6B520996154000B396F /* UIImageView+BRAdd.m in Sources */,

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSDate (BRAdd)
 
 /** 获取系统当前的时间戳，即当前时间距1970的秒数（以毫秒为单位） */
@@ -21,7 +23,7 @@
  *
  *  @param  formatterStr  设置格式：yyyy-MM-dd HH:mm:ss
  */
-+ (NSString *)br_currentDateStringWithFormat:(NSString *)formatterStr;
++ (nullable NSString *)br_currentDateStringWithFormat:(NSString *)formatterStr;
 
 /**
  *  返回指定时间差值的日期字符串
@@ -29,7 +31,7 @@
  *  @param delta 时间差值
  *  @return 日期字符串，格式：yyyy-MM-dd HH:mm:ss
  */
-+ (NSString *)br_dateStringWithDelta:(NSTimeInterval)delta;
++ (nullable NSString *)br_dateStringWithDelta:(NSTimeInterval)delta;
 
 /**
  *  返回日期格式字符串
@@ -43,6 +45,8 @@
  *      - MM-dd HH:mm(一年内)
  *      - yyyy-MM-dd HH:mm(更早期)
  */
-+ (NSString *)br_dateDescriptionWithTargetDate:(NSString *)dateStr andTargetDateFormat:(NSString *)dateFormatStr;
++ (nullable NSString *)br_dateDescriptionWithTargetDate:(NSString *)dateStr andTargetDateFormat:(NSString *)dateFormatStr;
 
 @end
+
+NS_ASSUME_NONNULL_END
