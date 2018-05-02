@@ -15,6 +15,7 @@
 		C538E6BB2099672D000B396F /* NSNumber+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6BA2099672D000B396F /* NSNumber+BRAdd.m */; };
 		C538E6BE209989CD000B396F /* NSTimer+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6BD209989CD000B396F /* NSTimer+BRAdd.m */; };
 		C538E6C120999B6F000B396F /* UIColor+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6C020999B6F000B396F /* UIColor+BRAdd.m */; };
+		C538E6C42099B2F8000B396F /* UIView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6C32099B2F8000B396F /* UIView+BRAdd.m */; };
 		C580EEA9208CC90C00C240AF /* NSDictionary+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */; };
 		C5E29E19208839E500AE642D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E18208839E500AE642D /* AppDelegate.m */; };
 		C5E29E1C208839E500AE642D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E1B208839E500AE642D /* ViewController.m */; };
@@ -42,6 +43,8 @@
 		C538E6BD209989CD000B396F /* NSTimer+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+BRAdd.m"; sourceTree = "<group>"; };
 		C538E6BF20999B6F000B396F /* UIColor+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+BRAdd.h"; sourceTree = "<group>"; };
 		C538E6C020999B6F000B396F /* UIColor+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BRAdd.m"; sourceTree = "<group>"; };
+		C538E6C22099B2F8000B396F /* UIView+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+BRAdd.h"; sourceTree = "<group>"; };
+		C538E6C32099B2F8000B396F /* UIView+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+BRAdd.m"; sourceTree = "<group>"; };
 		C580EEA7208CC90C00C240AF /* NSDictionary+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BRAdd.h"; sourceTree = "<group>"; };
 		C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BRAdd.m"; sourceTree = "<group>"; };
 		C5AD51BE20898D0300E1032B /* BRMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRMethod.h; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 		C580EEA6208CC85000C240AF /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				C538E6C22099B2F8000B396F /* UIView+BRAdd.h */,
+				C538E6C32099B2F8000B396F /* UIView+BRAdd.m */,
 				C538E6B020995FDF000B396F /* UIImage+BRAdd.h */,
 				C538E6B120995FDF000B396F /* UIImage+BRAdd.m */,
 				C538E6B320996154000B396F /* UIImageView+BRAdd.h */,
@@ -225,6 +230,7 @@
 				C538E6B820996212000B396F /* UIButton+BRAdd.m in Sources */,
 				C538E6C120999B6F000B396F /* UIColor+BRAdd.m in Sources */,
 				C538E6BB2099672D000B396F /* NSNumber+BRAdd.m in Sources */,
+				C538E6C42099B2F8000B396F /* UIView+BRAdd.m in Sources */,
 				C523E28F208B966D008A1508 /* NSArray+BRAdd.m in Sources */,
 				C538E6BE209989CD000B396F /* NSTimer+BRAdd.m in Sources */,
 				C5E29E27208839E700AE642D /* main.m in Sources */,
