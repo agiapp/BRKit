@@ -7,6 +7,9 @@
 //
 
 #import "UIButton+BRAdd.h"
+#import "BRKitMacro.h"
+
+BRSYNTH_DUMMY_CLASS(UIButton_BRAdd)
 
 @implementation UIButton (BRAdd)
 

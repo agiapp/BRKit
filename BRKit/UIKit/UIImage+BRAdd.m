@@ -7,6 +7,9 @@
 //
 
 #import "UIImage+BRAdd.h"
+#import "BRKitMacro.h"
+
+BRSYNTH_DUMMY_CLASS(UIImage_BRAdd)
 
 @implementation UIImage (BRAdd)
 

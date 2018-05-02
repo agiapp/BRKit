@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSUInteger, BRButtonEdgeInsetsStyle) {
     /** image在上，label在下 */
     BRButtonEdgeInsetsStyleTop,
@@ -32,3 +34,4 @@ typedef NS_ENUM(NSUInteger, BRButtonEdgeInsetsStyle) {
 
 @end
 
+NS_ASSUME_NONNULL_END

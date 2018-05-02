@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIImage (BRAdd)
 
 /** 用颜色返回一张图片 */
@@ -18,3 +20,5 @@
 - (UIImage *)br_setAlpha:(CGFloat)alpha;
 
 @end
+
+NS_ASSUME_NONNULL_END

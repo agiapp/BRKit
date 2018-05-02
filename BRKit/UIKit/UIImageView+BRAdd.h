@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIImageView (BRAdd)
 
 /** 使用 CAShapeLayer 和 UIBezierPath 设置圆角 */
@@ -17,3 +19,5 @@
 - (void)br_setGraphicsCornerRadius:(CGFloat)radius;
 
 @end
+
+NS_ASSUME_NONNULL_END
