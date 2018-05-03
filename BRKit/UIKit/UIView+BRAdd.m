@@ -7,6 +7,9 @@
 //
 
 #import "UIView+BRAdd.h"
+#import "BRKitMacro.h"
+
+BRSYNTH_DUMMY_CLASS(UIView_BRAdd)
 
 @implementation UIView (BRAdd)
 /// frame 快捷访问
@@ -104,6 +107,27 @@
     CGRect frame = self.frame;
     frame.size = size;
     self.frame = frame;
+}
+
+#pragma mark - 设置视图view的部分圆角(绝对布局)
+// corners(枚举类型，可组合使用)：UIRectCornerTopLeft | UIRectCornerTopRight | UIRectCornerBottomLeft | UIRectCornerBottomRight | UIRectCornerAllCorners
+- (void)br_setRoundedCorners:(UIRectCorner)corners
+                withRadius:(CGSize)radius {
+    UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:radius];
+    CAShapeLayer* shape = [[CAShapeLayer alloc] init];
+    [shape setPath:rounded.CGPath];
+    self.layer.mask = shape;
+}
+
+#pragma mark - 设置视图view的部分圆角(相对布局)
+// corners(枚举类型，可组合使用)：UIRectCornerTopLeft | UIRectCornerTopRight | UIRectCornerBottomLeft | UIRectCornerBottomRight | UIRectCornerAllCorners
+- (void)br_setRoundedCorners:(UIRectCorner)corners
+                withRadius:(CGSize)radius
+                 viewRect:(CGRect)rect {
+    UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:corners cornerRadii:radius];
+    CAShapeLayer *shape = [[CAShapeLayer alloc] init];
+    [shape setPath:rounded.CGPath];
+    self.layer.mask = shape;
 }
 
 #pragma mark - 设置视图view的阴影

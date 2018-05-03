@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIView (BRAdd)
 /** 返回视图的视图控制器(可能为nil) */
 @property (nullable, nonatomic, readonly) UIViewController *viewController;
@@ -33,6 +35,26 @@
 @property (nonatomic) CGSize  size;
 
 /**
+ *  设置视图view的部分圆角(绝对布局)
+ *
+ *  @param corners  需要设置为圆角的角(枚举类型)
+ *  @param radius   需要设置的圆角大小
+ */
+- (void)br_setRoundedCorners:(UIRectCorner)corners
+                  withRadius:(CGSize)radius;
+
+/**
+ *  设置视图view的部分圆角(相对布局)
+ *
+ *  @param corners  需要设置为圆角的角(枚举类型)
+ *  @param radius   需要设置的圆角大小
+ *  @param rect     需要设置的圆角view的rect
+ */
+- (void)br_setRoundedCorners:(UIRectCorner)corners
+                  withRadius:(CGSize)radius
+                    viewRect:(CGRect)rect;
+
+/**
  *  设置视图view的阴影
  *
  *  @param color  阴影颜色
@@ -51,3 +73,5 @@
 - (nullable NSData *)br_snapshotPDF;
 
 @end
+
+NS_ASSUME_NONNULL_END

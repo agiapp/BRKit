@@ -132,9 +132,9 @@
 			isa = PBXGroup;
 			children = (
 				C5E29E3120883B0800AE642D /* BRKit */,
+				C5E29E17208839E500AE642D /* AppDelegate.h */,
 				C5E29E18208839E500AE642D /* AppDelegate.m */,
 				C5E29E1A208839E500AE642D /* ViewController.h */,
-				C5E29E17208839E500AE642D /* AppDelegate.h */,
 				C5E29E1B208839E500AE642D /* ViewController.m */,
 				C5E29E1D208839E500AE642D /* Main.storyboard */,
 				C5E29E20208839E700AE642D /* Assets.xcassets */,

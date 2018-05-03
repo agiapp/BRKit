@@ -92,6 +92,7 @@ BRSYNTH_DUMMY_CLASS(UIImage_BRAdd)
 }
 
 #pragma mark - 设置圆角图片
+// corners：需要设置为圆角的角 UIRectCornerTopLeft | UIRectCornerTopRight | UIRectCornerBottomLeft | UIRectCornerBottomRight | UIRectCornerAllCorners
 - (UIImage *)br_imageByRoundCornerRadius:(CGFloat)radius
                               corners:(UIRectCorner)corners
                           borderWidth:(CGFloat)borderWidth
