@@ -54,7 +54,7 @@ static BOOL br_hexStrToRGBA(NSString *str, CGFloat *r, CGFloat *g, CGFloat *b, C
         return NO;
     }
     
-    //RGB, RGBA, RRGGBB, RRGGBBAA
+    // RGB, RGBA, RRGGBB, RRGGBBAA
     if (length < 5) {
         *r = br_hexStrToInt([str substringWithRange:NSMakeRange(0, 1)]) / 255.0f;
         *g = br_hexStrToInt([str substringWithRange:NSMakeRange(1, 1)]) / 255.0f;
