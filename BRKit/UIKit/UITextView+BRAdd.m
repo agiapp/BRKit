@@ -7,7 +7,10 @@
 //
 
 #import "UITextView+BRAdd.h"
+#import "BRKitMacro.h"
 #import <objc/runtime.h>
+
+BRSYNTH_DUMMY_CLASS(UITextView_BRAdd)
 
 const char *kInputLimitKey = "kInputLimit";
 
