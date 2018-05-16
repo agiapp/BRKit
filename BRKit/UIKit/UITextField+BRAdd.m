@@ -12,7 +12,7 @@
 
 BRSYNTH_DUMMY_CLASS(UITextField_BRAdd)
 
-const char *kInputLimitKey = "kInputLimit";
+const char *kTextFieldInputLimitKey = "kTextFieldInputLimit";
 
 @implementation UITextField (BRAdd)
 
@@ -31,12 +31,12 @@ const char *kInputLimitKey = "kInputLimit";
 
 #pragma mark - setter方法
 - (void)setInputLimit:(NSInteger)inputLimit {
-    objc_setAssociatedObject(self, kInputLimitKey, @(inputLimit), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, kTextFieldInputLimitKey, @(inputLimit), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark - getter方法
 - (NSInteger)inputLimit {
-    NSNumber *limit = objc_getAssociatedObject(self, kInputLimitKey);
+    NSNumber *limit = objc_getAssociatedObject(self, kTextFieldInputLimitKey);
     return [limit integerValue];
 }
 
