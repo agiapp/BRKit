@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C51A39B620AC809300F46E2A /* UITextField+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A39B420AC809300F46E2A /* UITextField+BRAdd.m */; };
 		C51A39B720AC809300F46E2A /* UITextView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A39B520AC809300F46E2A /* UITextView+BRAdd.m */; };
+		C51A39BA20AD1B1300F46E2A /* UIControl+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A39B920AD1B1300F46E2A /* UIControl+BRAdd.m */; };
 		C523E28F208B966D008A1508 /* NSArray+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C523E28E208B966D008A1508 /* NSArray+BRAdd.m */; };
 		C538E6AF20995DD7000B396F /* NSDate+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6AE20995DD7000B396F /* NSDate+BRAdd.m */; };
 		C538E6B220995FDF000B396F /* UIImage+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6B120995FDF000B396F /* UIImage+BRAdd.m */; };
@@ -33,6 +34,8 @@
 		C51A39B320AC809300F46E2A /* UITextView+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+BRAdd.h"; sourceTree = "<group>"; };
 		C51A39B420AC809300F46E2A /* UITextField+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+BRAdd.m"; sourceTree = "<group>"; };
 		C51A39B520AC809300F46E2A /* UITextView+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+BRAdd.m"; sourceTree = "<group>"; };
+		C51A39B820AD1B1300F46E2A /* UIControl+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+BRAdd.h"; sourceTree = "<group>"; };
+		C51A39B920AD1B1300F46E2A /* UIControl+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIControl+BRAdd.m"; sourceTree = "<group>"; };
 		C523E28D208B966D008A1508 /* NSArray+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+BRAdd.h"; sourceTree = "<group>"; };
 		C523E28E208B966D008A1508 /* NSArray+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BRAdd.m"; sourceTree = "<group>"; };
 		C538E6AD20995DD7000B396F /* NSDate+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+BRAdd.h"; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 				C51A39B420AC809300F46E2A /* UITextField+BRAdd.m */,
 				C51A39B320AC809300F46E2A /* UITextView+BRAdd.h */,
 				C51A39B520AC809300F46E2A /* UITextView+BRAdd.m */,
+				C51A39B820AD1B1300F46E2A /* UIControl+BRAdd.h */,
+				C51A39B920AD1B1300F46E2A /* UIControl+BRAdd.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 				C538E6BE209989CD000B396F /* NSTimer+BRAdd.m in Sources */,
 				C5E29E27208839E700AE642D /* main.m in Sources */,
 				C538E6B220995FDF000B396F /* UIImage+BRAdd.m in Sources */,
+				C51A39BA20AD1B1300F46E2A /* UIControl+BRAdd.m in Sources */,
 				C538E6B520996154000B396F /* UIImageView+BRAdd.m in Sources */,
 				C5E29E19208839E500AE642D /* AppDelegate.m in Sources */,
 				C538E6AF20995DD7000B396F /* NSDate+BRAdd.m in Sources */,
