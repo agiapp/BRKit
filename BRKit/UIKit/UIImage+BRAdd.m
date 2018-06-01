@@ -12,6 +12,10 @@
 BRSYNTH_DUMMY_CLASS(UIImage_BRAdd)
 
 @implementation UIImage (BRAdd)
+#pragma mark - 显示原图（避免被系统渲染成蓝色）
++ (UIImage *)br_originalImage:(NSString *)imageName {
+    return [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+}
 
 #pragma mark - 用颜色返回一张图片
 + (UIImage *)br_imageWithColor:(UIColor *)color {

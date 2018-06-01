@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImage (BRAdd)
-
+/** 显示原图（避免被系统渲染成蓝色） */
++ (nullable UIImage *)br_originalImage:(NSString *)imageName;
 /** 用颜色返回一张图片 */
 + (nullable UIImage *)br_imageWithColor:(UIColor *)color;
 /** 用颜色返回一张图片（指定图片大小） */
