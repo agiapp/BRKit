@@ -24,6 +24,9 @@
 #import <BRKit/UIImageView+BRAdd.h>
 #import <BRKit/UIButton+BRAdd.h>
 #import <BRKit/UIColor+BRAdd.h>
+#import <BRKit/UIControl+BRAdd.h>
+#import <BRKit/UITextField+BRAdd.h>
+#import <BRKit/UITextView+BRAdd.h>
 
 #else
 
@@ -41,6 +44,9 @@
 #import "UIImageView+BRAdd.h"
 #import "UIButton+BRAdd.h"
 #import "UIColor+BRAdd.h"
+#import "UIControl+BRAdd.h"
+#import "UITextField+BRAdd.h"
+#import "UITextView+BRAdd.h"
 
 #endif
 

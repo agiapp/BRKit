@@ -43,10 +43,10 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return [self stringByTrimmingCharactersInSet:set];
 }
 
-#pragma mark - md5加密
+#pragma mark - md5加密（32位小写）
 - (NSString *)br_md5String {
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    unsigned char result[CC_MD5_BLOCK_BYTES];
     CC_MD5(data.bytes, (CC_LONG)data.length, result);
     NSString *md5Str = [NSString stringWithFormat:
                         @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
@@ -54,6 +54,19 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
                         result[4], result[5], result[6], result[7],
                         result[8], result[9], result[10], result[11],
                         result[12], result[13], result[14], result[15]
+                        ];
+    return [md5Str lowercaseString];
+}
+
+#pragma mark - md5加密（16位小写）
+- (NSString *)br_md5String16 {
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(data.bytes, (CC_LONG)data.length, result);
+    NSString *md5Str = [NSString stringWithFormat:
+                        @"%02x%02x%02x%02x%02x%02x%02x%02x",
+                        result[4], result[5], result[6], result[7],
+                        result[8], result[9], result[10], result[11]
                         ];
     return [md5Str lowercaseString];
 }
