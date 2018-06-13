@@ -32,6 +32,15 @@ typedef NS_ENUM(NSUInteger, BRButtonEdgeInsetsStyle) {
 - (void)br_layoutButtonWithEdgeInsetsStyle:(BRButtonEdgeInsetsStyle)style
                         imageTitleSpace:(CGFloat)space;
 
+/*
+ *    倒计时按钮
+ *
+ *    @param seconds          要倒计时的总秒数
+ *    @param color            还没倒计时的颜色
+ *    @param countDownColor   倒计时的颜色
+ */
+- (void)br_startWithTime:(NSInteger)seconds color:(UIColor *)color countDownColor:(UIColor *)countDownColor;
+
 @end
 
 NS_ASSUME_NONNULL_END
