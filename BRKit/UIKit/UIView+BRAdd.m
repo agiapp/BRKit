@@ -185,4 +185,21 @@ BRSYNTH_DUMMY_CLASS(UIView_BRAdd)
     return data;
 }
 
+#pragma mark - 设置view的渐变色
+- (void)br_setGradientColor:(UIColor *)fromColor toColor:(UIColor *)toColor direction:(BRDirectionType)direction {
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[(__bridge id)fromColor.CGColor, (__bridge id)toColor.CGColor];
+    gradientLayer.locations = @[@0, @1.0];
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    if (direction == BRDirectionTypeTopToBottom) {
+        gradientLayer.endPoint = CGPointMake(0, 1.0);
+    } else {
+        gradientLayer.endPoint = CGPointMake(1.0, 0);
+    }
+    gradientLayer.frame = self.bounds;
+    [self.layer addSublayer:gradientLayer];
+}
+
+
+
 @end

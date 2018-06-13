@@ -10,6 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, BRDirectionType) {
+    BRDirectionTypeLeftToRight = 0,
+    BRDirectionTypeTopToBottom
+};
+
 @interface UIView (BRAdd)
 /** 返回视图的视图控制器(可能为nil) */
 @property (nullable, nonatomic, readonly) UIViewController *viewController;
@@ -71,6 +76,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 创建屏幕快照pdf */
 - (nullable NSData *)br_snapshotPDF;
+
+/** 设置view的渐变色 */
+- (void)br_setGradientColor:(UIColor *)fromColor toColor:(UIColor *)toColor direction:(BRDirectionType)direction;
 
 @end
 
