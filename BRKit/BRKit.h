@@ -27,6 +27,7 @@
 #import <BRKit/UIControl+BRAdd.h>
 #import <BRKit/UITextField+BRAdd.h>
 #import <BRKit/UITextView+BRAdd.h>
+#import <BRKit/UIDevice+BRAdd.h>
 
 #else
 
@@ -47,6 +48,7 @@
 #import "UIControl+BRAdd.h"
 #import "UITextField+BRAdd.h"
 #import "UITextView+BRAdd.h"
+#import "UIDevice+BRAdd.h"
 
 #endif
 
