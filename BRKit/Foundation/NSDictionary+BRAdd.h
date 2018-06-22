@@ -10,11 +10,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, BRDictionarySortType) {
+    /** 升序 */
+    BRDictionarySortTypeAsc = 0,
+    /** 降序 */
+    BRDictionarySortTypeDesc
+};
+
 @interface NSDictionary (BRAdd)
 /** 字典 转 json字符串 */
 - (nullable NSString *)br_toJsonString;
 /** 把字典拼成url字符串 */
 - (nullable NSString *)br_toURLString;
+/** 把排序后的字典拼成url字符串（根据key升序/降序排列） */
+- (nullable NSString *)br_toURLStringWithSortedDictionary:(BRDictionarySortType)type;
 
 @end
 

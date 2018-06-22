@@ -9,6 +9,7 @@
 #import "NSDictionary+BRAdd.h"
 #import "BRKitMacro.h"
 #import "BRMethod.h"
+#import "NSString+BRAdd.h"
 
 BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
 
@@ -29,21 +30,51 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
     return nil;
 }
 
+#pragma mark - 把排序后的字典拼成url字符串（根据key升序/降序排列）
+// 提示：iOS中字典是无序的，所以不能返回字典
+- (NSString *)br_toURLStringWithSortedDictionary:(BRDictionarySortType)type {
+    NSArray *allKeyArr = [self allKeys];
+    // 数组排序方法
+    NSArray *sortAllKeyArr = [allKeyArr sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    /*
+        NSComparisonResult resuest = [obj1 compare:obj2]; 为从小到大,即升序;
+        NSComparisonResult resuest = [obj2 compare:obj1]; 为从大到小,即降序;
+        注意:compare方法是区分大小写的,即按照ASCII排序
+    */
+        // 先转化为小写字母，再比较（即忽略大小写的比较）
+        obj1 = [obj1 lowercaseString];
+        obj2 = [obj2 lowercaseString];
+        // 排序操作
+        if (type == BRDictionarySortTypeAsc) {
+            return [obj1 compare:obj2 options:NSNumericSearch]; // 升序排列
+        } else {
+            return [obj2 compare:obj1 options:NSNumericSearch]; // 降序排列
+        }
+    }];
+    // 通过排列的key值获取value
+    NSMutableString *mutableStr = [NSMutableString string];
+    for (NSString *key in sortAllKeyArr) {
+        NSString *obj = [self objectForKey:key];
+        [mutableStr appendFormat:@"%@=%@&",key, obj];
+    }
+    if ([mutableStr rangeOfString:@"&"].length) {
+        [mutableStr deleteCharactersInRange:NSMakeRange(mutableStr.length - 1, 1)];
+    }
+    
+    return mutableStr;
+}
+
 #pragma mark - 把字典拼成url字符串
 - (NSString *)br_toURLString {
     NSMutableString *mutableStr = [NSMutableString string];
     // 遍历字典把键值拼起来
     [self enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, id _Nonnull obj, BOOL *_Nonnull stop) {
-        [mutableStr appendFormat:@"%@=", key];
-        [mutableStr appendFormat:@"%@", obj];
-        [mutableStr appendFormat:@"%@", @"&"];
+        [mutableStr appendFormat:@"%@=%@&",key, obj];
     }];
-    NSString *result = [mutableStr copy];
-    // 去掉最后一个&
-    if ([result hasSuffix:@"&"]) {
-        result = [result substringToIndex:result.length - 2];
+    if ([mutableStr rangeOfString:@"&"].length) {
+        [mutableStr deleteCharactersInRange:NSMakeRange(mutableStr.length - 1, 1)];
     }
-    return result;
+    return mutableStr;
 }
 
 @end
@@ -58,6 +89,17 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
     }
     if (br_isEmpty(anObject) && ![anObject isEqual:@""]) {
         return;
+    }
+    // 判断中文字符串 要转码UTF-8
+    if ([anObject isKindOfClass:[NSString class]]) {
+        NSString *utf8Str = anObject;
+        for (int i = 0; i < [utf8Str length]; i++){
+            int a = [utf8Str characterAtIndex:i];
+            if( a > 0x4e00 && a < 0x9fff) {
+                // 转成UTF-8字符串
+                anObject = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)utf8Str,NULL,(CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
+            }
+        }
     }
     [self setObject:anObject forKey:aKey];
 }
