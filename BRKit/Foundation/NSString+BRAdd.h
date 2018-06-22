@@ -22,11 +22,32 @@ NS_ASSUME_NONNULL_BEGIN
 /* 修剪字符串（去掉头尾两边的空格和换行符）*/
 - (NSString *)br_stringByTrim;
 
+/** 格式化字符串（去掉所有的换行符和空格）*/
+- (NSString *)br_formatString;
+
 /** md5加密（32位小写） */
 - (nullable NSString *)br_md5String;
 
 /** md5加密（16位小写） */
 - (nullable NSString *)br_md5String16;
+
+/** sha1加密（小写） */
+- (NSString *)br_sha1String;
+
+/** 使用DES加密方法 */
+- (NSString *)br_encryptUseDES:(NSString *)key;
+
+/** 使用DES进行解密计算 */
+- (NSString *)br_decryptUseDES:(NSString *)key;
+
+/**
+ *  返回一个新的UUID字符串（随机字符串，每次获取都不一样）
+ *  如："3FE15217-D71E-4B4F-9919-B388A8D13914"
+ */
++ (NSString *)br_UUID;
+
+#pragma mark - UTF8字符串
+- (NSString *)br_stringByURLEncode;
 
 /**
  *  获取文本的大小
