@@ -96,114 +96,6 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return sha1Str;
 }
 
-#pragma mark - 使用DES加密方法
-- (NSString *)br_encryptUseDES:(NSString *)key {
-    NSString *ciphertext = nil;
-    const char *textBytes = [self UTF8String];
-    size_t dataLength = [self length];
-    
-    uint8_t *bufferPtr = NULL;
-    size_t bufferPtrSize = 0;
-    size_t movedBytes = 0;
-    
-    bufferPtrSize = (dataLength + kCCBlockSizeDES) & ~(kCCBlockSizeDES - 1);
-    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
-    memset((void *)bufferPtr, 0x0, bufferPtrSize);
-    
-    NSString *testString = key;
-    NSData *testData = [testString dataUsingEncoding: NSUTF8StringEncoding];
-    Byte *iv = (Byte *)[testData bytes];
-    
-    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt, kCCAlgorithmDES,
-                                          kCCOptionPKCS7Padding,
-                                          [key UTF8String], kCCKeySizeDES,
-                                          iv,
-                                          textBytes, dataLength,
-                                          (void *)bufferPtr, bufferPtrSize,
-                                          &movedBytes);
-    if (cryptStatus == kCCSuccess) {
-        ciphertext= [self parseByte2HexString:bufferPtr len:(int)movedBytes];
-    }
-    ciphertext=[ciphertext uppercaseString]; //字符变大写
-    
-    return ciphertext ;
-}
-
-#pragma mark - 使用DES进行解密计算
-- (NSString *)br_decryptUseDES:(NSString *)key {
-    NSData* cipherData = [self convertHexStrToData:[self lowercaseString]];
-    unsigned char buffer[1024];
-    memset(buffer, 0, sizeof(char));
-    size_t numBytesDecrypted = 0;
-    NSString *testString = key;
-    NSData *testData = [testString dataUsingEncoding: NSUTF8StringEncoding];
-    Byte *iv = (Byte *)[testData bytes];
-    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt,
-                                          kCCAlgorithmDES,
-                                          kCCOptionPKCS7Padding,
-                                          [key UTF8String],
-                                          kCCKeySizeDES,
-                                          iv,
-                                          [cipherData bytes],
-                                          [cipherData length],
-                                          buffer,
-                                          1024,
-                                          &numBytesDecrypted);
-    NSString* plainText = nil;
-    if (cryptStatus == kCCSuccess) {
-        NSData* data = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesDecrypted];
-        plainText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    }
-    return plainText;
-    
-}
-
-
-// 加密时转成16进制
-- (NSString *)parseByte2HexString:(Byte *) bytes len:(int)len{
-    NSString *hexStr = @"";
-    if (bytes) {
-        for (int i = 0; i < len; i++) {
-            NSString *newHexStr = [NSString stringWithFormat:@"%x", bytes[i]&0xff]; ///16进制数
-            if([newHexStr length] == 1) {
-                hexStr = [NSString stringWithFormat:@"%@0%@", hexStr, newHexStr];
-            } else {
-                hexStr = [NSString stringWithFormat:@"%@%@", hexStr, newHexStr];
-            }
-            //NSLog(@"%@", hexStr);
-        }
-    }
-    return hexStr;
-}
-
-// 解密时转回data
-- (NSData *)convertHexStrToData:(NSString *)str {
-    if (!str || [str length] == 0) {
-        return nil;
-    }
-    NSMutableData *hexData = [[NSMutableData alloc] initWithCapacity:8];
-    NSRange range;
-    if ([str length] % 2 == 0) {
-        range = NSMakeRange(0, 2);
-    } else {
-        range = NSMakeRange(0, 1);
-    }
-    for (NSInteger i = range.location; i < [str length]; i += 2) {
-        unsigned int anInt;
-        NSString *hexCharStr = [str substringWithRange:range];
-        NSScanner *scanner = [[NSScanner alloc] initWithString:hexCharStr];
-        
-        [scanner scanHexInt:&anInt];
-        NSData *entity = [[NSData alloc] initWithBytes:&anInt length:1];
-        [hexData appendData:entity];
-        
-        range.location += range.length;
-        range.length = 2;
-    }
-    //NSLog(@"hexdata: %@", hexData);
-    return hexData;
-}
-
 #pragma mark - 返回一个新的UUID字符串
 + (NSString *)br_UUID {
     CFUUIDRef uuid = CFUUIDCreate(NULL);
@@ -212,61 +104,46 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return (__bridge_transfer NSString *)string;
 }
 
-#pragma mark - UTF8字符串
-- (NSString *)br_stringByURLEncode {
-    if ([self respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)]) {
-        /**
-         AFNetworking/AFURLRequestSerialization.m
-         
-         Returns a percent-escaped string following RFC 3986 for a query string key or value.
-         RFC 3986 states that the following characters are "reserved" characters.
-         - General Delimiters: ":", "#", "[", "]", "@", "?", "/"
-         - Sub-Delimiters: "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
-         In RFC 3986 - Section 3.4, it states that the "?" and "/" characters should not be escaped to allow
-         query strings to include a URL. Therefore, all "reserved" characters with the exception of "?" and "/"
-         should be percent-escaped in the query string.
-         - parameter string: The string to be percent-escaped.
-         - returns: The percent-escaped string.
-         */
-        static NSString * const kAFCharactersGeneralDelimitersToEncode = @":#[]@"; // does not include "?" or "/" due to RFC 3986 - Section 3.4
-        static NSString * const kAFCharactersSubDelimitersToEncode = @"!$&'()*+,;=";
+#pragma mark - 转UTF8字符串（UTF-8编码）
+- (NSString *)br_utf8String {
+    /**
+     AFNetworking/AFURLRequestSerialization.m
+     
+     Returns a percent-escaped string following RFC 3986 for a query string key or value.
+     RFC 3986 states that the following characters are "reserved" characters.
+     - 一般的分隔符: ":", "#", "[", "]", "@", "?", "/"
+     - 子分隔符: "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
+     In RFC 3986 - Section 3.4, it states that the "?" and "/" characters should not be escaped to allow
+     query strings to include a URL. Therefore, all "reserved" characters with the exception of "?" and "/"
+     should be percent-escaped in the query string.
+     - parameter string: The string to be percent-escaped.
+     - returns: The percent-escaped string.
+     */
+    static NSString * const kAFCharactersGeneralDelimitersToEncode = @":#[]@"; // does not include "?" or "/" due to RFC 3986 - Section 3.4
+    static NSString * const kAFCharactersSubDelimitersToEncode = @"!$&'()*+,;=";
+    
+    NSMutableCharacterSet * allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
+    [allowedCharacterSet removeCharactersInString:[kAFCharactersGeneralDelimitersToEncode stringByAppendingString:kAFCharactersSubDelimitersToEncode]];
+    static NSUInteger const batchSize = 50;
+    
+    NSUInteger index = 0;
+    NSMutableString *escaped = @"".mutableCopy;
+    
+    while (index < self.length) {
+        NSUInteger length = MIN(self.length - index, batchSize);
+        NSRange range = NSMakeRange(index, length);
+        // To avoid breaking up character sequences such as 👴🏻👮🏽
+        range = [self rangeOfComposedCharacterSequencesForRange:range];
+        NSString *substring = [self substringWithRange:range];
+        NSString *encoded = [substring stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+        [escaped appendString:encoded];
         
-        NSMutableCharacterSet * allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
-        [allowedCharacterSet removeCharactersInString:[kAFCharactersGeneralDelimitersToEncode stringByAppendingString:kAFCharactersSubDelimitersToEncode]];
-        static NSUInteger const batchSize = 50;
-        
-        NSUInteger index = 0;
-        NSMutableString *escaped = @"".mutableCopy;
-        
-        while (index < self.length) {
-            NSUInteger length = MIN(self.length - index, batchSize);
-            NSRange range = NSMakeRange(index, length);
-            // To avoid breaking up character sequences such as 👴🏻👮🏽
-            range = [self rangeOfComposedCharacterSequencesForRange:range];
-            NSString *substring = [self substringWithRange:range];
-            NSString *encoded = [substring stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
-            [escaped appendString:encoded];
-            
-            index += range.length;
-        }
-        return escaped;
-    } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding);
-        NSString *encoded = (__bridge_transfer NSString *)
-        CFURLCreateStringByAddingPercentEscapes(
-                                                kCFAllocatorDefault,
-                                                (__bridge CFStringRef)self,
-                                                NULL,
-                                                CFSTR("!#$&'()*+,/:;=?@[]"),
-                                                cfEncoding);
-        return encoded;
-#pragma clang diagnostic pop
+        index += range.length;
     }
+    return escaped;
+    
+    //return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 }
-
-
 
 #pragma mark - 获取文本的大小
 - (CGSize)br_getTextSize:(UIFont *)font maxSize:(CGSize)maxSize mode:(NSLineBreakMode)lineBreakMode {

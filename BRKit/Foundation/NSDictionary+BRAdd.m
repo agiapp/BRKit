@@ -55,7 +55,7 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
     NSMutableString *mutableStr = [NSMutableString string];
     for (NSString *key in sortAllKeyArr) {
         NSString *obj = [self objectForKey:key];
-        [mutableStr appendFormat:@"%@=%@&",key, obj];
+        [mutableStr appendFormat:@"%@=%@&", key, obj];
     }
     if ([mutableStr rangeOfString:@"&"].length) {
         [mutableStr deleteCharactersInRange:NSMakeRange(mutableStr.length - 1, 1)];
@@ -89,17 +89,6 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
     }
     if (br_isEmpty(anObject) && ![anObject isEqual:@""]) {
         return;
-    }
-    // 判断中文字符串 要转码UTF-8
-    if ([anObject isKindOfClass:[NSString class]]) {
-        NSString *utf8Str = anObject;
-        for (int i = 0; i < [utf8Str length]; i++){
-            int a = [utf8Str characterAtIndex:i];
-            if( a > 0x4e00 && a < 0x9fff) {
-                // 转成UTF-8字符串
-                anObject = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)utf8Str,NULL,(CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
-            }
-        }
     }
     [self setObject:anObject forKey:aKey];
 }

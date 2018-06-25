@@ -32,22 +32,22 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)br_md5String16;
 
 /** sha1加密（小写） */
-- (nullable NSString *)br_sha1String;
+- (NSString *)br_sha1String;
 
 /** 使用DES加密方法 */
-- (nullable NSString *)br_encryptUseDES:(NSString *)key;
+- (NSString *)br_encryptUseDES:(NSString *)key;
 
 /** 使用DES进行解密计算 */
-- (nullable NSString *)br_decryptUseDES:(NSString *)key;
+- (NSString *)br_decryptUseDES:(NSString *)key;
 
 /**
  *  返回一个新的UUID字符串（随机字符串，每次获取都不一样）
  *  如："3FE15217-D71E-4B4F-9919-B388A8D13914"
  */
-+ (nullable NSString *)br_UUID;
++ (NSString *)br_UUID;
 
-#pragma mark - UTF8字符串
-- (nullable NSString *)br_stringByURLEncode;
+/** 转UTF8字符串（UTF-8编码）*/
+- (NSString *)br_utf8String;
 
 /**
  *  获取文本的大小
