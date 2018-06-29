@@ -34,12 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 /** sha1加密（小写） */
 - (NSString *)br_sha1String;
 
-/** 使用DES加密方法 */
-- (NSString *)br_encryptUseDES:(NSString *)key;
-
-/** 使用DES进行解密计算 */
-- (NSString *)br_decryptUseDES:(NSString *)key;
-
 /**
  *  返回一个新的UUID字符串（随机字符串，每次获取都不一样）
  *  如："3FE15217-D71E-4B4F-9919-B388A8D13914"
