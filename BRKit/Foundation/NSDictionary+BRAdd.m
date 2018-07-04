@@ -17,6 +17,7 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
 
 #pragma mark - 字典 转 json字符串
 - (NSString *)br_toJsonString {
+    // 一定要加这个判断，防止格式不对而崩溃
     if ([NSJSONSerialization isValidJSONObject:self]) {
         NSError *error = nil;
         // 1.转化为 JSON 格式的 NSData
