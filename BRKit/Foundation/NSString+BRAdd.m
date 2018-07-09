@@ -174,6 +174,22 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return size.height;
 }
 
+#pragma mark - 设置文本关键词红色显示
+// 美国<em>苹果</em> <em>科技</em>有限公司
+- (NSAttributedString *)br_setTextKeywords:(UIColor *)keywordColor {
+    NSArray <NSString *>* textArr = [self componentsSeparatedByString:@"<em>"];
+    NSString *formatText = [[self stringByReplacingOccurrencesOfString:@"<em>" withString:@""] stringByReplacingOccurrencesOfString:@"</em>" withString:@""];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:formatText];
+    for (NSInteger i = 0; i < textArr.count; i++) {
+        if ([textArr[i] containsString:@"</em>"]) {
+            NSString *keyword = [[textArr[i] componentsSeparatedByString:@"</em>"] firstObject];
+            NSRange range = [formatText rangeOfString:keyword];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:keywordColor range:range];
+        }
+    }
+    return [attributedString copy];
+}
+
 ///==================================================
 ///             正则表达式
 ///==================================================

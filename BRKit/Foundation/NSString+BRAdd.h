@@ -74,6 +74,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (CGFloat)br_getTextHeight:(UIFont *)font width:(CGFloat)width;
 
+/** 设置文本关键词红色显示 */
+// <em>苹果</em><em>科技</em>股份有限公司
+- (NSAttributedString *)br_setTextKeywords:(UIColor *)keywordColor ;
 
 ///==================================================
 ///             正则表达式
