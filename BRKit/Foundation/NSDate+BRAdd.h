@@ -26,6 +26,21 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSString *)br_currentDateStringWithFormat:(NSString *)formatterStr;
 
 /**
+ *  按指定格式返回时间字符串
+ *
+ *  @param  dateString  日期字符串
+ *  @param  oldFormat   旧格式
+ *  @param  newFormat   新格式
+ */
++ (nullable NSString *)br_dateString:(NSString *)dateString oldFormat:(NSString *)oldFormat newFormat:(NSString *)newFormat;
+
+/** 日期和字符串之间的转换：NSDate --> NSString */
++ (nullable  NSString *)br_getDateString:(NSDate *)date format:(NSString *)format;
+
+/** 日期和字符串之间的转换：NSString --> NSDate */
++ (nullable  NSDate *)br_getDate:(NSString *)dateString format:(NSString *)format;
+
+/**
  *  返回指定时间差值的日期字符串
  *
  *  @param delta 时间差值

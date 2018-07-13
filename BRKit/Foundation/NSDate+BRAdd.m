@@ -42,6 +42,42 @@ BRSYNTH_DUMMY_CLASS(NSDate_BRAdd)
     return currentDateStr;
 }
 
+#pragma mark - 按指定格式返回时间字符串
++ (NSString *)br_dateString:(NSString *)dateString oldFormat:(NSString *)oldFormat newFormat:(NSString *)newFormat {
+    // 获取系统当前时间
+    NSDate *oldDate = [self br_getDate:dateString format:oldFormat];
+    // 用于格式化 NSDate 对象
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    // 设置格式：yyyy-MM-dd HH:mm:ss
+    formatter.dateFormat = newFormat;
+    // 将 NSDate 按 formatter格式 转成 NSString
+    NSString *newDateString = [formatter stringFromDate:oldDate];
+    // 输出 newDateString
+    return newDateString;
+}
+
+#pragma mark - 日期和字符串之间的转换：NSDate --> NSString
++ (NSString *)br_getDateString:(NSDate *)date format:(NSString *)format {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [NSLocale currentLocale];
+    dateFormatter.timeZone = [NSTimeZone localTimeZone];
+    dateFormatter.dateFormat = format;
+    NSString *destDateString = [dateFormatter stringFromDate:date];
+    
+    return destDateString;
+}
+
+#pragma mark - 日期和字符串之间的转换：NSString --> NSDate
++ (NSDate *)br_getDate:(NSString *)dateString format:(NSString *)format {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [NSLocale currentLocale];
+    dateFormatter.timeZone = [NSTimeZone localTimeZone];
+    dateFormatter.dateFormat = format;
+    NSDate *destDate = [dateFormatter dateFromString:dateString];
+    
+    return destDate;
+}
+
 #pragma mark - 返回指定时间差值的日期字符串
 + (NSString *)br_dateStringWithDelta:(NSTimeInterval)delta {
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:delta];
