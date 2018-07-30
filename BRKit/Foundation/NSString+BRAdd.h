@@ -74,6 +74,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (CGFloat)br_getTextHeight:(UIFont *)font width:(CGFloat)width;
 
+/** label富文本: 插入图片 */
+- (NSMutableAttributedString *)br_setRichTextWithImage:(NSString *)iconName bounds:(CGRect)bounds iconLocation:(NSInteger)location;
+
+/** label富文本: 设置不同字体和颜色 */
+- (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color;
+
+/** label富文本: HTML标签文本 */
+- (NSMutableAttributedString *)br_setTextHTMLString;
+
+/** label富文本: 添加中划线 */
+- (NSMutableAttributedString *)br_setTextLineThrough;
+
 /** 设置文本关键词红色显示 */
 // <em>苹果</em><em>科技</em>股份有限公司
 - (NSAttributedString *)br_setTextKeywords:(UIColor *)keywordColor;

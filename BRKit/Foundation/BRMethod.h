@@ -75,4 +75,27 @@ static inline NSString *br_nonullString(NSString *obj) {
     return obj;
 }
 
+/** 过滤非空字符串 */
+static inline NSString *br_filterNullString(NSString *obj) {
+    if (obj == nil ||
+        [obj isEqual:[NSNull null]] ||
+        [obj isEqual:@"(null)"] ||
+        [obj isEqual:@"null"] ||
+        [obj isEqual:@""]) {
+        return @"暂无";
+    }
+    return obj;
+}
+
+/** 过滤非空number，并返回字符串 */
+static inline NSString *br_filterNullNumber(NSNumber *obj) {
+    if (obj == nil ||
+        [obj isEqual:[NSNull null]] ||
+        [obj isEqual:@"(null)"] ||
+        [obj isEqual:@"null"]) {
+        return @"-";
+    }
+    return [obj stringValue];
+}
+
 #endif /* BRMethod_h */
