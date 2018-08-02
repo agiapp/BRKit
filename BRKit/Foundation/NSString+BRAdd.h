@@ -22,9 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 /* 修剪字符串（去掉头尾两边的空格和换行符）*/
 - (NSString *)br_stringByTrim;
 
-/** 格式化字符串（去掉所有的换行符和空格）*/
-- (NSString *)br_formatString;
-
 /** md5加密（32位小写） */
 - (nullable NSString *)br_md5String;
 

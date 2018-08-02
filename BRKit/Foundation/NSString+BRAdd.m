@@ -43,18 +43,6 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return [self stringByTrimmingCharactersInSet:set];
 }
 
-#pragma mark - 格式化字符串（去掉所有的换行符和空格）
-- (NSString *)br_formatString {
-    NSString *str = self;
-    // 1.去掉首尾空格和换行符
-    str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    // 2.去掉所有空格和换行符
-    str = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-    str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
-    return str;
-}
-
 #pragma mark - md5加密（32位小写）
 - (NSString *)br_md5String {
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];

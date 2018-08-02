@@ -18,6 +18,8 @@ typedef NS_ENUM(NSInteger, BRDictionarySortType) {
 };
 
 @interface NSDictionary (BRAdd)
+/** 字典 转 json字符串（一整行输出，没有空格和换行符）*/
+- (nullable NSString *)br_toJsonStringNoFormat;
 /** 字典 转 json字符串 */
 - (nullable NSString *)br_toJsonString;
 /** 把字典拼成url字符串 */

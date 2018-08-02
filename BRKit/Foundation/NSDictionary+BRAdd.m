@@ -15,7 +15,22 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
 
 @implementation NSDictionary (BRAdd)
 
-#pragma mark - 字典 转 json字符串
+#pragma mark - 字典 转 json字符串（一整行输出，没有空格和换行符）
+- (NSString *)br_toJsonStringNoFormat {
+    if ([NSJSONSerialization isValidJSONObject:self]) {
+        NSError *error = nil;
+        // 1.转化为 JSON 格式的 NSData
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:0 error:&error];
+        if (error) {
+            NSLog(@"字典转JSON字符串失败：%@", error);
+        }
+        // 2.转化为 JSON 格式的 NSString
+        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    return nil;
+}
+
+#pragma mark - 字典 转 json字符串（格式化输出，有空格和换行符)
 - (NSString *)br_toJsonString {
     if ([NSJSONSerialization isValidJSONObject:self]) {
         NSError *error = nil;
