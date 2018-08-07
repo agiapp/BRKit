@@ -10,6 +10,6 @@
 
 @interface UITextView (BRAdd)
 /** UITextView 的最大输入长度 */
-//@property (nonatomic, assign) NSInteger inputLimit;
+@property (nonatomic, assign) NSInteger inputLimit;
 
 @end
