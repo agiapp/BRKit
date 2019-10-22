@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   # 框架的名称
   s.name         = "BRKit"
   # 框架的版本号
-  s.version      = "0.1.0"
+  s.version      = "1.0.0"
   # 框架的简单介绍
   s.summary      = "A collection of iOS UIKit, Foundation and other extensions."
   # 框架的详细描述(详细介绍，要比简介长)
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   # 作者
   s.author             = { "任波" => "91renb@gmail.com" }
   # 社交网址
-  s.social_media_url = 'https://blog.91renb.com'
+  s.social_media_url = 'http://blog.91renb.com'
   
   # 框架支持的平台和版本
   s.platform     = :ios, "8.0"
