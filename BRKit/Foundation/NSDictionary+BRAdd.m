@@ -105,6 +105,9 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
     if (br_isEmpty(anObject) && ![anObject isEqual:@""]) {
         return;
     }
+    if ([anObject isKindOfClass:[NSString class]] && ![anObject br_isValidString]) {
+        return;
+    }
     [self setObject:anObject forKey:aKey];
 }
 

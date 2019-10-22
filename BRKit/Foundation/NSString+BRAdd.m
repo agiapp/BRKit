@@ -31,6 +31,14 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return YES;
 }
 
+#pragma mark - 获取有效参数字符串
+- (NSString *)br_PramsString {
+    if ([self br_isValidString]) {
+        return self;
+    }
+    return nil;
+}
+
 #pragma mark - 判断是否包含指定字符串
 - (BOOL)br_containsString:(NSString *)string {
     if (string == nil) return NO;
@@ -92,45 +100,14 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return (__bridge_transfer NSString *)string;
 }
 
-#pragma mark - 转UTF8字符串（UTF-8编码）
-- (NSString *)br_utf8String {
-    /**
-     AFNetworking/AFURLRequestSerialization.m
-     
-     Returns a percent-escaped string following RFC 3986 for a query string key or value.
-     RFC 3986 states that the following characters are "reserved" characters.
-     - 一般的分隔符: ":", "#", "[", "]", "@", "?", "/"
-     - 子分隔符: "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
-     In RFC 3986 - Section 3.4, it states that the "?" and "/" characters should not be escaped to allow
-     query strings to include a URL. Therefore, all "reserved" characters with the exception of "?" and "/"
-     should be percent-escaped in the query string.
-     - parameter string: The string to be percent-escaped.
-     - returns: The percent-escaped string.
-     */
-    static NSString * const kAFCharactersGeneralDelimitersToEncode = @":#[]@"; // does not include "?" or "/" due to RFC 3986 - Section 3.4
-    static NSString * const kAFCharactersSubDelimitersToEncode = @"!$&'()*+,;=";
-    
-    NSMutableCharacterSet * allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
-    [allowedCharacterSet removeCharactersInString:[kAFCharactersGeneralDelimitersToEncode stringByAppendingString:kAFCharactersSubDelimitersToEncode]];
-    static NSUInteger const batchSize = 50;
-    
-    NSUInteger index = 0;
-    NSMutableString *escaped = @"".mutableCopy;
-    
-    while (index < self.length) {
-        NSUInteger length = MIN(self.length - index, batchSize);
-        NSRange range = NSMakeRange(index, length);
-        // To avoid breaking up character sequences such as 👴🏻👮🏽
-        range = [self rangeOfComposedCharacterSequencesForRange:range];
-        NSString *substring = [self substringWithRange:range];
-        NSString *encoded = [substring stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
-        [escaped appendString:encoded];
-        
-        index += range.length;
-    }
-    return escaped;
-    
-    //return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+#pragma mark - UTF-8字符串编码
+- (NSString *)br_stringByUTF8Encode {
+    return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+}
+
+#pragma mark - UTF-8字符串解码
+- (NSString *)br_stringByUTF8Decode {
+    return [self stringByRemovingPercentEncoding];
 }
 
 #pragma mark - 获取文本的大小
@@ -180,6 +157,9 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 #pragma mark - label富文本: 设置不同字体和颜色
 - (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color {
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
+    if (![changeText br_isValidString]) {
+        return attrString;
+    }
     // 获取要调整文字样式的位置
     NSRange range = [[attrString string]rangeOfString:changeText];
     if (font) {
@@ -192,6 +172,43 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     }
     return attrString;
 }
+
+#pragma mark - 设置所有关键词自定义颜色显示
+- (NSMutableAttributedString *)br_setAllChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color {
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
+    if (![changeText br_isValidString]) {
+        return attrString;
+    }
+    NSArray *rangeArr = [self br_rangeArrayOfSubString:changeText];
+    for (NSInteger i = 0; i < rangeArr.count; i++) {
+        NSRange range = [rangeArr[i] rangeValue];
+        if (font) {
+            // 设置不同字体
+            [attrString addAttribute:NSFontAttributeName value:font range:range];
+        }
+        if (color) {
+            // 设置不同颜色
+            [attrString addAttribute:NSForegroundColorAttributeName value:color range:range];
+        }
+    }
+    return attrString;
+}
+
+#pragma mark - 获取字符串中多个相同字符串的所有range
+- (NSArray *)br_rangeArrayOfSubString:(NSString *)searchString {
+    NSMutableArray *rangeArr = [NSMutableArray array];
+    NSString *string1 = [self stringByAppendingString:searchString];
+    NSString *temp = nil;
+    for (NSInteger i = 0; i < (self.length - searchString.length + 1); i++) {
+        temp = [string1 substringWithRange:NSMakeRange(i, searchString.length)];
+        if ([temp isEqualToString:searchString]) {
+            NSRange range = {i, searchString.length};
+            [rangeArr addObject: [NSValue valueWithRange:range]];
+        }
+    }
+    return rangeArr;
+}
+
 
 #pragma mark - label富文本: HTML标签文本（HTMLString 转化为NSAttributedString）
 - (NSMutableAttributedString *)br_setTextHTMLString {
@@ -217,13 +234,72 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     NSString *formatText = [[self stringByReplacingOccurrencesOfString:@"<em>" withString:@""] stringByReplacingOccurrencesOfString:@"</em>" withString:@""];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:formatText];
     for (NSInteger i = 0; i < textArr.count; i++) {
-        if ([textArr[i] containsString:@"</em>"]) {
+        if ([textArr[i] br_containsString:@"</em>"]) {
             NSString *keyword = [[textArr[i] componentsSeparatedByString:@"</em>"] firstObject];
+            // 只会得到第一个关键字的位置
             NSRange range = [formatText rangeOfString:keyword];
             [attributedString addAttribute:NSForegroundColorAttributeName value:keywordColor range:range];
         }
     }
     return [attributedString copy];
+}
+
+#pragma mark - label富文本: 段落样式
+- (NSAttributedString *)br_paragraphText {
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    // 段落行间距
+    paragraphStyle.lineSpacing = 7;
+    // 段落行高
+    //paragraphStyle.lineHeightMultiple = 1.5;
+    // 段落间距
+    paragraphStyle.paragraphSpacing = 12;
+    // 首行缩进
+    paragraphStyle.firstLineHeadIndent = 28;
+    // 在单个字符边界处换行
+    paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+    [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [[attrString string] length])];
+    
+    return [attrString copy];
+}
+
+#pragma mark - label富文本: 设置文本行间距
+- (NSAttributedString *)br_textWithLineSpacing:(CGFloat)lineSpacing alignment:(NSTextAlignment)alignment {
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    // 段落行间距
+    paragraphStyle.lineSpacing = lineSpacing;
+    paragraphStyle.alignment = alignment;
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    // 在单个字符边界处换行
+    //paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+    [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [[attrString string] length])];
+    
+    return [attrString copy];
+}
+
+#pragma mark - 获取段落文本的高度
+- (CGFloat)br_getParagraphTextHeight:(UIFont *)font width:(CGFloat)width {
+    NSMutableDictionary *attributes = [[NSMutableDictionary alloc]init];
+    attributes[NSFontAttributeName] = font;
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    // 段落行间距
+    paragraphStyle.lineSpacing = 7;
+    // 段落行高
+    //paragraphStyle.lineHeightMultiple = 1.5;
+    // 段落间距
+    paragraphStyle.paragraphSpacing = 12;
+    // 首行缩进
+    paragraphStyle.firstLineHeadIndent = 28;
+    // 在单个字符边界处换行
+    paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+    attributes[NSParagraphStyleAttributeName] = paragraphStyle;
+    // 计算文本的的rect
+    CGRect rect = [self boundingRectWithSize:CGSizeMake(width, MAXFLOAT)
+                                     options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                  attributes:attributes
+                                     context:nil];
+    return rect.size.height;
 }
 
 ///==================================================
@@ -232,24 +308,10 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 #pragma mark - 判断是否是有效的手机号
 - (BOOL)br_isValidPhoneNumber {
     NSString *telNumber = [self stringByReplacingOccurrencesOfString:@" " withString:@""];
-    /**
-     * 手机号码
-     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
-     * 联通：130,131,132,152,155,156,185,186
-     * 电信：133,1349,153,180,189,181(增加)
-     */
-    if (telNumber.length == 11) {
-        // 移动号段正则表达式
-        NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[2-4,7-8]))\\d{8}|(1705)\\d{7}$";
-        // 联通号段正则表达式
-        NSString *CU_NUM = @"^((13[0-2])|(145)|(15[5-6])|(176)|(18[5,6]))\\d{8}|(1709)\\d{7}$";
-        // 电信号段正则表达式
-        NSString *CT_NUM = @"^((133)|(153)|(177)|(18[0,1,9]))\\d{8}$";
-        if ([self br_isValidateByRegex:CM_NUM] || [self br_isValidateByRegex:CU_NUM] || [self br_isValidateByRegex:CT_NUM]) {
-            return YES;
-        } else {
-            return NO;
-        }
+    // @"^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$"
+    NSString *regex = @"^(1[3-9][0-9])\\d{8}$";
+    if ([self br_isValidateByRegex:regex]) {
+        return YES;
     } else {
         return NO;
     }

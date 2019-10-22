@@ -20,6 +20,7 @@
 #import <BRKit/NSTimer+BRAdd.h>
 
 #import <BRKit/UIView+BRAdd.h>
+#import <BRKit/UILabel+BRAdd.h>
 #import <BRKit/UIImage+BRAdd.h>
 #import <BRKit/UIImageView+BRAdd.h>
 #import <BRKit/UIButton+BRAdd.h>
@@ -41,6 +42,7 @@
 #import "NSTimer+BRAdd.h"
 
 #import "UIView+BRAdd.h"
+#import "UILabel+BRAdd.h"
 #import "UIImage+BRAdd.h"
 #import "UIImageView+BRAdd.h"
 #import "UIButton+BRAdd.h"

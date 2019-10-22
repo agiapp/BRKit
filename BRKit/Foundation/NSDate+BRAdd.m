@@ -86,6 +86,58 @@ BRSYNTH_DUMMY_CLASS(NSDate_BRAdd)
     return [formatter stringFromDate:date];
 }
 
+/**
+ * @method
+ *
+ * @brief 获取两个日期之间的天数
+ * @param fromDate       起始日期
+ * @param toDate         终止日期
+ * @return    总天数
+ */
++ (NSInteger)br_numberOfDaysWithFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *comp = [calendar components:NSCalendarUnitDay fromDate:fromDate toDate:toDate options:NSCalendarWrapComponents];
+    return comp.day;
+}
+
+/**
+ 计算两个时间相差多少天多少小时多少分多少秒
+
+ @param startTime 开始时间
+ @param endTime 结束时间
+ @return 时间差
+ */
+- (NSString *)br_dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime {
+    NSDateFormatter *date = [[NSDateFormatter alloc]init];
+    [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *startDate =[date dateFromString:startTime];
+    NSDate *endDdate = [date dateFromString:endTime];
+    
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    unsigned int unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    NSDateComponents *dateComponents = [cal components:unitFlags fromDate:startDate toDate:endDdate options:0];
+    // 天
+    NSInteger day = [dateComponents day];
+    // 小时
+    NSInteger house = [dateComponents hour];
+    // 分
+    NSInteger minute = [dateComponents minute];
+    // 秒
+    NSInteger second = [dateComponents second];
+    NSString *timeStr;
+    if (day != 0) {
+        timeStr = [NSString stringWithFormat:@"%zd天%zd小时%zd分%zd秒", day, house, minute, second];
+    } else if (day == 0 && house != 0) {
+        timeStr = [NSString stringWithFormat:@"%zd小时%zd分%zd秒", house, minute, second];
+    } else if (day == 0 && house == 0 && minute != 0) {
+        timeStr = [NSString stringWithFormat:@"%zd分%zd秒", minute, second];
+    } else {
+        timeStr = [NSString stringWithFormat:@"%zd秒", second];
+    }
+    
+    return timeStr;
+}
+
 #pragma mark - 返回日期格式字符串  @"2016-10-16 14:30:30"  @"yyyy-MM-dd HH:mm:ss"
 // 注意：一个日期字符串必须 与 它相应的日期格式对应，这个才能被系统识别为日期
 + (NSString *)br_dateDescriptionWithTargetDate:(NSString *)dateStr andTargetDateFormat:(NSString *)dateFormatStr {

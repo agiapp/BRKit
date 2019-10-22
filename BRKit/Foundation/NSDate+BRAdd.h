@@ -49,6 +49,25 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSString *)br_dateStringWithDelta:(NSTimeInterval)delta;
 
 /**
+ * @method
+ *
+ * @brief 获取两个日期之间的天数
+ * @param fromDate       起始日期
+ * @param toDate         终止日期
+ * @return    总天数
+ */
++ (NSInteger)br_numberOfDaysWithFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate;
+
+/**
+ 计算两个时间相差多少天多少小时多少分多少秒
+ 
+ @param startTime 开始时间
+ @param endTime 结束时间
+ @return 时间差
+ */
+- (nullable NSString *)br_dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime;
+
+/**
  *  返回日期格式字符串
  *
  *  @param dateStr 需要转换的时间点

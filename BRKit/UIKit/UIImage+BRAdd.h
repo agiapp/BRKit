@@ -39,6 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
                                    borderWidth:(CGFloat)borderWidth
                                    borderColor:(nullable UIColor *)borderColor;
 
+/** 截取当前屏幕的截图/快照 */
++ (nullable UIImage *)br_imageWithScreenshot;
+
 @end
 
 NS_ASSUME_NONNULL_END

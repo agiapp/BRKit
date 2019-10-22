@@ -64,38 +64,40 @@ static inline BOOL br_isEmpty(id thing) {
      && [(NSArray *)thing count] == 0);
 }
 
-/** 获取非空字符串 */
-static inline NSString *br_nonullString(NSString *obj) {
+/** 获取非空字符串，可指定缺省值 */
+static inline NSString *br_nonullString(NSString *obj, NSString *msg) {
     if (obj == nil ||
         [obj isEqual:[NSNull null]] ||
         [obj isEqual:@"(null)"] ||
-        [obj isEqual:@"null"]) {
-        return @"";
+        [obj isEqual:@"null"] || obj.length == 0) {
+        return msg;
     }
     return obj;
 }
 
-/** 过滤非空字符串 */
-static inline NSString *br_filterNullString(NSString *obj) {
-    if (obj == nil ||
-        [obj isEqual:[NSNull null]] ||
-        [obj isEqual:@"(null)"] ||
-        [obj isEqual:@"null"] ||
-        [obj isEqual:@""]) {
-        return @"暂无";
-    }
-    return obj;
-}
-
-/** 过滤非空number，并返回字符串 */
-static inline NSString *br_filterNullNumber(NSNumber *obj) {
+/** 获取非空number，可指定缺省值 */
+static inline NSString *br_nonullNumber(NSNumber *obj, NSString *msg) {
     if (obj == nil ||
         [obj isEqual:[NSNull null]] ||
         [obj isEqual:@"(null)"] ||
         [obj isEqual:@"null"]) {
-        return @"-";
+        return msg;
     }
-    return [obj stringValue];
+    // 修复网络数据解析小数位精度丢失问题（建议：后台不要传浮点类型数字，直接传字符串）
+    NSString *doubleString = [NSString stringWithFormat:@"%lf", obj.doubleValue];
+    NSDecimalNumber *decNumber = [NSDecimalNumber decimalNumberWithString:doubleString];
+    return [decNumber stringValue];
+}
+
+#pragma mark - 获取有效"年月日"日期字符串(2019-09-09)
+static inline NSString *br_getDateYMDString(NSString *dateString) {
+    if (!br_isEmpty(dateString) && dateString.length >= 10) {
+        NSString *yearStr = [dateString substringToIndex:4];
+        if ([yearStr integerValue] > 1900) {
+            return [dateString substringToIndex:10];
+        }
+    }
+    return @"－";
 }
 
 #endif /* BRMethod_h */

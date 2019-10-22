@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSArray (BRAdd)
+/** 字典 转 json字符串（一整行输出，没有空格和换行符）*/
+- (nullable NSString *)br_toJsonStringNoFormat;
 /** 数组/字典 转 json字符串 */
 - (nullable NSString *)br_toJsonString;
 /** 数组倒序 */

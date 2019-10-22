@@ -15,6 +15,15 @@ typedef NS_ENUM(NSUInteger, BRDirectionType) {
     BRDirectionTypeTopToBottom
 };
 
+/// 边框类型(位移枚举)
+typedef NS_ENUM(NSInteger, BRBorderSideType) {
+    BRBorderSideTypeAll    = 0,
+    BRBorderSideTypeTop    = 1 << 0,
+    BRBorderSideTypeBottom = 1 << 1,
+    BRBorderSideTypeLeft   = 1 << 2,
+    BRBorderSideTypeRight  = 1 << 3,
+};
+
 @interface UIView (BRAdd)
 /** 返回视图的视图控制器(可能为nil) */
 @property (nullable, nonatomic, readonly) UIViewController *viewController;
@@ -79,6 +88,9 @@ typedef NS_ENUM(NSUInteger, BRDirectionType) {
 
 /** 设置view的渐变色 */
 - (void)br_setGradientColor:(UIColor *)fromColor toColor:(UIColor *)toColor direction:(BRDirectionType)direction;
+
+/** 设置view的边框线（使用注意：1、先把view添加到父视图，再设置边框；2、可以设置多个边框：BRBorderSideTypeTop | BRBorderSideTypeBottom） */
+- (void)br_setBorderType:(BRBorderSideType)borderType borderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth;
 
 @end
 

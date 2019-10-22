@@ -200,6 +200,52 @@ BRSYNTH_DUMMY_CLASS(UIView_BRAdd)
     [self.layer addSublayer:gradientLayer];
 }
 
+#pragma mark - 设置view的边框线
+- (void)br_setBorderType:(BRBorderSideType)borderType borderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth {
+    if (borderType == BRBorderSideTypeAll) {
+        self.layer.borderWidth = borderWidth;
+        self.layer.borderColor = borderColor.CGColor;
+    }
+    /// 左侧
+    if (borderType & BRBorderSideTypeLeft) {
+        /// 左侧线路径
+        [self.layer addSublayer:[self addLineOriginPoint:CGPointMake(0.f, 0.f) toPoint:CGPointMake(0.0f, self.frame.size.height) color:borderColor borderWidth:borderWidth]];
+    }
+    
+    /// 右侧
+    if (borderType & BRBorderSideTypeRight) {
+        /// 右侧线路径
+        [self.layer addSublayer:[self addLineOriginPoint:CGPointMake(self.frame.size.width, 0.0f) toPoint:CGPointMake( self.frame.size.width, self.frame.size.height) color:borderColor borderWidth:borderWidth]];
+    }
+    
+    /// top
+    if (borderType & BRBorderSideTypeTop) {
+        /// top线路径
+        [self.layer addSublayer:[self addLineOriginPoint:CGPointMake(0.0f, 0.0f) toPoint:CGPointMake(self.frame.size.width, 0.0f) color:borderColor borderWidth:borderWidth]];
+    }
+    
+    /// bottom
+    if (borderType & BRBorderSideTypeBottom) {
+        /// bottom线路径
+        [self.layer addSublayer:[self addLineOriginPoint:CGPointMake(0.0f, self.frame.size.height) toPoint:CGPointMake( self.frame.size.width, self.frame.size.height) color:borderColor borderWidth:borderWidth]];
+    }
+}
+
+- (CAShapeLayer *)addLineOriginPoint:(CGPoint)p0 toPoint:(CGPoint)p1 color:(UIColor *)color borderWidth:(CGFloat)borderWidth {
+    /// 线的路径
+    UIBezierPath * bezierPath = [UIBezierPath bezierPath];
+    [bezierPath moveToPoint:p0];
+    [bezierPath addLineToPoint:p1];
+    
+    CAShapeLayer * shapeLayer = [CAShapeLayer layer];
+    shapeLayer.strokeColor = color.CGColor;
+    shapeLayer.fillColor  = [UIColor clearColor].CGColor;
+    /// 添加路径
+    shapeLayer.path = bezierPath.CGPath;
+    /// 线宽度
+    shapeLayer.lineWidth = borderWidth;
+    return shapeLayer;
+}
 
 
 @end

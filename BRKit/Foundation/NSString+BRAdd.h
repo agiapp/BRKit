@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** 判断是否是有效的(非空/非空白)字符串 */
 - (BOOL)br_isValidString;
 
+/** 获取有效参数字符串 */
+- (nullable NSString *)br_PramsString;
+
 /** 判断是否包含指定字符串 */
 - (BOOL)br_containsString:(NSString *)string;
 
@@ -37,8 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSString *)br_UUID;
 
-/** 转UTF8字符串（UTF-8编码）*/
-- (NSString *)br_utf8String;
+/** UTF-8字符串编码 */
+- (NSString *)br_stringByUTF8Encode;
+
+/** UTF-8字符串解码 */
+- (NSString *)br_stringByUTF8Decode;
 
 /**
  *  获取文本的大小
@@ -77,6 +83,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** label富文本: 设置不同字体和颜色 */
 - (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color;
 
+/** label富文本: 设置所有关键词自定义颜色显示 */
+- (NSMutableAttributedString *)br_setAllChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color;
+
 /** label富文本: HTML标签文本 */
 - (NSMutableAttributedString *)br_setTextHTMLString;
 
@@ -86,6 +95,16 @@ NS_ASSUME_NONNULL_BEGIN
 /** 设置文本关键词红色显示 */
 // <em>苹果</em><em>科技</em>股份有限公司
 - (NSAttributedString *)br_setTextKeywords:(UIColor *)keywordColor;
+
+/** label富文本: 段落样式 */
+- (NSAttributedString *)br_paragraphText;
+
+/** label富文本: 设置文本行间距 */
+- (NSAttributedString *)br_textWithLineSpacing:(CGFloat)lineSpacing alignment:(NSTextAlignment)alignment;
+
+/** 获取段落文本的高度 */
+- (CGFloat)br_getParagraphTextHeight:(UIFont *)font width:(CGFloat)width;
+
 
 ///==================================================
 ///             正则表达式
