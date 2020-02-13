@@ -96,4 +96,153 @@ static inline NSUInteger br_hexStrToInt(NSString *str) {
     return [UIColor colorWithPatternImage:image];
 }
 
+
+
+//================================================= 动态颜色 =================================================
+
+#pragma mark - 系统背景颜色1：systemBackgroundColor
++ (UIColor *)br_systemBackgroundColor {
+    if (@available(iOS 13.0, *)) {
+        // #ffffff(正常)、#000000(深色)
+        return [UIColor systemBackgroundColor];
+    } else {
+        return [UIColor whiteColor];
+    }
+}
+
+#pragma mark - 系统背景颜色2：secondarySystemBackgroundColor
++ (UIColor *)br_secondarySystemBackgroundColor {
+    if (@available(iOS 13.0, *)) {
+        // #f2f2f7(正常)、#1c1c1e(深色)
+        return [UIColor secondarySystemBackgroundColor];
+    } else {
+        return [UIColor br_colorWithHexString:@"#f2f2f7"];
+    }
+}
+
+#pragma mark - 系统背景颜色3：tertiarySystemBackgroundColor
++ (UIColor *)br_tertiarySystemBackgroundColor {
+    if (@available(iOS 13.0, *)) {
+        // #ffffff(正常)、#2c2c2e(深色)
+        return [UIColor tertiarySystemBackgroundColor];
+    } else {
+        return [UIColor whiteColor];
+    }
+}
+
+#pragma mark - Grouped 背景颜色1（如，UITableView 背景颜色）：systemGroupedBackgroundColor
++ (UIColor *)br_systemGroupedBackgroundColor {
+    if (@available(iOS 13.0, *)) {
+        // #f2f2f7(正常)、#000000(深色)
+        return [UIColor systemGroupedBackgroundColor];
+    } else {
+        return [UIColor groupTableViewBackgroundColor];
+    }
+}
+
+#pragma mark - Grouped 背景颜色2（如，UITableViewCell 背景颜色）：secondarySystemGroupedBackgroundColor
++ (UIColor *)br_secondarySystemGroupedBackgroundColor {
+    if (@available(iOS 13.0, *)) {
+        // #ffffff(正常)、#1c1c1e(深色)
+        return [UIColor secondarySystemGroupedBackgroundColor];
+    } else {
+        return [UIColor whiteColor];
+    }
+}
+
+#pragma mark - Grouped 背景颜色3：tertiarySystemGroupedBackgroundColor
++ (UIColor *)br_tertiarySystemGroupedBackgroundColor {
+    if (@available(iOS 13.0, *)) {
+        // #f2f2f7(正常)、#2c2c2e(深色)
+        return [UIColor tertiarySystemGroupedBackgroundColor];
+    } else {
+        return [UIColor br_colorWithHexString:@"#f2f2f7"];
+    }
+}
+
+#pragma mark - 边框线背景颜色（有透明度）：separatorColor
++ (UIColor *)br_separatorColor {
+    if (@available(iOS 13.0, *)) {
+        // 边框线背景颜色，有透明度
+        return [UIColor separatorColor];
+    } else {
+        return [UIColor br_colorWithHexString:@"#c6c6c8"];
+    }
+}
+
+#pragma mark - 分隔线背景颜色（无透明度）：opaqueSeparatorColor
++ (UIColor *)br_opaqueSeparatorColor {
+    if (@available(iOS 13.0, *)) {
+        // 分割线背景颜色，无透明度
+        return [UIColor opaqueSeparatorColor];
+    } else {
+        return [UIColor br_colorWithHexString:@"#c6c6c8"];
+    }
+}
+
+#pragma mark - 文本颜色1：labelColor
++ (UIColor *)br_labelColor {
+    if (@available(iOS 13.0, *)) {
+        // #000000(正常)、#ffffff(深色)
+        return [UIColor labelColor];
+    } else {
+        return [UIColor blackColor];
+    }
+}
+
+#pragma mark - 文本颜色2：secondaryLabelColor
++ (UIColor *)br_secondaryLabelColor {
+    if (@available(iOS 13.0, *)) {
+        // #8a8a8e(正常)、#8d8d92/#98989e(深色)
+        return [UIColor secondaryLabelColor];
+    } else {
+        return [UIColor br_colorWithHexString:@"#8a8a8e"];
+    }
+}
+
+#pragma mark - 文本颜色3：tertiaryLabelColor
++ (UIColor *)br_tertiaryLabelColor {
+    if (@available(iOS 13.0, *)) {
+        // #c4c4c6(正常)、#47474a/#5a5a5e(深色)
+        return [UIColor tertiaryLabelColor];
+    } else {
+        return [UIColor br_colorWithHexString:@"#c4c4c6"];
+    }
+}
+
+#pragma mark - 超链接文本颜色：linkColor
++ (UIColor *)br_linkColor {
+    if (@available(iOS 13.0, *)) {
+        return [UIColor linkColor];
+    } else {
+        return [UIColor br_colorWithHexString:@"#2c7cf6"];
+    }
+}
+
+#pragma mark - 占位文本颜色：placeholderTextColor（等于 tertiaryLabelColor）
++ (UIColor *)br_placeholderTextColor {
+    if (@available(iOS 13.0, *)) {
+        return [UIColor placeholderTextColor];
+    } else {
+        return [UIColor br_colorWithHexString:@"#c4c4c6"];
+    }
+}
+
+#pragma mark - 创建自定义动态颜色（适配深色模式）
++ (UIColor *)br_colorWithLightColor:(UIColor *)lightColor darkColor:(UIColor *)darkColor {
+    if (@available(iOS 13.0, *)) {
+        UIColor *dyColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if ([traitCollection userInterfaceStyle] == UIUserInterfaceStyleLight) {
+                return lightColor;
+            } else {
+                return darkColor;
+            }
+        }];
+        return dyColor;
+    } else {
+        return lightColor;
+    }
+}
+
+
 @end

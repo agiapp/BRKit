@@ -55,6 +55,86 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (UIColor*)br_gradientFromColor:(UIColor*)fromColor toColor:(UIColor*)toColor withHeight:(CGFloat)height;
 
+
+
+//================================================= 动态颜色 =================================================
+
+/**
+ *  系统背景颜色1：systemBackgroundColor
+ */
++ (UIColor *)br_systemBackgroundColor;
+
+/**
+ *  系统背景颜色2：secondarySystemBackgroundColor
+ */
++ (UIColor *)br_secondarySystemBackgroundColor;
+
+/**
+ *  系统背景颜色3：tertiarySystemBackgroundColor
+ */
++ (UIColor *)br_tertiarySystemBackgroundColor;
+
+/**
+ *  Grouped 背景颜色1（如，UITableView 背景颜色）：systemGroupedBackgroundColor
+ */
++ (UIColor *)br_systemGroupedBackgroundColor;
+
+/**
+ *  Grouped 背景颜色2（如，UITableViewCell 背景颜色）：secondarySystemGroupedBackgroundColor
+ */
++ (UIColor *)br_secondarySystemGroupedBackgroundColor;
+
+/**
+ *  Grouped 背景颜色3：tertiarySystemGroupedBackgroundColor
+ */
++ (UIColor *)br_tertiarySystemGroupedBackgroundColor;
+
+/**
+ *  边框线背景颜色（有透明度）：separatorColor
+ */
++ (UIColor *)br_separatorColor;
+
+/**
+ *  分隔线背景颜色（无透明度）：opaqueSeparatorColor
+ */
++ (UIColor *)br_opaqueSeparatorColor;
+
+/**
+ *  文本颜色1：labelColor
+ */
++ (UIColor *)br_labelColor;
+
+/**
+ *  文本颜色2：secondaryLabelColor
+ */
++ (UIColor *)br_secondaryLabelColor;
+
+/**
+ *  文本颜色3：tertiaryLabelColor
+ */
++ (UIColor *)br_tertiaryLabelColor;
+
+/**
+ *  超链接文本颜色：linkColor
+ */
++ (UIColor *)br_linkColor;
+
+/**
+ *  占位文本颜色：placeholderTextColor（等于 tertiaryLabelColor）
+ */
++ (UIColor *)br_placeholderTextColor;
+
+/**
+*  创建自定义动态颜色（适配深色模式）
+*
+*  @param lightColor  正常模式颜色
+*  @param darkColor   深色模式颜色
+*
+*  @return 颜色对象
+*/
++ (UIColor *)br_colorWithLightColor:(UIColor *)lightColor darkColor:(UIColor *)darkColor;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
