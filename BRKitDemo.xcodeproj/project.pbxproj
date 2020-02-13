@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		45FA7FEA23F50B3800A17E5E /* UILabel+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA7FE923F50B3800A17E5E /* UILabel+BRAdd.m */; };
-		45FA7FED23F5394000A17E5E /* UIDevice+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA7FEC23F5394000A17E5E /* UIDevice+BRAdd.m */; };
 		C51A39B620AC809300F46E2A /* UITextField+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A39B420AC809300F46E2A /* UITextField+BRAdd.m */; };
 		C51A39B720AC809300F46E2A /* UITextView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A39B520AC809300F46E2A /* UITextView+BRAdd.m */; };
 		C51A39BA20AD1B1300F46E2A /* UIControl+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A39B920AD1B1300F46E2A /* UIControl+BRAdd.m */; };
@@ -35,8 +34,6 @@
 		459A260B23643CB90048F06D /* BRKitMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKitMacro.h; sourceTree = "<group>"; };
 		45FA7FE823F50B3800A17E5E /* UILabel+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+BRAdd.h"; sourceTree = "<group>"; };
 		45FA7FE923F50B3800A17E5E /* UILabel+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+BRAdd.m"; sourceTree = "<group>"; };
-		45FA7FEB23F5394000A17E5E /* UIDevice+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+BRAdd.h"; sourceTree = "<group>"; };
-		45FA7FEC23F5394000A17E5E /* UIDevice+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+BRAdd.m"; sourceTree = "<group>"; };
 		C51A39B220AC809300F46E2A /* UITextField+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+BRAdd.h"; sourceTree = "<group>"; };
 		C51A39B320AC809300F46E2A /* UITextView+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+BRAdd.h"; sourceTree = "<group>"; };
 		C51A39B420AC809300F46E2A /* UITextField+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+BRAdd.m"; sourceTree = "<group>"; };
@@ -132,8 +129,6 @@
 				C51A39B520AC809300F46E2A /* UITextView+BRAdd.m */,
 				C51A39B820AD1B1300F46E2A /* UIControl+BRAdd.h */,
 				C51A39B920AD1B1300F46E2A /* UIControl+BRAdd.m */,
-				45FA7FEB23F5394000A17E5E /* UIDevice+BRAdd.h */,
-				45FA7FEC23F5394000A17E5E /* UIDevice+BRAdd.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -263,7 +258,6 @@
 				C538E6B220995FDF000B396F /* UIImage+BRAdd.m in Sources */,
 				C51A39BA20AD1B1300F46E2A /* UIControl+BRAdd.m in Sources */,
 				C538E6B520996154000B396F /* UIImageView+BRAdd.m in Sources */,
-				45FA7FED23F5394000A17E5E /* UIDevice+BRAdd.m in Sources */,
 				C5E29E19208839E500AE642D /* AppDelegate.m in Sources */,
 				C538E6AF20995DD7000B396F /* NSDate+BRAdd.m in Sources */,
 				C580EEA9208CC90C00C240AF /* NSDictionary+BRAdd.m in Sources */,
