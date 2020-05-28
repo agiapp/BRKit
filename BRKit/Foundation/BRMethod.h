@@ -97,7 +97,7 @@ static inline NSString *br_getDateYMDString(NSString *dateString) {
             return [dateString substringToIndex:10];
         }
     }
-    return @"－";
+    return @"﹣";
 }
 
 #endif /* BRMethod_h */

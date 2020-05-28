@@ -42,6 +42,24 @@ NS_ASSUME_NONNULL_BEGIN
 /** 截取当前屏幕的截图/快照 */
 + (nullable UIImage *)br_imageWithScreenshot;
 
+/// 局部截图：截取指定视图指定大小
+/// @param view 截取的指定视图
+/// @param size 截取的指定大小
++ (nullable UIImage *)br_screenShotWithView:(UIView *)view size:(CGSize)size;
+
+/// 截取长图(即截取 tableView、collectionView)
+/// @param srcollView 截取的滚动视图(长图)
++ (nullable UIImage *)br_screenShotWithSrollView:(UIScrollView *)srcollView;
+
+/// 图片拼接(拼接头部/尾部视图)
+/// @param headImage 头图片
+/// @param footImage 尾图片
+- (nullable UIImage *)br_addHeadImage:(nullable UIImage *)headImage footImage:(nullable UIImage *)footImage;
+
+/// 压缩图片（使图片压缩后刚好小于指定大小）
+/// @param maxLength 图片压缩后的最大大小
+- (nullable NSData *)br_compressImageWithMaxLength:(NSUInteger)maxLength;
+
 @end
 
 NS_ASSUME_NONNULL_END

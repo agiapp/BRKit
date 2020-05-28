@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, BRBorderSideType) {
  *  @param offset 阴影偏移量
  *  @param radius 阴影半径
  */
-- (void)br_setLayerShadow:(nullable UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius;
+- (void)br_setLayerShadow:(nullable UIColor *)color offset:(CGSize)offset radius:(CGFloat)radius;
 
 /** 删除所有子视图 */
 - (void)br_removeAllSubviews;

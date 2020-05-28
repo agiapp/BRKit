@@ -37,7 +37,7 @@
         [[UIMenuController sharedMenuController] setMenuItems:@[copyItem]];
         [[UIMenuController sharedMenuController] setTargetRect:self.frame inView:self.superview];
         [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
-        self.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
+        self.backgroundColor = [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:0.2f];
     }
 }
 

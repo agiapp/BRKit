@@ -189,4 +189,113 @@ BRSYNTH_DUMMY_CLASS(UIImage_BRAdd)
     return [UIImage imageWithData:imageData];
 }
 
+#pragma mark - 局部截图：截取指定视图指定大小
++ (UIImage *)br_screenShotWithView:(UIView *)view size:(CGSize)size {
+    UIImage *image = nil;
+    UIGraphicsBeginImageContextWithOptions(size, YES, 0.0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+#pragma mark - 截取长图(即截取 tableView、collectionView)
++ (UIImage *)br_screenShotWithSrollView:(UIScrollView *)srcollView {
+    UIImage *image = nil;
+    UIGraphicsBeginImageContextWithOptions(srcollView.contentSize, YES, 0.0);
+
+    // 保存 srcollView 当前的偏移量
+    CGPoint savedContentOffset = srcollView.contentOffset;
+    CGRect saveFrame = srcollView.frame;
+
+    // 将 srcollView 的偏移量设置为(0,0)
+    srcollView.contentOffset = CGPointZero;
+    srcollView.frame = CGRectMake(0, 0, srcollView.contentSize.width, srcollView.contentSize.height);
+
+    // 在当前上下文中渲染出 srcollView
+    [srcollView.layer renderInContext: UIGraphicsGetCurrentContext()];
+    // 截取当前上下文生成 Image
+    image = UIGraphicsGetImageFromCurrentImageContext();
+
+    // 恢复 srcollView 的偏移量
+    srcollView.contentOffset = savedContentOffset;
+    srcollView.frame = saveFrame;
+
+    UIGraphicsEndImageContext();
+
+    return image;
+}
+
+#pragma mark - 图片拼接
+- (UIImage *)br_addHeadImage:(UIImage *)headImage footImage:(UIImage *)footImage {
+    CGSize size;
+    size.width = self.size.width;
+    CGFloat headHeight = !headImage ? 0 : headImage.size.height;
+    CGFloat footHeight = !footImage ? 0 : footImage.size.height;
+    size.height = self.size.height + headHeight + footHeight;
+    
+    UIGraphicsBeginImageContextWithOptions(size, YES, 0.0);
+    
+    // Draw headImage
+    if (headImage) {
+        [headImage drawInRect:CGRectMake(0, 0, self.size.width, headHeight)];
+    }
+    // Draw masterImage
+    [self drawInRect:CGRectMake(0, headHeight, self.size.width, self.size.height)];
+    // Draw footImage
+    if (footImage) {
+        [footImage drawInRect:CGRectMake(0, self.size.height + headHeight, self.size.width, footHeight)];
+    }
+    
+    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return resultImage;
+}
+
+#pragma mark - 压缩图片（使图片压缩后刚好小于指定大小）
+// 微信小程序分享名片缩略图最大长度128KB。传值，如：maxLength = 128 * 1024
+- (NSData *)br_compressImageWithMaxLength:(NSUInteger)maxLength {
+    // 1.压缩图片质量
+    CGFloat compression = 1;
+    NSData *data = UIImageJPEGRepresentation(self, compression);
+    NSLog(@"图片压缩前：%ld KB",data.length / 1024);
+    if (data.length < maxLength) return data;
+    
+    CGFloat max = 1;
+    CGFloat min = 0;
+    for (int i = 0; i < 6; ++i) {
+        compression = (max + min) / 2;
+        data = UIImageJPEGRepresentation(self, compression);
+        if (data.length < maxLength * 0.9) {
+            min = compression;
+        } else if (data.length > maxLength) {
+            max = compression;
+        } else {
+            break;
+        }
+    }
+    NSLog(@"图片压缩质量后：%ld KB", data.length / 1024);
+    if (data.length < maxLength) return data;
+    
+    UIImage *resultImage = [UIImage imageWithData:data];
+    // 2.压缩图片大小
+    NSUInteger lastDataLength = 0;
+    while (data.length > maxLength && data.length != lastDataLength) {
+        lastDataLength = data.length;
+        CGFloat ratio = (CGFloat)maxLength / data.length;
+        CGSize size = CGSizeMake((NSUInteger)(resultImage.size.width * sqrtf(ratio)), (NSUInteger)(resultImage.size.height * sqrtf(ratio)));
+        UIGraphicsBeginImageContext(size);
+        [resultImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        resultImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        data = UIImageJPEGRepresentation(resultImage, compression);
+    }
+    NSLog(@"图片压缩大小后：%ld KB", data.length / 1024);
+    
+    return data;
+}
+
 @end
