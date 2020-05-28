@@ -109,6 +109,17 @@ NS_ASSUME_NONNULL_BEGIN
 ///==================================================
 ///             正则表达式
 ///==================================================
+
+/// 检查字符串是否匹配正则表达式格式
+/// @param regex 正则表达式
+- (BOOL)br_checkStringWithRegex:(NSString *)regex;
+
+/** 判断是否是有效的正整数 */
+- (BOOL)br_isValidUInteger;
+
+/** 判断是否是小数，且最多保留两位小数 */
+- (BOOL)br_isValidTwoFloat;
+
 /** 判断是否是有效的手机号 */
 - (BOOL)br_isValidPhoneNumber;
 
@@ -122,7 +133,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)br_isValidEmail;
 
 /** 判断是否是有效的URL */
-- (BOOL)isValidUrl;
+- (BOOL)br_isValidUrl;
 
 /** 判断是否是有效的银行卡号 */
 - (BOOL)br_isValidBankNumber;

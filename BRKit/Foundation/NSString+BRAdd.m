@@ -305,47 +305,60 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 ///==================================================
 ///             正则表达式
 ///==================================================
+
+#pragma mark - 检查字符串是否匹配正则表达式格式
+- (BOOL)br_checkStringWithRegex:(NSString *)regex {
+    NSPredicate *predicte = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [predicte evaluateWithObject:self];
+}
+
+#pragma mark - 判断是否是正整数
+- (BOOL)br_isValidUInteger {
+    NSString *regex = @"^[1-9]\\d*$";
+    return [self br_checkStringWithRegex:regex];
+}
+
+#pragma mark - 判断是否是小数，且最多保留两位小数
+- (BOOL)br_isValidTwoFloat {
+    NSString *regex = @"^\\-?([1-9]\\d*|0)(\\.\\d{0,2})?$";
+    return [self br_checkStringWithRegex:regex];
+}
+
 #pragma mark - 判断是否是有效的手机号
 - (BOOL)br_isValidPhoneNumber {
-    NSString *telNumber = [self stringByReplacingOccurrencesOfString:@" " withString:@""];
-    // @"^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$"
     NSString *regex = @"^(1[3-9][0-9])\\d{8}$";
-    if ([self br_isValidateByRegex:regex]) {
-        return YES;
-    } else {
-        return NO;
-    }
+    return [self br_checkStringWithRegex:regex];
 }
 
 #pragma mark - 判断是否是有效的用户密码
 - (BOOL)br_isValidPassword {
     // 以字母开头，只能包含“字母”，“数字”，“下划线”，长度6~18
     NSString *regex = @"^([a-zA-Z]|[a-zA-Z0-9_]|[0-9]){6,18}$";
-    return [self br_isValidateByRegex:regex];
+    return [self br_checkStringWithRegex:regex];
 }
 
 #pragma mark - 判断是否是有效的用户名（20位的中文或英文）
 - (BOOL)br_isValidUserName {
     NSString *regex = @"^[a-zA-Z一-龥]{1,20}";
-    return [self br_isValidateByRegex:regex];
+    return [self br_checkStringWithRegex:regex];
 }
 
 #pragma mark - 判断是否是有效的邮箱
 - (BOOL)br_isValidEmail {
     NSString *regex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    return [self br_isValidateByRegex:regex];
+    return [self br_checkStringWithRegex:regex];
 }
 
 #pragma mark - 判断是否是有效的URL
-- (BOOL)isValidUrl {
+- (BOOL)br_isValidUrl {
     NSString *regex = @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-    return [self br_isValidateByRegex:regex];
+    return [self br_checkStringWithRegex:regex];
 }
 
 #pragma mark - 判断是否是有效的银行卡号
 - (BOOL)br_isValidBankNumber {
     NSString *regex =@"^\\d{16,19}$|^\\d{6}[- ]\\d{10,13}$|^\\d{4}[- ]\\d{4}[- ]\\d{4}[- ]\\d{4,7}$";
-    return [self br_isValidateByRegex:regex];
+    return [self br_checkStringWithRegex:regex];
 }
 
 #pragma mark - 判断是否是有效的身份证号
@@ -433,7 +446,7 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 #pragma mark - 判断是否是有效的IP地址
 - (BOOL)br_isValidIPAddress {
     NSString *regex = [NSString stringWithFormat:@"^(\\\\d{1,3})\\\\.(\\\\d{1,3})\\\\.(\\\\d{1,3})\\\\.(\\\\d{1,3})$"];
-    BOOL rc = [self br_isValidateByRegex:regex];
+    BOOL rc = [self br_checkStringWithRegex:regex];
     if (rc) {
         NSArray *componds = [self componentsSeparatedByString:@","];
         BOOL v = YES;
@@ -451,19 +464,19 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 #pragma mark - 判断是否是纯汉字
 - (BOOL)br_isValidChinese {
     NSString *regex = @"^[\\u4e00-\\u9fa5]+$";
-    return [self br_isValidateByRegex:regex];
+    return [self br_checkStringWithRegex:regex];
 }
 
 #pragma mark - 判断是否是邮政编码
 - (BOOL)br_isValidPostalcode {
     NSString *regex = @"^[0-8]\\\\d{5}(?!\\\\d)$";
-    return [self br_isValidateByRegex:regex];
+    return [self br_checkStringWithRegex:regex];
 }
 
 #pragma mark - 判断是否是工商税号
 - (BOOL)br_isValidTaxNo {
     NSString *regex = @"[0-9]\\\\d{13}([0-9]|X)$";
-    return [self br_isValidateByRegex:regex];
+    return [self br_checkStringWithRegex:regex];
 }
 
 #pragma mark - 判断是否是车牌号
@@ -471,13 +484,7 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     // 车牌号:湘K-DE829 香港车牌号码:粤Z-J499港
     // 其中\\u4e00-\\u9fa5表示unicode编码中汉字已编码部分，\\u9fa5-\\u9fff是保留部分，将来可能会添加
     NSString *regex = @"^[\\u4e00-\\u9fff]{1}[a-zA-Z]{1}[-][a-zA-Z_0-9]{4}[a-zA-Z_0-9_\\u4e00-\\u9fff]$";
-    return [self br_isValidateByRegex:regex];
-}
-
-#pragma mark - 匹配正则表达式的一些简单封装
-- (BOOL)br_isValidateByRegex:(NSString *)regex {
-    NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    return [pre evaluateWithObject:self];
+    return [self br_checkStringWithRegex:regex];
 }
 
 #pragma mark - 通过身份证获取性别
