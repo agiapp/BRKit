@@ -13,27 +13,97 @@
 ///            static inline 内联函数
 ///==================================================
 
-//static inline UIEdgeInsets br_safeAreaInset(UIView *view) {
-//    if (@available(iOS 11.0, *)) {
-//        return view.safeAreaInsets;
-//    }
-//    return UIEdgeInsetsZero;
-//}
+/** 判断对象是否为空 */
+static inline BOOL br_isEmpty(id thing) {
+    return thing == nil || [thing isEqual:[NSNull null]] ||
+    [thing isEqual:@"null"] || [thing isEqual:@"(null)"] ||
+    ([thing respondsToSelector:@selector(length)] && [(NSData *)thing length] == 0) ||
+    ([thing respondsToSelector:@selector(count)] && [(NSArray *)thing count] == 0);
+}
 
-//static inline MASConstraint * br_safeAreaBottom(MASConstraintMaker *make,UIView *view) {
-//    if (@available(iOS 11.0, *)) {
-//        //mas_safeAreaLayoutGuideBottom
-//        return make.bottom.equalTo(view.mas_safeAreaLayoutGuideBottom);
-//    }
-//    return make.bottom.equalTo(view);
-//}
-
-static inline BOOL br_isZeroFloat(float f) {
-    const float EPSINON = 0.0001;
-    if ((f >= -EPSINON) && f <= EPSINON) {
-        return YES;
+/**
+ *  判断对象是否为null
+ *  nil、NSNil、@"null"、@"(null)" 返回 NO
+ *  @return YES 为实例对象, NO 为空
+ */
+static inline BOOL br_isNotNullOrNil(id object) {
+    if (object == nil || [object isEqual:[NSNull null]]) {
+        return NO;
     }
-    return NO;
+    if ([object isEqual:@"null"] || [object isEqual:@"(null)"]) {
+        return NO;
+    }
+    return YES;
+}
+
+/**
+ *  判断对象是否为空
+ *  nil、NSNil、@"null"、@"(null)"、@""、@0、@[]、@{} 返回 NO
+ *  @return YES 为实例对象, NO 为空
+ */
+static inline BOOL br_isNotEmptyObject(id object) {
+    if (object == nil || [object isEqual:[NSNull null]]) {
+        return NO;
+    }
+    if ([object isEqual:@"null"] || [object isEqual:@"(null)"] || [object isEqual:@""]) {
+        return NO;
+    }
+    if ([object isKindOfClass:[NSNumber class]] && [object isEqualToNumber:@0]) {
+        return NO;
+    }
+    if ([object respondsToSelector:@selector(length)] && [(NSData *)object length] == 0) {
+        return NO;
+    }
+    if ([object respondsToSelector:@selector(count)] && [(NSArray *)object count] == 0) {
+        return NO;
+    }
+    return YES;
+}
+
+/**
+ *  判断数字是否是正数
+ *  nil、NSNil、@0 返回 NO
+ *  @return YES 为实例对象, NO 为空
+ */
+static inline BOOL br_isPositiveNumber(NSNumber *number) {
+    if (number == nil || [number isEqual:[NSNull null]]) {
+        return NO;
+    }
+    if ([number isEqualToNumber:@0] || [number integerValue] < 0) {
+        return NO;
+    }
+    return YES;
+}
+
+/** 获取非空字符串，可指定缺省值 */
+static inline NSString *br_nonullString(NSString *obj, NSString *msg) {
+    if (obj == nil || [obj isEqual:[NSNull null]] ||
+        [obj isEqual:@"(null)"] || [obj isEqual:@"null"] || obj.length == 0) {
+        return msg;
+    }
+    return obj;
+}
+
+/** 获取非空number，可指定缺省值 */
+static inline NSString *br_nonullNumber(NSNumber *obj, NSString *msg) {
+    if (obj == nil || [obj isEqual:[NSNull null]] || [obj isEqualToNumber:@0] || [obj isEqualToNumber:@(-1)]) {
+        return msg;
+    }
+    // 修复网络数据解析小数位精度丢失问题（建议：后台不要传浮点类型数字，直接传字符串）
+    NSString *doubleString = [NSString stringWithFormat:@"%lf", obj.doubleValue];
+    NSDecimalNumber *decNumber = [NSDecimalNumber decimalNumberWithString:doubleString];
+    return [decNumber stringValue];
+}
+
+/** 获取有效"年月日"日期字符串(2019-09-09) */
+static inline NSString *br_getDateYMDString(NSString *dateString) {
+    if (!br_isEmpty(dateString) && dateString.length >= 10) {
+        NSString *yearStr = [dateString substringToIndex:4];
+        if ([yearStr integerValue] > 1900) {
+            return [dateString substringToIndex:10];
+        }
+    }
+    return @"--";
 }
 
 /** 获取字符串（对象转字符串）*/
@@ -50,54 +120,6 @@ static inline NSString *br_stringFromObject(id object) {
     } else {
         return [object description];
     }
-}
-
-/** 判断对象是否为空 */
-static inline BOOL br_isEmpty(id thing) {
-    return thing == nil ||
-    [thing isEqual:[NSNull null]] ||
-    [thing isEqual:@"null"] ||
-    [thing isEqual:@"(null)"] ||
-    ([thing respondsToSelector:@selector(length)]
-     && [(NSData *)thing length] == 0) ||
-    ([thing respondsToSelector:@selector(count)]
-     && [(NSArray *)thing count] == 0);
-}
-
-/** 获取非空字符串，可指定缺省值 */
-static inline NSString *br_nonullString(NSString *obj, NSString *msg) {
-    if (obj == nil ||
-        [obj isEqual:[NSNull null]] ||
-        [obj isEqual:@"(null)"] ||
-        [obj isEqual:@"null"] || obj.length == 0) {
-        return msg;
-    }
-    return obj;
-}
-
-/** 获取非空number，可指定缺省值 */
-static inline NSString *br_nonullNumber(NSNumber *obj, NSString *msg) {
-    if (obj == nil ||
-        [obj isEqual:[NSNull null]] ||
-        [obj isEqual:@"(null)"] ||
-        [obj isEqual:@"null"]) {
-        return msg;
-    }
-    // 修复网络数据解析小数位精度丢失问题（建议：后台不要传浮点类型数字，直接传字符串）
-    NSString *doubleString = [NSString stringWithFormat:@"%lf", obj.doubleValue];
-    NSDecimalNumber *decNumber = [NSDecimalNumber decimalNumberWithString:doubleString];
-    return [decNumber stringValue];
-}
-
-#pragma mark - 获取有效"年月日"日期字符串(2019-09-09)
-static inline NSString *br_getDateYMDString(NSString *dateString) {
-    if (!br_isEmpty(dateString) && dateString.length >= 10) {
-        NSString *yearStr = [dateString substringToIndex:4];
-        if ([yearStr integerValue] > 1900) {
-            return [dateString substringToIndex:10];
-        }
-    }
-    return @"﹣";
 }
 
 #endif /* BRMethod_h */
