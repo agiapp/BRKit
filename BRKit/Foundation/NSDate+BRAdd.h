@@ -2,7 +2,7 @@
 //  NSDate+BRAdd.h
 //  BRKitDemo
 //
-//  Created by 任波 on 2018/5/2.
+//  Created by renbo on 2018/5/2.
 //  Copyright © 2018年 91renb. All rights reserved.
 //
 
@@ -47,6 +47,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return 日期字符串，格式：yyyy-MM-dd HH:mm:ss
  */
 + (nullable NSString *)br_dateStringWithDelta:(NSTimeInterval)delta;
+
+/**
+ *  计算任意2个时间之间的间隔(单位：秒)
+ *
+ *  @param starTime 开始时间
+ *  @param endTime  结束时间
+ *  @return 时间差，秒数
+ */
++ (NSTimeInterval)br_timeIntervalWithStarTime:(NSString *)starTime endTime:(NSString *)endTime;
 
 /**
  * @method

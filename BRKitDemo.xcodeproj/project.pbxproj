@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		45467ECC25495E55001E8D6B /* UIDevice+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45467ECB25495E55001E8D6B /* UIDevice+BRAdd.m */; };
+		4568FBF62566150E008269C1 /* NSMutableAttributedString+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 4568FBF52566150E008269C1 /* NSMutableAttributedString+BRAdd.m */; };
 		45FA7FEA23F50B3800A17E5E /* UILabel+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA7FE923F50B3800A17E5E /* UILabel+BRAdd.m */; };
 		C51A39B620AC809300F46E2A /* UITextField+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A39B420AC809300F46E2A /* UITextField+BRAdd.m */; };
 		C51A39B720AC809300F46E2A /* UITextView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A39B520AC809300F46E2A /* UITextView+BRAdd.m */; };
@@ -34,6 +35,8 @@
 /* Begin PBXFileReference section */
 		45467ECA25495E55001E8D6B /* UIDevice+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+BRAdd.h"; sourceTree = "<group>"; };
 		45467ECB25495E55001E8D6B /* UIDevice+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+BRAdd.m"; sourceTree = "<group>"; };
+		4568FBF42566150E008269C1 /* NSMutableAttributedString+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+BRAdd.h"; sourceTree = "<group>"; };
+		4568FBF52566150E008269C1 /* NSMutableAttributedString+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+BRAdd.m"; sourceTree = "<group>"; };
 		459A260B23643CB90048F06D /* BRKitMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKitMacro.h; sourceTree = "<group>"; };
 		45FA7FE823F50B3800A17E5E /* UILabel+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+BRAdd.h"; sourceTree = "<group>"; };
 		45FA7FE923F50B3800A17E5E /* UILabel+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+BRAdd.m"; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 				459A260B23643CB90048F06D /* BRKitMacro.h */,
 				C5E29E32208847DB00AE642D /* NSString+BRAdd.h */,
 				C5E29E33208847DB00AE642D /* NSString+BRAdd.m */,
+				4568FBF42566150E008269C1 /* NSMutableAttributedString+BRAdd.h */,
+				4568FBF52566150E008269C1 /* NSMutableAttributedString+BRAdd.m */,
 				C523E28D208B966D008A1508 /* NSArray+BRAdd.h */,
 				C523E28E208B966D008A1508 /* NSArray+BRAdd.m */,
 				C580EEA7208CC90C00C240AF /* NSDictionary+BRAdd.h */,
@@ -261,6 +266,7 @@
 				C538E6BE209989CD000B396F /* NSTimer+BRAdd.m in Sources */,
 				C5E29E27208839E700AE642D /* main.m in Sources */,
 				C538E6B220995FDF000B396F /* UIImage+BRAdd.m in Sources */,
+				4568FBF62566150E008269C1 /* NSMutableAttributedString+BRAdd.m in Sources */,
 				C51A39BA20AD1B1300F46E2A /* UIControl+BRAdd.m in Sources */,
 				C538E6B520996154000B396F /* UIImageView+BRAdd.m in Sources */,
 				45467ECC25495E55001E8D6B /* UIDevice+BRAdd.m in Sources */,

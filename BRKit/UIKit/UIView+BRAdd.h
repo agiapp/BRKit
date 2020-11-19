@@ -2,7 +2,7 @@
 //  UIView+BRAdd.h
 //  BRKitDemo
 //
-//  Created by 任波 on 2018/5/2.
+//  Created by renbo on 2018/5/2.
 //  Copyright © 2018年 91renb. All rights reserved.
 //
 
@@ -25,8 +25,6 @@ typedef NS_ENUM(NSInteger, BRBorderSideType) {
 };
 
 @interface UIView (BRAdd)
-/** 返回视图的视图控制器(可能为nil) */
-@property (nullable, nonatomic, readonly) UIViewController *viewController;
 /** left: frame.origin.x */
 @property (nonatomic) CGFloat left;
 /** top: frame.origin.y */
@@ -75,10 +73,13 @@ typedef NS_ENUM(NSInteger, BRBorderSideType) {
  *  @param offset 阴影偏移量
  *  @param radius 阴影半径
  */
-- (void)br_setLayerShadow:(nullable UIColor *)color offset:(CGSize)offset radius:(CGFloat)radius;
+- (void)br_setLayerShadowColor:(nullable UIColor *)color offset:(CGSize)offset radius:(CGFloat)radius;
 
 /** 删除所有子视图 */
 - (void)br_removeAllSubviews;
+
+/** 返回当前视图的控制器 */
+- (nullable UIViewController *)br_getViewController;
 
 /** 创建屏幕快照 */
 - (nullable UIImage *)br_snapshotImage;
@@ -91,6 +92,23 @@ typedef NS_ENUM(NSInteger, BRBorderSideType) {
 
 /** 设置view的边框线（使用注意：1、先把view添加到父视图，再设置边框；2、可以设置多个边框：BRBorderSideTypeTop | BRBorderSideTypeBottom） */
 - (void)br_setBorderType:(BRBorderSideType)borderType borderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth;
+
+/**
+ *  给视图画条虚线
+ *
+ *  @param point        起点
+ *  @param color        虚线颜色
+ *  @param width        虚线的宽度
+ *  @param length       虚线的长度
+ *  @param space        虚线之间的间距
+ *  @param size         width 为 0 时垂直；height 为 0 时水平
+ */
+- (void)br_drawDottedLineWithStartPoint:(CGPoint)point
+                                  color:(UIColor *)color
+                                  width:(CGFloat)width
+                                 length:(NSNumber *)length
+                                  space:(NSNumber *)space
+                                   size:(CGSize)size;
 
 @end
 

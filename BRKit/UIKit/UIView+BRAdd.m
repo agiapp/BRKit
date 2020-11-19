@@ -2,7 +2,7 @@
 //  UIView+BRAdd.m
 //  BRKitDemo
 //
-//  Created by 任波 on 2018/5/2.
+//  Created by renbo on 2018/5/2.
 //  Copyright © 2018年 91renb. All rights reserved.
 //
 
@@ -130,8 +130,8 @@ BRSYNTH_DUMMY_CLASS(UIView_BRAdd)
     self.layer.mask = shape;
 }
 
-#pragma mark - 设置视图view的阴影
-- (void)br_setLayerShadow:(nullable UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius {
+#pragma mark - 设置视图view的阴影效果
+- (void)br_setLayerShadowColor:(UIColor *)color offset:(CGSize)offset radius:(CGFloat)radius {
     self.layer.shadowColor = color.CGColor;
     self.layer.shadowOffset = offset;
     self.layer.shadowRadius = radius;
@@ -147,10 +147,10 @@ BRSYNTH_DUMMY_CLASS(UIView_BRAdd)
     }
 }
 
-#pragma mark - 返回视图的视图控制器
-- (UIViewController *)viewController {
-    for (UIView *view = self; view; view = view.superview) {
-        UIResponder *nextResponder = [view nextResponder];
+#pragma mark - 返回当前视图的控制器
+- (UIViewController *)br_getViewController {
+    for (UIView *next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
         if ([nextResponder isKindOfClass:[UIViewController class]]) {
             return (UIViewController *)nextResponder;
         }
@@ -247,5 +247,38 @@ BRSYNTH_DUMMY_CLASS(UIView_BRAdd)
     return shapeLayer;
 }
 
+/**
+ *  给视图画条虚线
+ *
+ *  @param point        起点
+ *  @param color        虚线颜色
+ *  @param width        虚线的宽度
+ *  @param length       虚线的长度
+ *  @param space        虚线之间的间距
+ *  @param size         width 为 0 时垂直；height 为 0 时水平
+ */
+- (void)br_drawDottedLineWithStartPoint:(CGPoint)point
+                                  color:(UIColor *)color
+                                  width:(CGFloat)width
+                                 length:(NSNumber *)length
+                                  space:(NSNumber *)space
+                                   size:(CGSize)size {
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.position = point;
+    shapeLayer.fillColor = nil;
+    // 虚线颜色
+    shapeLayer.strokeColor = color.CGColor;
+    // 虚线的宽度
+    shapeLayer.lineWidth = width;
+    shapeLayer.lineJoin = kCALineJoinRound;
+    // 第一个参数：线的长度；第二个参数：线间距
+    shapeLayer.lineDashPattern = @[length, space];
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0, 0);
+    CGPathAddLineToPoint(path, NULL, size.width, size.height);
+    shapeLayer.path = path;
+    CGPathRelease(path);
+    [self.layer addSublayer:shapeLayer];
+}
 
 @end

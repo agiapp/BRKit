@@ -2,7 +2,7 @@
 //  NSString+BRAdd.m
 //  BRKitDemo
 //
-//  Created by 任波 on 2018/4/19.
+//  Created by renbo on 2018/4/19.
 //  Copyright © 2018年 91renb. All rights reserved.
 //
 
@@ -139,6 +139,26 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return size.height;
 }
 
+#pragma mark - 获取文本的高度（带行间距）
+- (CGFloat)br_getTextHeight:(UIFont *)font width:(CGFloat)width lineSpacing:(CGFloat)lineSpacing {
+    NSMutableDictionary *attributes = [[NSMutableDictionary alloc]init];
+    attributes[NSFontAttributeName] = font;
+    if (lineSpacing > 0) {
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        // 段落行间距
+        paragraphStyle.lineSpacing = lineSpacing;
+        // 在单个字符边界处换行
+        paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+        attributes[NSParagraphStyleAttributeName] = paragraphStyle;
+    }
+    // 计算文本的的rect
+    CGRect rect = [self boundingRectWithSize:CGSizeMake(width, MAXFLOAT)
+                                     options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                  attributes:attributes
+                                     context:nil];
+    return rect.size.height;
+}
+
 #pragma mark - label富文本: 插入图片
 - (NSMutableAttributedString *)br_setRichTextWithImage:(NSString *)iconName bounds:(CGRect)bounds iconLocation:(NSInteger)location {
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
@@ -170,6 +190,33 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
         // 设置不同颜色
         [attrString addAttribute:NSForegroundColorAttributeName value:color range:range];
     }
+    return attrString;
+}
+
+#pragma mark - label富文本: 设置不同颜色和行高
+- (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText
+                                changeTextColor:(UIColor *)color
+                                    lineSpacing:(CGFloat)lineSpacing {
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
+    if (![changeText br_isValidString]) {
+        return attrString;
+    }
+    // 获取要调整文字样式的位置
+    NSRange range = [[attrString string]rangeOfString:changeText];
+    if (color) {
+        // 设置不同颜色
+        [attrString addAttribute:NSForegroundColorAttributeName value:color range:range];
+    }
+    
+    if (lineSpacing > 0) {
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        // 行间距
+        paragraphStyle.lineSpacing = lineSpacing;
+        // 显示不下在末尾显示省略号
+        paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+        [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [[attrString string] length])];
+    }
+    
     return attrString;
 }
 

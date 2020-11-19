@@ -2,7 +2,7 @@
 //  UIButton+BRAdd.m
 //  BRKitDemo
 //
-//  Created by 任波 on 2018/5/2.
+//  Created by renbo on 2018/5/2.
 //  Copyright © 2018年 91renb. All rights reserved.
 //
 
@@ -25,16 +25,9 @@ BRSYNTH_DUMMY_CLASS(UIButton_BRAdd)
     CGFloat imageWith = self.imageView.frame.size.width;
     CGFloat imageHeight = self.imageView.frame.size.height;
     
-    CGFloat labelWidth = 0.0;
-    CGFloat labelHeight = 0.0;
-    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
-        // 由于iOS8中titleLabel的size为0，用下面的这种设置
-        labelWidth = self.titleLabel.intrinsicContentSize.width;
-        labelHeight = self.titleLabel.intrinsicContentSize.height;
-    } else {
-        labelWidth = self.titleLabel.frame.size.width;
-        labelHeight = self.titleLabel.frame.size.height;
-    }
+    // 由于iOS8中titleLabel的size为0，用下面的这种设置
+    CGFloat labelWidth = self.titleLabel.intrinsicContentSize.width;
+    CGFloat labelHeight = self.titleLabel.intrinsicContentSize.height;
     
     // 2. 声明全局的imageEdgeInsets和labelEdgeInsets
     UIEdgeInsets imageEdgeInsets = UIEdgeInsetsZero;

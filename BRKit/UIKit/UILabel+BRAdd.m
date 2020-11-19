@@ -2,7 +2,7 @@
 //  UILabel+BRAdd.m
 //  AFNetworking
 //
-//  Created by 任波 on 2018/5/2.
+//  Created by renbo on 2018/5/2.
 //  Copyright © 2018年 91renb. All rights reserved.
 //
 
@@ -11,6 +11,50 @@
 
 @implementation UILabel (BRAdd)
 
++ (UILabel * _Nonnull (^)(CGRect))br_label {
+    // 声明并实现一个block，并返回
+    return ^(CGRect frame) {
+        // 根据传过来的frame参数初始化UILabel，并返回
+        return [[UILabel alloc] initWithFrame:frame];
+    };
+}
+
+- (UILabel * _Nonnull (^)(UIColor * _Nonnull))br_backgroundColor {
+    return ^(UIColor *backgroundColor) {
+        self.backgroundColor = backgroundColor;
+        return self;
+    };
+}
+
+- (UILabel * _Nonnull (^)(CGRect))br_frame {
+    return ^(CGRect frame) {
+        self.frame = frame;
+        return self;
+    };
+}
+
+- (UILabel * _Nonnull (^)(UIFont * _Nonnull))br_font {
+    return ^(UIFont *font) {
+        self.font = font;
+        return self;
+    };
+}
+
+- (UILabel * _Nonnull (^)(UIColor * _Nonnull))br_textColor {
+    return ^(UIColor *textColor) {
+        self.textColor = textColor;
+        return self;
+    };
+}
+
+- (UILabel * _Nonnull (^)(NSString * _Nonnull))br_text {
+    return ^(NSString *text) {
+        self.text = text;
+        return self;
+    };
+}
+
+#pragma mark - ------------ 长按文本支持复制 -----------
 - (BOOL)copyable {
     return [objc_getAssociatedObject(self, @selector(copyable)) boolValue];
 }

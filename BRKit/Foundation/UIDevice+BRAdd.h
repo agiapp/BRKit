@@ -2,7 +2,7 @@
 //  UIDevice+BRAdd.h
 //  BRKitDemo
 //
-//  Created by 任波 on 2018/6/4.
+//  Created by renbo on 2018/5/2.
 //  Copyright © 2018年 91renb. All rights reserved.
 //
 

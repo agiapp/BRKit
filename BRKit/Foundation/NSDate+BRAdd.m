@@ -2,7 +2,7 @@
 //  NSDate+BRAdd.m
 //  BRKitDemo
 //
-//  Created by 任波 on 2018/5/2.
+//  Created by renbo on 2018/5/2.
 //  Copyright © 2018年 91renb. All rights reserved.
 //
 
@@ -84,6 +84,16 @@ BRSYNTH_DUMMY_CLASS(NSDate_BRAdd)
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     return [formatter stringFromDate:date];
+}
+
+
+#pragma mark - 计算任意2个时间之间的间隔(单位：秒)
++ (NSTimeInterval)br_timeIntervalWithStarTime:(NSString *)starTime endTime:(NSString *)endTime {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *startDate = [formatter dateFromString:starTime];
+    NSDate *endDate = [formatter dateFromString:endTime];
+    return [endDate timeIntervalSinceDate:startDate];
 }
 
 /**

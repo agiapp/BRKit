@@ -2,7 +2,7 @@
 //  BRMethod.h
 //  BRKitDemo
 //
-//  Created by 任波 on 2018/4/20.
+//  Created by renbo on 2018/4/20.
 //  Copyright © 2018年 91renb. All rights reserved.
 //
 
@@ -61,17 +61,24 @@ static inline BOOL br_isNotEmptyObject(id object) {
 }
 
 /**
- *  判断数字是否是正数
- *  nil、NSNil、@0 返回 NO
- *  @return YES 为实例对象, NO 为空
+ *  判断是否是有效的参数数字（即值是大于零的 NSString 或 NSNumber 类型的数字）
+ *  nil、NSNil、@0、@-1、@""、@"0"、@"-1" 返回 NO
+ *  @return YES 为有效ID, NO 为无效
  */
-static inline BOOL br_isPositiveNumber(NSNumber *number) {
-    if (number == nil || [number isEqual:[NSNull null]]) {
+static inline BOOL br_isValidParamNumber(id object) {
+    if (object == nil || [object isEqual:[NSNull null]]) {
         return NO;
     }
-    if ([number isEqualToNumber:@0] || [number integerValue] < 0) {
+    if ([object isEqual:@"null"] || [object isEqual:@"(null)"] || [object isEqual:@""]) {
         return NO;
     }
+    NSString *IDString = [NSString stringWithFormat:@"%@", object];
+    // 修剪字符串（去掉头尾两边的空格和换行符）
+    IDString = [IDString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([IDString length] == 0 || [IDString isEqualToString:@"-1"] || [IDString isEqualToString:@"0"] || [IDString integerValue] <= 0) {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -104,6 +111,17 @@ static inline NSString *br_getDateYMDString(NSString *dateString) {
         }
     }
     return @"--";
+}
+
+/** 判断是否是有效日期字符串(年份大于1900) */
+static inline BOOL br_isValidDateString(NSString *dateString) {
+    if (!br_isEmpty(dateString) && dateString.length >= 4) {
+        NSString *yearStr = [dateString substringToIndex:4];
+        if ([yearStr integerValue] > 1900) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 /** 获取字符串（对象转字符串）*/

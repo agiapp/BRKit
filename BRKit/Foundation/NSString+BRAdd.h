@@ -2,7 +2,7 @@
 //  NSString+BRAdd.h
 //  BRKitDemo
 //
-//  Created by 任波 on 2018/4/19.
+//  Created by renbo on 2018/4/19.
 //  Copyright © 2018年 91renb. All rights reserved.
 //
 
@@ -77,11 +77,25 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (CGFloat)br_getTextHeight:(UIFont *)font width:(CGFloat)width;
 
+/**
+ *  获取文本的高度（带行间距）
+ *
+ *  @param  font   文本字体
+ *  @param  width  文本宽度
+ *
+ *  @return 文本高度
+*/
+- (CGFloat)br_getTextHeight:(UIFont *)font width:(CGFloat)width lineSpacing:(CGFloat)lineSpacing;
+
 /** label富文本: 插入图片 */
 - (NSMutableAttributedString *)br_setRichTextWithImage:(NSString *)iconName bounds:(CGRect)bounds iconLocation:(NSInteger)location;
 
 /** label富文本: 设置不同字体和颜色 */
 - (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color;
+/** label富文本: 设置不同颜色和行高 */
+- (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText
+                                changeTextColor:(nullable UIColor *)color
+                                    lineSpacing:(CGFloat)lineSpacing;
 
 /** label富文本: 设置所有关键词自定义颜色显示 */
 - (NSMutableAttributedString *)br_setAllChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color;
