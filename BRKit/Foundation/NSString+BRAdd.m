@@ -174,6 +174,21 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return attrString;
 }
 
+#pragma mark - label富文本: 插入图片
+- (NSMutableAttributedString *)br_insertImage:(UIImage *)image bounds:(CGRect)bounds location:(NSInteger)location {
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
+    // 文本附件
+    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+    // 定义图片内容及位置和大小（y为负值可以向上移动图片）
+    attch.image = image;
+    attch.bounds = bounds;
+    // 创建带有图片的富文本
+    NSAttributedString *imageStr = [NSAttributedString attributedStringWithAttachment:attch];
+    // 将图片插入指定位置
+    [attrString insertAttributedString:imageStr atIndex:location];
+    return attrString;
+}
+
 #pragma mark - label富文本: 设置不同字体和颜色
 - (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color {
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];

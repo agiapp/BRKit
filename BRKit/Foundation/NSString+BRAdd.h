@@ -89,6 +89,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** label富文本: 插入图片 */
 - (NSMutableAttributedString *)br_setRichTextWithImage:(NSString *)iconName bounds:(CGRect)bounds iconLocation:(NSInteger)location;
+/** label富文本: 插入图片 */
+- (NSMutableAttributedString *)br_insertImage:(UIImage *)image bounds:(CGRect)bounds location:(NSInteger)location;
 
 /** label富文本: 设置不同字体和颜色 */
 - (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color;

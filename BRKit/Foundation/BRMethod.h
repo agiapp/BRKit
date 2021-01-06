@@ -83,18 +83,18 @@ static inline BOOL br_isValidParamNumber(id object) {
 }
 
 /** 获取非空字符串，可指定缺省值 */
-static inline NSString *br_nonullString(NSString *obj, NSString *msg) {
+static inline NSString *br_nonullString(NSString *obj, NSString *placeholder) {
     if (obj == nil || [obj isEqual:[NSNull null]] ||
         [obj isEqual:@"(null)"] || [obj isEqual:@"null"] || obj.length == 0) {
-        return msg;
+        return placeholder ? placeholder : @"--";
     }
     return obj;
 }
 
 /** 获取非空number，可指定缺省值 */
-static inline NSString *br_nonullNumber(NSNumber *obj, NSString *msg) {
+static inline NSString *br_nonullNumber(NSNumber *obj, NSString *placeholder) {
     if (obj == nil || [obj isEqual:[NSNull null]] || [obj isEqualToNumber:@0] || [obj isEqualToNumber:@(-1)]) {
-        return msg;
+        return placeholder ? placeholder : @"--";
     }
     // 修复网络数据解析小数位精度丢失问题（建议：后台不要传浮点类型数字，直接传字符串）
     NSString *doubleString = [NSString stringWithFormat:@"%lf", obj.doubleValue];
@@ -103,14 +103,14 @@ static inline NSString *br_nonullNumber(NSNumber *obj, NSString *msg) {
 }
 
 /** 获取有效"年月日"日期字符串(2019-09-09) */
-static inline NSString *br_getDateYMDString(NSString *dateString) {
+static inline NSString *br_getDateYMDString(NSString *dateString, NSString *placeholder) {
     if (!br_isEmpty(dateString) && dateString.length >= 10) {
         NSString *yearStr = [dateString substringToIndex:4];
         if ([yearStr integerValue] > 1900) {
             return [dateString substringToIndex:10];
         }
     }
-    return @"--";
+    return placeholder ? placeholder : @"--";
 }
 
 /** 判断是否是有效日期字符串(年份大于1900) */

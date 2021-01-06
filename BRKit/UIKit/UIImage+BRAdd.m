@@ -35,6 +35,16 @@ BRSYNTH_DUMMY_CLASS(UIImage_BRAdd)
     return image;
 }
 
+#pragma mark - UIView 转 UIImage
++ (UIImage *)br_imageWithView:(UIView *)view {
+    // 参数1：区域大小。参数2：是否是非透明的（如果需要显示半透明效果，需要传NO，否则传YES）。参数3：屏幕密度
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, [UIScreen mainScreen].scale);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 /**
  *  滤镜名字：OriginImage(原图)、CIPhotoEffectNoir(黑白)、CIPhotoEffectInstant(怀旧)、CIPhotoEffectProcess(冲印)、CIPhotoEffectFade(褪色)、CIPhotoEffectTonal(色调)、CIPhotoEffectMono(单色)、CIPhotoEffectChrome(铬黄)
  *

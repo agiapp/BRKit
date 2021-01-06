@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UITextField (BRAdd)
-/** UITextField 的最大输入长度 */
-//@property (nonatomic, assign) NSInteger inputLimit;
+@interface UITextField (BRAdd)<UITextViewDelegate>
+/** 最大输入长度 */
+@property (nonatomic, assign) NSInteger br_maxLength;
+/** 最多保留两位小数 */
+@property (nonatomic, assign) NSInteger br_maxPoint;
+
+/** 输入文本的格式(正则表达式) */
+@property (nonatomic, copy) NSString *br_regex;
 
 @end

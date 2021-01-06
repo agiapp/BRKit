@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UITextView (BRAdd)
-/** UITextView 的最大输入长度 */
-//@property (nonatomic, assign) NSInteger inputLimit;
+@interface UITextView (BRAdd)<UITextViewDelegate>
+/** 最大输入长度 */
+@property (nonatomic, assign) NSInteger br_maxLength;
 
 @end

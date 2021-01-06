@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable UIImage *)br_imageWithColor:(UIColor *)color;
 /** 用颜色返回一张图片（指定图片大小） */
 + (nullable UIImage *)br_imageWithColor:(UIColor *)color size:(CGSize)size;
+/** UIView 转 UIImage */
++ (nullable UIImage *)br_imageWithView:(UIView *)view;
 /** 为UIImage添加滤镜效果 */
 - (nullable UIImage *)br_addFilter:(NSString *)filter;
 /** 设置图片的透明度 */

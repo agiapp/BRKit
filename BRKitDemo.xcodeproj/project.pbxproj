@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		452428EB2591E08100724EF9 /* BRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 452428EA2591E08100724EF9 /* BRTextField.m */; };
 		45467ECC25495E55001E8D6B /* UIDevice+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45467ECB25495E55001E8D6B /* UIDevice+BRAdd.m */; };
 		4568FBF62566150E008269C1 /* NSMutableAttributedString+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 4568FBF52566150E008269C1 /* NSMutableAttributedString+BRAdd.m */; };
 		45FA7FEA23F50B3800A17E5E /* UILabel+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA7FE923F50B3800A17E5E /* UILabel+BRAdd.m */; };
@@ -33,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		452428E92591E08100724EF9 /* BRTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRTextField.h; sourceTree = "<group>"; };
+		452428EA2591E08100724EF9 /* BRTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BRTextField.m; sourceTree = "<group>"; };
 		45467ECA25495E55001E8D6B /* UIDevice+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+BRAdd.h"; sourceTree = "<group>"; };
 		45467ECB25495E55001E8D6B /* UIDevice+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+BRAdd.m"; sourceTree = "<group>"; };
 		4568FBF42566150E008269C1 /* NSMutableAttributedString+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+BRAdd.h"; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				C5AD51BF2089927300E1032B /* BRKit.h */,
+				452428E92591E08100724EF9 /* BRTextField.h */,
+				452428EA2591E08100724EF9 /* BRTextField.m */,
 				C523E28C208B9518008A1508 /* Foundation */,
 				C580EEA6208CC85000C240AF /* UIKit */,
 			);
@@ -268,6 +273,7 @@
 				C538E6B220995FDF000B396F /* UIImage+BRAdd.m in Sources */,
 				4568FBF62566150E008269C1 /* NSMutableAttributedString+BRAdd.m in Sources */,
 				C51A39BA20AD1B1300F46E2A /* UIControl+BRAdd.m in Sources */,
+				452428EB2591E08100724EF9 /* BRTextField.m in Sources */,
 				C538E6B520996154000B396F /* UIImageView+BRAdd.m in Sources */,
 				45467ECC25495E55001E8D6B /* UIDevice+BRAdd.m in Sources */,
 				C5E29E19208839E500AE642D /* AppDelegate.m in Sources */,

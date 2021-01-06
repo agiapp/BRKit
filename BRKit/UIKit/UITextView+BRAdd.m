@@ -8,40 +8,52 @@
 
 #import "UITextView+BRAdd.h"
 #import "BRKitMacro.h"
+#import "NSString+BRAdd.h"
+#import "UIColor+BRAdd.h"
 #import <objc/runtime.h>
+
+/*! runtime set */
+#define BR_Objc_setObject(key, value) objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+/*! runtime setCopy */
+#define BR_Objc_setObjectCOPY(key, value) objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_COPY)
+/*! runtime get */
+#define BR_Objc_getObject objc_getAssociatedObject(self, _cmd)
 
 BRSYNTH_DUMMY_CLASS(UITextView_BRAdd)
 
-const char *kTextViewInputLimitKey = "kTextViewInputLimit";
-
 @implementation UITextView (BRAdd)
 
-- (void)addObserver {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // 添加监听(监听文本的变化)
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidChange:) name:UITextViewTextDidChangeNotification object:nil];
-    });
+- (void)setBr_maxLength:(NSInteger)br_maxLength {
+    BR_Objc_setObject(@selector(br_maxLength), @(br_maxLength));
+    //[self addTarget:self action:@selector(handleTextFieldTextDidChangeAction) forControlEvents:UIControlEventEditingChanged];
 }
 
-#pragma mark - 通知事件
-- (void)textViewDidChange:(NSNotification *)notification {
-    UITextView *textView = (UITextView *)notification.object;
-    if (self.inputLimit > 0 && textView.text.length > self.inputLimit && textView.markedTextRange == nil) {
-        textView.text = [textView.text substringToIndex:self.inputLimit - 1];
+- (NSInteger)br_maxLength {
+    return [BR_Objc_getObject integerValue];
+}
+
+- (void)handleTextFieldTextDidChangeAction {
+    NSString *toBeginString = self.text;
+    // 获取高亮部分
+    UITextRange *selectRange = [self markedTextRange];
+    UITextPosition *position = [self positionFromPosition:selectRange.start offset:0];
+    
+    // 没有高亮选择的字，则对已输入的文字进行字数统计和限制；在 iOS7 下, position 对象总是不为 nil
+    if ((!position || !selectRange) && (self.br_maxLength > 0 && toBeginString.length > self.br_maxLength && [self isFirstResponder])) {
+        NSRange rangeIndex = [toBeginString rangeOfComposedCharacterSequenceAtIndex:self.br_maxLength];
+        if (rangeIndex.length == 1) {
+            self.text = [toBeginString substringToIndex:self.br_maxLength];
+        } else {
+            NSRange tempRange = [toBeginString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, self.br_maxLength)];
+            NSInteger tempLength = 0;
+            if (tempRange.length > self.br_maxLength) {
+                tempLength = tempRange.length - rangeIndex.length;
+            } else {
+                tempLength = tempRange.length;
+            }
+            self.text = [toBeginString substringWithRange:NSMakeRange(0, tempLength)];
+        }
     }
-}
-
-#pragma mark - setter方法
-- (void)setInputLimit:(NSInteger)inputLimit {
-    [self addObserver];
-    objc_setAssociatedObject(self, kTextViewInputLimitKey, @(inputLimit), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-#pragma mark - getter方法
-- (NSInteger)inputLimit {
-    NSNumber *limit = objc_getAssociatedObject(self, kTextViewInputLimitKey);
-    return [limit integerValue];
 }
 
 @end
