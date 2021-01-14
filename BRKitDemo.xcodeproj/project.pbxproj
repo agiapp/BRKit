@@ -7,70 +7,69 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		452428EB2591E08100724EF9 /* BRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 452428EA2591E08100724EF9 /* BRTextField.m */; };
-		45467ECC25495E55001E8D6B /* UIDevice+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45467ECB25495E55001E8D6B /* UIDevice+BRAdd.m */; };
-		4568FBF62566150E008269C1 /* NSMutableAttributedString+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 4568FBF52566150E008269C1 /* NSMutableAttributedString+BRAdd.m */; };
-		45FA7FEA23F50B3800A17E5E /* UILabel+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA7FE923F50B3800A17E5E /* UILabel+BRAdd.m */; };
-		C51A39B620AC809300F46E2A /* UITextField+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A39B420AC809300F46E2A /* UITextField+BRAdd.m */; };
-		C51A39B720AC809300F46E2A /* UITextView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A39B520AC809300F46E2A /* UITextView+BRAdd.m */; };
-		C51A39BA20AD1B1300F46E2A /* UIControl+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A39B920AD1B1300F46E2A /* UIControl+BRAdd.m */; };
-		C523E28F208B966D008A1508 /* NSArray+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C523E28E208B966D008A1508 /* NSArray+BRAdd.m */; };
-		C538E6AF20995DD7000B396F /* NSDate+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6AE20995DD7000B396F /* NSDate+BRAdd.m */; };
-		C538E6B220995FDF000B396F /* UIImage+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6B120995FDF000B396F /* UIImage+BRAdd.m */; };
-		C538E6B520996154000B396F /* UIImageView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6B420996154000B396F /* UIImageView+BRAdd.m */; };
-		C538E6B820996212000B396F /* UIButton+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6B720996212000B396F /* UIButton+BRAdd.m */; };
-		C538E6BB2099672D000B396F /* NSNumber+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6BA2099672D000B396F /* NSNumber+BRAdd.m */; };
-		C538E6BE209989CD000B396F /* NSTimer+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6BD209989CD000B396F /* NSTimer+BRAdd.m */; };
-		C538E6C120999B6F000B396F /* UIColor+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6C020999B6F000B396F /* UIColor+BRAdd.m */; };
-		C538E6C42099B2F8000B396F /* UIView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C538E6C32099B2F8000B396F /* UIView+BRAdd.m */; };
-		C580EEA9208CC90C00C240AF /* NSDictionary+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */; };
+		45F57E4425B01F5C00CB613A /* UIView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E1E25B01F5C00CB613A /* UIView+BRAdd.m */; };
+		45F57E4525B01F5C00CB613A /* UIImageView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E2025B01F5C00CB613A /* UIImageView+BRAdd.m */; };
+		45F57E4625B01F5C00CB613A /* UIColor+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E2225B01F5C00CB613A /* UIColor+BRAdd.m */; };
+		45F57E4725B01F5C00CB613A /* UILabel+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E2325B01F5C00CB613A /* UILabel+BRAdd.m */; };
+		45F57E4825B01F5C00CB613A /* UITextField+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E2525B01F5C00CB613A /* UITextField+BRAdd.m */; };
+		45F57E4925B01F5C00CB613A /* UIControl+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E2825B01F5C00CB613A /* UIControl+BRAdd.m */; };
+		45F57E4A25B01F5C00CB613A /* UIImage+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E2A25B01F5C00CB613A /* UIImage+BRAdd.m */; };
+		45F57E4B25B01F5C00CB613A /* UITextView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E2D25B01F5C00CB613A /* UITextView+BRAdd.m */; };
+		45F57E4C25B01F5C00CB613A /* UIButton+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E2F25B01F5C00CB613A /* UIButton+BRAdd.m */; };
+		45F57E4D25B01F5C00CB613A /* UIDevice+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E3425B01F5C00CB613A /* UIDevice+BRAdd.m */; };
+		45F57E4E25B01F5C00CB613A /* NSNumber+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E3825B01F5C00CB613A /* NSNumber+BRAdd.m */; };
+		45F57E4F25B01F5C00CB613A /* NSMutableAttributedString+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E3925B01F5C00CB613A /* NSMutableAttributedString+BRAdd.m */; };
+		45F57E5025B01F5C00CB613A /* NSArray+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E3A25B01F5C00CB613A /* NSArray+BRAdd.m */; };
+		45F57E5125B01F5C00CB613A /* NSDictionary+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E3B25B01F5C00CB613A /* NSDictionary+BRAdd.m */; };
+		45F57E5225B01F5C00CB613A /* NSString+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E3D25B01F5C00CB613A /* NSString+BRAdd.m */; };
+		45F57E5325B01F5C00CB613A /* NSDate+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E3E25B01F5C00CB613A /* NSDate+BRAdd.m */; };
+		45F57E5425B01F5C00CB613A /* NSTimer+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E4225B01F5C00CB613A /* NSTimer+BRAdd.m */; };
 		C5E29E19208839E500AE642D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E18208839E500AE642D /* AppDelegate.m */; };
 		C5E29E1C208839E500AE642D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E1B208839E500AE642D /* ViewController.m */; };
 		C5E29E1F208839E500AE642D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5E29E1D208839E500AE642D /* Main.storyboard */; };
 		C5E29E21208839E700AE642D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5E29E20208839E700AE642D /* Assets.xcassets */; };
 		C5E29E24208839E700AE642D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5E29E22208839E700AE642D /* LaunchScreen.storyboard */; };
 		C5E29E27208839E700AE642D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E26208839E700AE642D /* main.m */; };
-		C5E29E34208847DB00AE642D /* NSString+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E29E33208847DB00AE642D /* NSString+BRAdd.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		452428E92591E08100724EF9 /* BRTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRTextField.h; sourceTree = "<group>"; };
-		452428EA2591E08100724EF9 /* BRTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BRTextField.m; sourceTree = "<group>"; };
-		45467ECA25495E55001E8D6B /* UIDevice+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+BRAdd.h"; sourceTree = "<group>"; };
-		45467ECB25495E55001E8D6B /* UIDevice+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+BRAdd.m"; sourceTree = "<group>"; };
-		4568FBF42566150E008269C1 /* NSMutableAttributedString+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+BRAdd.h"; sourceTree = "<group>"; };
-		4568FBF52566150E008269C1 /* NSMutableAttributedString+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+BRAdd.m"; sourceTree = "<group>"; };
-		459A260B23643CB90048F06D /* BRKitMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKitMacro.h; sourceTree = "<group>"; };
-		45FA7FE823F50B3800A17E5E /* UILabel+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+BRAdd.h"; sourceTree = "<group>"; };
-		45FA7FE923F50B3800A17E5E /* UILabel+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+BRAdd.m"; sourceTree = "<group>"; };
-		C51A39B220AC809300F46E2A /* UITextField+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+BRAdd.h"; sourceTree = "<group>"; };
-		C51A39B320AC809300F46E2A /* UITextView+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+BRAdd.h"; sourceTree = "<group>"; };
-		C51A39B420AC809300F46E2A /* UITextField+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+BRAdd.m"; sourceTree = "<group>"; };
-		C51A39B520AC809300F46E2A /* UITextView+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+BRAdd.m"; sourceTree = "<group>"; };
-		C51A39B820AD1B1300F46E2A /* UIControl+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+BRAdd.h"; sourceTree = "<group>"; };
-		C51A39B920AD1B1300F46E2A /* UIControl+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIControl+BRAdd.m"; sourceTree = "<group>"; };
-		C523E28D208B966D008A1508 /* NSArray+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+BRAdd.h"; sourceTree = "<group>"; };
-		C523E28E208B966D008A1508 /* NSArray+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BRAdd.m"; sourceTree = "<group>"; };
-		C538E6AD20995DD7000B396F /* NSDate+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+BRAdd.h"; sourceTree = "<group>"; };
-		C538E6AE20995DD7000B396F /* NSDate+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+BRAdd.m"; sourceTree = "<group>"; };
-		C538E6B020995FDF000B396F /* UIImage+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+BRAdd.h"; sourceTree = "<group>"; };
-		C538E6B120995FDF000B396F /* UIImage+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BRAdd.m"; sourceTree = "<group>"; };
-		C538E6B320996154000B396F /* UIImageView+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+BRAdd.h"; sourceTree = "<group>"; };
-		C538E6B420996154000B396F /* UIImageView+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BRAdd.m"; sourceTree = "<group>"; };
-		C538E6B620996212000B396F /* UIButton+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+BRAdd.h"; sourceTree = "<group>"; };
-		C538E6B720996212000B396F /* UIButton+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+BRAdd.m"; sourceTree = "<group>"; };
-		C538E6B92099672D000B396F /* NSNumber+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+BRAdd.h"; sourceTree = "<group>"; };
-		C538E6BA2099672D000B396F /* NSNumber+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+BRAdd.m"; sourceTree = "<group>"; };
-		C538E6BC209989CD000B396F /* NSTimer+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimer+BRAdd.h"; sourceTree = "<group>"; };
-		C538E6BD209989CD000B396F /* NSTimer+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+BRAdd.m"; sourceTree = "<group>"; };
-		C538E6BF20999B6F000B396F /* UIColor+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+BRAdd.h"; sourceTree = "<group>"; };
-		C538E6C020999B6F000B396F /* UIColor+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BRAdd.m"; sourceTree = "<group>"; };
-		C538E6C22099B2F8000B396F /* UIView+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+BRAdd.h"; sourceTree = "<group>"; };
-		C538E6C32099B2F8000B396F /* UIView+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+BRAdd.m"; sourceTree = "<group>"; };
-		C580EEA7208CC90C00C240AF /* NSDictionary+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BRAdd.h"; sourceTree = "<group>"; };
-		C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BRAdd.m"; sourceTree = "<group>"; };
-		C5AD51BE20898D0300E1032B /* BRMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRMethod.h; sourceTree = "<group>"; };
-		C5AD51BF2089927300E1032B /* BRKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRKit.h; sourceTree = "<group>"; };
+		45F57E1E25B01F5C00CB613A /* UIView+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E1F25B01F5C00CB613A /* UIImage+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E2025B01F5C00CB613A /* UIImageView+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E2125B01F5C00CB613A /* UIControl+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E2225B01F5C00CB613A /* UIColor+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E2325B01F5C00CB613A /* UILabel+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E2425B01F5C00CB613A /* UIButton+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E2525B01F5C00CB613A /* UITextField+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E2625B01F5C00CB613A /* UITextView+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E2725B01F5C00CB613A /* UIView+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E2825B01F5C00CB613A /* UIControl+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E2925B01F5C00CB613A /* UIImageView+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E2A25B01F5C00CB613A /* UIImage+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E2B25B01F5C00CB613A /* UILabel+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E2C25B01F5C00CB613A /* UIColor+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E2D25B01F5C00CB613A /* UITextView+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E2E25B01F5C00CB613A /* UITextField+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E2F25B01F5C00CB613A /* UIButton+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E3125B01F5C00CB613A /* NSDictionary+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E3225B01F5C00CB613A /* NSString+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E3325B01F5C00CB613A /* BRMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRMethod.h; sourceTree = "<group>"; };
+		45F57E3425B01F5C00CB613A /* UIDevice+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E3525B01F5C00CB613A /* BRKitMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKitMacro.h; sourceTree = "<group>"; };
+		45F57E3625B01F5C00CB613A /* NSDate+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E3725B01F5C00CB613A /* NSTimer+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E3825B01F5C00CB613A /* NSNumber+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E3925B01F5C00CB613A /* NSMutableAttributedString+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E3A25B01F5C00CB613A /* NSArray+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E3B25B01F5C00CB613A /* NSDictionary+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E3C25B01F5C00CB613A /* UIDevice+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E3D25B01F5C00CB613A /* NSString+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E3E25B01F5C00CB613A /* NSDate+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E3F25B01F5C00CB613A /* NSArray+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E4025B01F5C00CB613A /* NSMutableAttributedString+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E4125B01F5C00CB613A /* NSNumber+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+BRAdd.h"; sourceTree = "<group>"; };
+		45F57E4225B01F5C00CB613A /* NSTimer+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+BRAdd.m"; sourceTree = "<group>"; };
+		45F57E4325B01F5C00CB613A /* BRKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRKit.h; sourceTree = "<group>"; };
 		C5E29E14208839E500AE642D /* BRKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5E29E17208839E500AE642D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C5E29E18208839E500AE642D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -81,8 +80,6 @@
 		C5E29E23208839E700AE642D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5E29E25208839E700AE642D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5E29E26208839E700AE642D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C5E29E32208847DB00AE642D /* NSString+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+BRAdd.h"; sourceTree = "<group>"; };
-		C5E29E33208847DB00AE642D /* NSString+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+BRAdd.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,54 +93,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C523E28C208B9518008A1508 /* Foundation */ = {
+		45F57E1C25B01F5C00CB613A /* BRKit */ = {
 			isa = PBXGroup;
 			children = (
-				C5AD51BE20898D0300E1032B /* BRMethod.h */,
-				459A260B23643CB90048F06D /* BRKitMacro.h */,
-				C5E29E32208847DB00AE642D /* NSString+BRAdd.h */,
-				C5E29E33208847DB00AE642D /* NSString+BRAdd.m */,
-				4568FBF42566150E008269C1 /* NSMutableAttributedString+BRAdd.h */,
-				4568FBF52566150E008269C1 /* NSMutableAttributedString+BRAdd.m */,
-				C523E28D208B966D008A1508 /* NSArray+BRAdd.h */,
-				C523E28E208B966D008A1508 /* NSArray+BRAdd.m */,
-				C580EEA7208CC90C00C240AF /* NSDictionary+BRAdd.h */,
-				C580EEA8208CC90C00C240AF /* NSDictionary+BRAdd.m */,
-				C538E6AD20995DD7000B396F /* NSDate+BRAdd.h */,
-				C538E6AE20995DD7000B396F /* NSDate+BRAdd.m */,
-				C538E6B92099672D000B396F /* NSNumber+BRAdd.h */,
-				C538E6BA2099672D000B396F /* NSNumber+BRAdd.m */,
-				C538E6BC209989CD000B396F /* NSTimer+BRAdd.h */,
-				C538E6BD209989CD000B396F /* NSTimer+BRAdd.m */,
-				45467ECA25495E55001E8D6B /* UIDevice+BRAdd.h */,
-				45467ECB25495E55001E8D6B /* UIDevice+BRAdd.m */,
+				45F57E4325B01F5C00CB613A /* BRKit.h */,
+				45F57E3025B01F5C00CB613A /* Foundation */,
+				45F57E1D25B01F5C00CB613A /* UIKit */,
 			);
-			path = Foundation;
-			sourceTree = "<group>";
+			path = BRKit;
+			sourceTree = SOURCE_ROOT;
 		};
-		C580EEA6208CC85000C240AF /* UIKit */ = {
+		45F57E1D25B01F5C00CB613A /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				C538E6C22099B2F8000B396F /* UIView+BRAdd.h */,
-				C538E6C32099B2F8000B396F /* UIView+BRAdd.m */,
-				C538E6B020995FDF000B396F /* UIImage+BRAdd.h */,
-				C538E6B120995FDF000B396F /* UIImage+BRAdd.m */,
-				C538E6B320996154000B396F /* UIImageView+BRAdd.h */,
-				C538E6B420996154000B396F /* UIImageView+BRAdd.m */,
-				C538E6B620996212000B396F /* UIButton+BRAdd.h */,
-				C538E6B720996212000B396F /* UIButton+BRAdd.m */,
-				C538E6BF20999B6F000B396F /* UIColor+BRAdd.h */,
-				C538E6C020999B6F000B396F /* UIColor+BRAdd.m */,
-				45FA7FE823F50B3800A17E5E /* UILabel+BRAdd.h */,
-				45FA7FE923F50B3800A17E5E /* UILabel+BRAdd.m */,
-				C51A39B220AC809300F46E2A /* UITextField+BRAdd.h */,
-				C51A39B420AC809300F46E2A /* UITextField+BRAdd.m */,
-				C51A39B320AC809300F46E2A /* UITextView+BRAdd.h */,
-				C51A39B520AC809300F46E2A /* UITextView+BRAdd.m */,
-				C51A39B820AD1B1300F46E2A /* UIControl+BRAdd.h */,
-				C51A39B920AD1B1300F46E2A /* UIControl+BRAdd.m */,
+				45F57E2425B01F5C00CB613A /* UIButton+BRAdd.h */,
+				45F57E2F25B01F5C00CB613A /* UIButton+BRAdd.m */,
+				45F57E2C25B01F5C00CB613A /* UIColor+BRAdd.h */,
+				45F57E2225B01F5C00CB613A /* UIColor+BRAdd.m */,
+				45F57E2125B01F5C00CB613A /* UIControl+BRAdd.h */,
+				45F57E2825B01F5C00CB613A /* UIControl+BRAdd.m */,
+				45F57E1F25B01F5C00CB613A /* UIImage+BRAdd.h */,
+				45F57E2A25B01F5C00CB613A /* UIImage+BRAdd.m */,
+				45F57E2925B01F5C00CB613A /* UIImageView+BRAdd.h */,
+				45F57E2025B01F5C00CB613A /* UIImageView+BRAdd.m */,
+				45F57E2B25B01F5C00CB613A /* UILabel+BRAdd.h */,
+				45F57E2325B01F5C00CB613A /* UILabel+BRAdd.m */,
+				45F57E2E25B01F5C00CB613A /* UITextField+BRAdd.h */,
+				45F57E2525B01F5C00CB613A /* UITextField+BRAdd.m */,
+				45F57E2625B01F5C00CB613A /* UITextView+BRAdd.h */,
+				45F57E2D25B01F5C00CB613A /* UITextView+BRAdd.m */,
+				45F57E2725B01F5C00CB613A /* UIView+BRAdd.h */,
+				45F57E1E25B01F5C00CB613A /* UIView+BRAdd.m */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		45F57E3025B01F5C00CB613A /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				45F57E3525B01F5C00CB613A /* BRKitMacro.h */,
+				45F57E3325B01F5C00CB613A /* BRMethod.h */,
+				45F57E3F25B01F5C00CB613A /* NSArray+BRAdd.h */,
+				45F57E3A25B01F5C00CB613A /* NSArray+BRAdd.m */,
+				45F57E3625B01F5C00CB613A /* NSDate+BRAdd.h */,
+				45F57E3E25B01F5C00CB613A /* NSDate+BRAdd.m */,
+				45F57E3125B01F5C00CB613A /* NSDictionary+BRAdd.h */,
+				45F57E3B25B01F5C00CB613A /* NSDictionary+BRAdd.m */,
+				45F57E4025B01F5C00CB613A /* NSMutableAttributedString+BRAdd.h */,
+				45F57E3925B01F5C00CB613A /* NSMutableAttributedString+BRAdd.m */,
+				45F57E4125B01F5C00CB613A /* NSNumber+BRAdd.h */,
+				45F57E3825B01F5C00CB613A /* NSNumber+BRAdd.m */,
+				45F57E3225B01F5C00CB613A /* NSString+BRAdd.h */,
+				45F57E3D25B01F5C00CB613A /* NSString+BRAdd.m */,
+				45F57E3725B01F5C00CB613A /* NSTimer+BRAdd.h */,
+				45F57E4225B01F5C00CB613A /* NSTimer+BRAdd.m */,
+				45F57E3C25B01F5C00CB613A /* UIDevice+BRAdd.h */,
+				45F57E3425B01F5C00CB613A /* UIDevice+BRAdd.m */,
+			);
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		C5E29E0B208839E500AE642D = {
@@ -165,7 +172,7 @@
 		C5E29E16208839E500AE642D /* BRKitDemo */ = {
 			isa = PBXGroup;
 			children = (
-				C5E29E3120883B0800AE642D /* BRKit */,
+				45F57E1C25B01F5C00CB613A /* BRKit */,
 				C5E29E17208839E500AE642D /* AppDelegate.h */,
 				C5E29E18208839E500AE642D /* AppDelegate.m */,
 				C5E29E1A208839E500AE642D /* ViewController.h */,
@@ -178,18 +185,6 @@
 			);
 			path = BRKitDemo;
 			sourceTree = "<group>";
-		};
-		C5E29E3120883B0800AE642D /* BRKit */ = {
-			isa = PBXGroup;
-			children = (
-				C5AD51BF2089927300E1032B /* BRKit.h */,
-				452428E92591E08100724EF9 /* BRTextField.h */,
-				452428EA2591E08100724EF9 /* BRTextField.m */,
-				C523E28C208B9518008A1508 /* Foundation */,
-				C580EEA6208CC85000C240AF /* UIKit */,
-			);
-			path = BRKit;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -261,27 +256,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F57E4525B01F5C00CB613A /* UIImageView+BRAdd.m in Sources */,
+				45F57E5125B01F5C00CB613A /* NSDictionary+BRAdd.m in Sources */,
+				45F57E4925B01F5C00CB613A /* UIControl+BRAdd.m in Sources */,
+				45F57E5025B01F5C00CB613A /* NSArray+BRAdd.m in Sources */,
+				45F57E5425B01F5C00CB613A /* NSTimer+BRAdd.m in Sources */,
 				C5E29E1C208839E500AE642D /* ViewController.m in Sources */,
-				C538E6B820996212000B396F /* UIButton+BRAdd.m in Sources */,
-				C538E6C120999B6F000B396F /* UIColor+BRAdd.m in Sources */,
-				C51A39B720AC809300F46E2A /* UITextView+BRAdd.m in Sources */,
-				C538E6BB2099672D000B396F /* NSNumber+BRAdd.m in Sources */,
-				C538E6C42099B2F8000B396F /* UIView+BRAdd.m in Sources */,
-				C523E28F208B966D008A1508 /* NSArray+BRAdd.m in Sources */,
-				C538E6BE209989CD000B396F /* NSTimer+BRAdd.m in Sources */,
+				45F57E4B25B01F5C00CB613A /* UITextView+BRAdd.m in Sources */,
+				45F57E5325B01F5C00CB613A /* NSDate+BRAdd.m in Sources */,
 				C5E29E27208839E700AE642D /* main.m in Sources */,
-				C538E6B220995FDF000B396F /* UIImage+BRAdd.m in Sources */,
-				4568FBF62566150E008269C1 /* NSMutableAttributedString+BRAdd.m in Sources */,
-				C51A39BA20AD1B1300F46E2A /* UIControl+BRAdd.m in Sources */,
-				452428EB2591E08100724EF9 /* BRTextField.m in Sources */,
-				C538E6B520996154000B396F /* UIImageView+BRAdd.m in Sources */,
-				45467ECC25495E55001E8D6B /* UIDevice+BRAdd.m in Sources */,
+				45F57E4F25B01F5C00CB613A /* NSMutableAttributedString+BRAdd.m in Sources */,
+				45F57E4C25B01F5C00CB613A /* UIButton+BRAdd.m in Sources */,
+				45F57E4D25B01F5C00CB613A /* UIDevice+BRAdd.m in Sources */,
+				45F57E4725B01F5C00CB613A /* UILabel+BRAdd.m in Sources */,
+				45F57E5225B01F5C00CB613A /* NSString+BRAdd.m in Sources */,
+				45F57E4425B01F5C00CB613A /* UIView+BRAdd.m in Sources */,
+				45F57E4825B01F5C00CB613A /* UITextField+BRAdd.m in Sources */,
+				45F57E4A25B01F5C00CB613A /* UIImage+BRAdd.m in Sources */,
+				45F57E4E25B01F5C00CB613A /* NSNumber+BRAdd.m in Sources */,
 				C5E29E19208839E500AE642D /* AppDelegate.m in Sources */,
-				C538E6AF20995DD7000B396F /* NSDate+BRAdd.m in Sources */,
-				C580EEA9208CC90C00C240AF /* NSDictionary+BRAdd.m in Sources */,
-				C51A39B620AC809300F46E2A /* UITextField+BRAdd.m in Sources */,
-				45FA7FEA23F50B3800A17E5E /* UILabel+BRAdd.m in Sources */,
-				C5E29E34208847DB00AE642D /* NSString+BRAdd.m in Sources */,
+				45F57E4625B01F5C00CB613A /* UIColor+BRAdd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
