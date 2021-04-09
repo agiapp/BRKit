@@ -104,10 +104,15 @@ static inline NSString *br_nonullNumber(NSNumber *obj, NSString *placeholder) {
 
 /** 获取有效"年月日"日期字符串(2019-09-09) */
 static inline NSString *br_getDateYMDString(NSString *dateString, NSString *placeholder) {
-    if (!br_isEmpty(dateString) && dateString.length >= 10) {
-        NSString *yearStr = [dateString substringToIndex:4];
-        if ([yearStr integerValue] > 1900) {
-            return [dateString substringToIndex:10];
+    if (!br_isEmpty(dateString)) {
+        if ([dateString containsString:@"*"]) {
+            return dateString;
+        }
+        if (dateString.length >= 10) {
+            NSString *yearStr = [dateString substringToIndex:4];
+            if ([yearStr integerValue] > 1900) {
+                return [dateString substringToIndex:10];
+            }
         }
     }
     return placeholder ? placeholder : @"--";
@@ -115,7 +120,7 @@ static inline NSString *br_getDateYMDString(NSString *dateString, NSString *plac
 
 /** 判断是否是有效日期字符串(年份大于1900) */
 static inline BOOL br_isValidDateString(NSString *dateString) {
-    if (!br_isEmpty(dateString) && dateString.length >= 4) {
+    if (!br_isEmpty(dateString) && dateString.length >= 4 && ![dateString containsString:@"*"]) {
         NSString *yearStr = [dateString substringToIndex:4];
         if ([yearStr integerValue] > 1900) {
             return YES;

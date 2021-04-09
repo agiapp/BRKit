@@ -190,7 +190,9 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 }
 
 #pragma mark - label富文本: 设置不同字体和颜色
-- (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color {
+- (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText
+                                     changeFont:(UIFont *)font
+                                changeTextColor:(UIColor *)color {
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
     if (![changeText br_isValidString]) {
         return attrString;
@@ -235,6 +237,18 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return attrString;
 }
 
+#pragma mark - label富文本: 设置行高
+- (NSAttributedString *)br_setTextLineSpacing:(CGFloat)lineSpacing {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    // 段落行间距
+    paragraphStyle.lineSpacing = lineSpacing;
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail; // 显示不完整，尾部显示省略号
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self length])];
+    
+    return [attributedString copy];
+}
+
 #pragma mark - 设置所有关键词自定义颜色显示
 - (NSMutableAttributedString *)br_setAllChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color {
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
@@ -257,20 +271,19 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 }
 
 #pragma mark - 获取字符串中多个相同字符串的所有range
-- (NSArray *)br_rangeArrayOfSubString:(NSString *)searchString {
+- (NSArray *)br_rangeArrayOfSubString:(NSString *)subString {
     NSMutableArray *rangeArr = [NSMutableArray array];
-    NSString *string1 = [self stringByAppendingString:searchString];
+    NSString *string1 = [self stringByAppendingString:subString];
     NSString *temp = nil;
-    for (NSInteger i = 0; i < (self.length - searchString.length + 1); i++) {
-        temp = [string1 substringWithRange:NSMakeRange(i, searchString.length)];
-        if ([temp isEqualToString:searchString]) {
-            NSRange range = {i, searchString.length};
+    for (NSInteger i = 0; i < (self.length - subString.length + 1); i++) {
+        temp = [string1 substringWithRange:NSMakeRange(i, subString.length)];
+        if ([temp isEqualToString:subString]) {
+            NSRange range = {i, subString.length};
             [rangeArr addObject: [NSValue valueWithRange:range]];
         }
     }
     return rangeArr;
 }
-
 
 #pragma mark - label富文本: HTML标签文本（HTMLString 转化为NSAttributedString）
 - (NSMutableAttributedString *)br_setTextHTMLString {
@@ -292,18 +305,58 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 #pragma mark - 设置文本关键词红色显示
 // 美国<em>苹果</em> <em>科技</em>有限公司
 - (NSAttributedString *)br_setTextKeywords:(UIColor *)keywordColor {
-    NSString *formatText = [[self stringByReplacingOccurrencesOfString:@"<em>" withString:@""] stringByReplacingOccurrencesOfString:@"</em>" withString:@""];
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:formatText];
-    NSArray <NSString *>* textArr = [self componentsSeparatedByString:@"<em>"];
-    for (NSInteger i = 0; i < textArr.count; i++) {
-        if ([textArr[i] br_containsString:@"</em>"]) {
-            NSString *keyword = [[textArr[i] componentsSeparatedByString:@"</em>"] firstObject];
-            // 只会得到第一个关键字的位置
-            NSRange range = [formatText rangeOfString:keyword];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:keywordColor range:range];
+    NSString *formatText = nil;
+    NSMutableAttributedString *attributedString = nil;
+    if ([self br_containsString:@"<em>"]) {
+        formatText = [[self stringByReplacingOccurrencesOfString:@"<em>" withString:@""] stringByReplacingOccurrencesOfString:@"</em>" withString:@""];
+        attributedString = [[NSMutableAttributedString alloc] initWithString:formatText];
+        NSArray <NSString *>* substringArr = [self componentsSeparatedByString:@"<em>"];
+        NSMutableArray *keywordRangeArr = [[NSMutableArray alloc]init];
+        for (NSString *substring in substringArr) {
+            if ([substring br_containsString:@"</em>"]) {
+                NSString *keyword = [[substring componentsSeparatedByString:@"</em>"] firstObject];
+                // 只会得到第一个关键字的位置
+                NSRange firstRange = [formatText rangeOfString:keyword];
+                // 判断是否有多个相同的关键词（加个判断主要目标是针对只有一个关键词的场景进行算法优化）
+                NSString *tempString = [formatText stringByReplacingOccurrencesOfString:keyword withString:@""];
+                if (formatText.length - tempString.length == keyword.length) {
+                    // 只有一个关键词
+                    [attributedString addAttribute:NSForegroundColorAttributeName value:keywordColor range:firstRange];
+                } else {
+                    // 有多个关键词
+                    NSArray *keywordRangeArr = [self br_substringRange:keyword ofString:formatText];
+                    for (NSValue *keywordRangeValue in keywordRangeArr) {
+                        NSRange range = [keywordRangeValue rangeValue];
+                        [attributedString addAttribute:NSForegroundColorAttributeName value:keywordColor range:range];
+                    }
+                }
+            }
+        }
+    } else {
+        formatText = self;
+        attributedString = [[NSMutableAttributedString alloc] initWithString:formatText];
+    }
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    // 段落行间距
+    paragraphStyle.lineSpacing = 5.0f;
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail; // 显示不完整，尾部显示省略号
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [formatText length])];
+    
+    return [attributedString copy];
+}
+
+#pragma mark - 查找 substring 在 string 中的位置范围
+- (NSArray *)br_substringRange:(NSString *)substring ofString:(NSString *)string {
+    NSMutableArray *rangeArr = [[NSMutableArray alloc]init];
+    for (NSInteger i = 0; i < string.length - substring.length + 1; i++) {
+        NSString *findString = [string substringWithRange:NSMakeRange(i, substring.length)];
+        if ([findString isEqualToString:substring]) {
+            NSRange range = NSMakeRange(i, substring.length);
+            [rangeArr addObject:[NSValue valueWithRange:range]];
         }
     }
-    return [attributedString copy];
+    return [rangeArr copy];
 }
 
 #pragma mark - label富文本: 段落样式

@@ -98,9 +98,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText
                                 changeTextColor:(nullable UIColor *)color
                                     lineSpacing:(CGFloat)lineSpacing;
+/** label富文本: 设置行高 */
+- (NSAttributedString *)br_setTextLineSpacing:(CGFloat)lineSpacing;
 
 /** label富文本: 设置所有关键词自定义颜色显示 */
 - (NSMutableAttributedString *)br_setAllChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color;
+
+/** 获取字符串中多个相同字符串的所有range */
+- (NSArray *)br_rangeArrayOfSubString:(NSString *)subString;
 
 /** label富文本: HTML标签文本 */
 - (NSMutableAttributedString *)br_setTextHTMLString;
