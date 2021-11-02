@@ -102,7 +102,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSAttributedString *)br_setTextLineSpacing:(CGFloat)lineSpacing;
 
 /** label富文本: 设置所有关键词自定义颜色显示 */
-- (NSMutableAttributedString *)br_setAllChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color;
+- (NSMutableAttributedString *)br_setAllChangeText:(NSString *)changeText
+                                        changeFont:(nullable UIFont *)font
+                                   changeTextColor:(nullable UIColor *)color
+                                       lineSpacing:(CGFloat)lineSpacing;
 
 /** 获取字符串中多个相同字符串的所有range */
 - (NSArray *)br_rangeArrayOfSubString:(NSString *)subString;

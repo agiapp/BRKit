@@ -19,6 +19,11 @@
 
 @implementation UITextField (BRAdd)
 
+/// @dynamic 就是告诉编译器：属性的 setter 与 getter 方法由用户自己实现，不自动生成。
+@dynamic br_maxLength;
+@dynamic br_maxPoint;
+@dynamic br_regex;
+
 - (void)setBr_maxLength:(NSInteger)br_maxLength {
     BR_Objc_setObject(@selector(br_maxLength), @(br_maxLength));
     [self addTarget:self action:@selector(handleTextFieldTextDidChangeAction) forControlEvents:UIControlEventEditingChanged];
@@ -61,10 +66,10 @@
 
 - (void)setBr_regex:(NSString *)br_regex {
     BR_Objc_setObjectCOPY(@selector(br_regex), br_regex);
-    self.delegate = self;
+    self.delegate = (id<UITextFieldDelegate>)self;
 }
 
-- (NSInteger)br_regex {
+- (NSString *)br_regex {
     return BR_Objc_getObject;
 }
 
