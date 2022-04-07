@@ -75,7 +75,7 @@ static inline BOOL br_isValidParamNumber(id object) {
     NSString *IDString = [NSString stringWithFormat:@"%@", object];
     // 修剪字符串（去掉头尾两边的空格和换行符）
     IDString = [IDString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if ([IDString length] == 0 || [IDString isEqualToString:@"-1"] || [IDString isEqualToString:@"0"] || [IDString integerValue] <= 0) {
+    if ([IDString length] == 0 || [IDString doubleValue] <= 0) {
         return NO;
     }
     

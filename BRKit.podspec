@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   # 框架的名称
   s.name         = "BRKit"
   # 框架的版本号
-  s.version      = "2.0.1"
+  s.version      = "2.0.2"
   # 框架的简单介绍
   s.summary      = "A collection of iOS UIKit, Foundation and other extensions."
   # 框架的详细描述(详细介绍，要比简介长)
@@ -48,5 +48,4 @@ Pod::Spec.new do |s|
   # 框架要求ARC环境下使用
   s.requires_arc = true
 
- 
 end
