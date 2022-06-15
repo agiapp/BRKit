@@ -46,6 +46,15 @@ NS_ASSUME_NONNULL_BEGIN
 /** UTF-8字符串解码 */
 - (NSString *)br_stringByUTF8Decode;
 
+/** base64编码 */
+- (NSString *)br_base64EncodedString;
+
+/** base64解码 */
+- (NSString *)br_base64DecodedString;
+
+/** JSON字符串 转 字典 */
+- (NSDictionary *)br_jsonStringToDictionary;
+
 /**
  *  获取文本的大小
  *

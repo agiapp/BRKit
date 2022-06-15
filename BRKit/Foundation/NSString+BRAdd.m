@@ -110,6 +110,39 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return [self stringByRemovingPercentEncoding];
 }
 
+#pragma mark - base64编码
+- (NSString *)br_base64EncodedString {
+    if (![self br_isValidString]) {
+        return nil;
+    }
+    NSData *data = [self dataUsingEncoding: NSUTF8StringEncoding];
+    return [data base64EncodedStringWithOptions:0];
+}
+
+#pragma mark - base64解码
+- (NSString *)br_base64DecodedString {
+    if (![self br_isValidString]) {
+        return nil;
+    }
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:self options:0];
+    return [[NSString alloc]initWithData:data encoding: NSUTF8StringEncoding];
+}
+
+#pragma mark - JSON字符串 转 字典
+- (NSDictionary *)br_jsonStringToDictionary {
+    if (![self br_isValidString]) {
+        return nil;
+    }
+    NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:&error];
+    if (error) {
+        NSLog(@"json解析失败：%@", error);
+        return nil;
+    }
+    return dic;
+}
+
 #pragma mark - 获取文本的大小
 - (CGSize)br_getTextSize:(UIFont *)font maxSize:(CGSize)maxSize mode:(NSLineBreakMode)lineBreakMode {
     NSMutableDictionary *attributes = [[NSMutableDictionary alloc]init];
