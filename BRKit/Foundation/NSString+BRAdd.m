@@ -287,23 +287,26 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
         return attrString;
     }
     NSArray *rangeArr = [self br_rangeArrayOfSubString:changeText];
-    for (NSInteger i = 0; i < rangeArr.count; i++) {
-        NSRange range = [rangeArr[i] rangeValue];
-        if (font) {
-            // 设置不同字体
-            [attrString addAttribute:NSFontAttributeName value:font range:range];
-        }
-        if (color) {
-            // 设置不同颜色
-            [attrString addAttribute:NSForegroundColorAttributeName value:color range:range];
-        }
-        if (lineSpacing > 0) {
-            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-            // 行间距
-            paragraphStyle.lineSpacing = lineSpacing;
-            [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [[attrString string] length])];
+    if (rangeArr && rangeArr.count > 0) {
+        for (NSInteger i = 0; i < rangeArr.count; i++) {
+            NSRange range = [rangeArr[i] rangeValue];
+            if (font) {
+                // 设置不同字体
+                [attrString addAttribute:NSFontAttributeName value:font range:range];
+            }
+            if (color) {
+                // 设置不同颜色
+                [attrString addAttribute:NSForegroundColorAttributeName value:color range:range];
+            }
         }
     }
+    if (lineSpacing > 0) {
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        // 行间距
+        paragraphStyle.lineSpacing = lineSpacing;
+        [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [[attrString string] length])];
+    }
+    
     return attrString;
 }
 
@@ -319,7 +322,7 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
             [rangeArr addObject: [NSValue valueWithRange:range]];
         }
     }
-    return rangeArr;
+    return [rangeArr copy];
 }
 
 #pragma mark - label富文本: HTML标签文本（HTMLString 转化为NSAttributedString）
