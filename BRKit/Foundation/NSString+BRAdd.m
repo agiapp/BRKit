@@ -279,6 +279,7 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         // 行间距
         paragraphStyle.lineSpacing = lineSpacing;
+        paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail; // 显示不完整，尾部显示省略号
         [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [[attrString string] length])];
     }
     
@@ -291,6 +292,7 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     // 段落行间距
     paragraphStyle.lineSpacing = lineSpacing;
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail; // 显示不完整，尾部显示省略号
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self length])];
     
     return [attributedString copy];
@@ -323,6 +325,7 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         // 行间距
         paragraphStyle.lineSpacing = lineSpacing;
+        paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail; // 显示不完整，尾部显示省略号
         [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [[attrString string] length])];
     }
     
