@@ -27,4 +27,7 @@
 /** 获取设备外网IP（公网IP） */
 - (NSString *)br_WANIPAddress;
 
+/// 获取广告唯一标识
+- (NSString *)br_getIDFAString;
+
 @end

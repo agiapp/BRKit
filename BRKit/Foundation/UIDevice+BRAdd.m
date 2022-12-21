@@ -14,6 +14,11 @@
 #import <arpa/inet.h>
 #import <ifaddrs.h>
 
+// 广告标识符头文件
+#import <AdSupport/ASIdentifierManager.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+
+
 @implementation UIDevice (BRAdd)
 
 #pragma mark - 设备搭载系统及版本号
@@ -489,6 +494,40 @@ NSString *HomePodPlatform(NSString *platform) {
 - (NSNumber *)freeDiskSpace {
     NSDictionary *fattributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
     return [fattributes objectForKey:NSFileSystemFreeSize];
+}
+
+#pragma mark - 获取广告唯一标识
+- (NSString *)br_getIDFAString {
+    __block NSString *idfaString = nil;
+    // 记录激活事件-使用 IDFA 用于精准渠道追踪
+    if (@available(iOS 14, *)) {
+        // iOS14及以上版本需要先请求权限
+        /**
+            iOS14及以上：需要在info.plist文件添加跟踪权限请求描述文字
+            <key>NSUserTrackingUsageDescription</key>
+            <string>此标识符将用于向您推荐个性化广告。</string>
+         */
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+            // 获取到权限后，依然使用老方法获取idfa
+            if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
+                idfaString = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
+                NSLog(@"%@", idfaString);
+            } else {
+                NSLog(@"请在设置-隐私-跟踪中允许App请求跟踪");
+            }
+        }];
+    } else {
+        // iOS14以下版本依然使用老方法
+        // 判断在设置-隐私里用户是否打开了广告跟踪
+        if ([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]) {
+            idfaString = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
+            NSLog(@"%@", idfaString);
+        } else {
+            NSLog(@"请在设置-隐私-广告中打开广告跟踪功能");
+        }
+    }
+
+    return idfaString;
 }
 
 @end
