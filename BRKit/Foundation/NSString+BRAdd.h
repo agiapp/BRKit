@@ -55,6 +55,11 @@ NS_ASSUME_NONNULL_BEGIN
 /** JSON字符串 转 字典 */
 - (NSDictionary *)br_jsonStringToDictionary;
 
+/** 获取url的所有参数拼接的字典 */
+- (NSDictionary *)br_queryDictionary;
+
+ /** 获取url中指定参数的值 */
+- (NSString *)br_queryValueForKey:(NSString *)key;
 /**
  *  获取文本的大小
  *

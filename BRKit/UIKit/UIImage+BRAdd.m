@@ -308,4 +308,62 @@ BRSYNTH_DUMMY_CLASS(UIImage_BRAdd)
     return data;
 }
 
+#pragma mark - 压缩图片（使图片压缩后刚好小于指定大小，单位：KB）
+// 保证图片清晰度，结合图片质量和大小进行压缩（最大长度128KB。传值，如：maxLength = 128 * 1024）
++ (UIImage *)br_compressImage:(UIImage *)image toByte:(NSUInteger)maxLength {
+    // 1.压缩图片质量
+    CGFloat compression = 1;
+    NSData *data = UIImageJPEGRepresentation(image, compression);
+    NSLog(@"图片压缩前：%ld KB",data.length / 1024);
+    if (data.length < maxLength) return image;
+    
+    CGFloat max = 1;
+    CGFloat min = 0;
+    for (int i = 0; i < 6; ++i) {
+        compression = (max + min) / 2;
+        data = UIImageJPEGRepresentation(image, compression);
+        if (data.length < maxLength * 0.9f) {
+            min = compression;
+        } else if (data.length > maxLength) {
+            max = compression;
+        } else {
+            break;
+        }
+    }
+    NSLog(@"图片压缩质量后：%ld KB", data.length / 1024);
+    UIImage *resultImage = [UIImage imageWithData:data];
+    if (data.length < maxLength) return resultImage;
+    
+    // 2.压缩图片大小
+    NSUInteger lastDataLength = 0;
+    while (data.length > maxLength && data.length != lastDataLength) {
+        lastDataLength = data.length;
+        CGFloat ratio = (CGFloat)maxLength / data.length;
+        CGSize size = CGSizeMake((NSUInteger)(resultImage.size.width * sqrtf(ratio)), (NSUInteger)(resultImage.size.height * sqrtf(ratio)));
+        UIGraphicsBeginImageContext(size);
+        [resultImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        resultImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        data = UIImageJPEGRepresentation(resultImage, compression);
+    }
+    NSLog(@"图片压缩大小后：%ld KB", data.length / 1024);
+    
+    return [UIImage imageWithData:data];
+}
+
+#pragma mark - 图片 转 base64字符串
++ (NSString *)br_base64StringWithImage:(UIImage *)image {
+    NSData *imagedata = UIImageJPEGRepresentation(image, 1.0f);
+    NSString *image64 = [imagedata base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    return image64;
+}
+
+#pragma mark - base64字符串 转 图片
++ (UIImage *)br_imageWithBase64String:(NSString *)base64String {
+    NSData *imageData =[[NSData alloc] initWithBase64EncodedString:base64String options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    UIImage *image = [UIImage imageWithData:imageData];
+    return image;
+}
+
 @end

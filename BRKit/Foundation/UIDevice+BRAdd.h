@@ -22,7 +22,9 @@
 /// MAC地址（如：02:C9:56:41:00:00）
 - (NSString *)br_macAddress;
 
-/// IP地址（如：192.168.1.10）
-- (NSString *)br_ipAddresses;
+/** 获取设备内网IP（局域网IP，如：192.168.1.10）只能获取到WiFi环境下的本地IP */
+- (NSString *)br_deviceIPAddress;
+/** 获取设备外网IP（公网IP） */
+- (NSString *)br_WANIPAddress;
 
 @end

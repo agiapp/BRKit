@@ -62,6 +62,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param maxLength 图片压缩后的最大大小
 - (nullable NSData *)br_compressImageWithMaxLength:(NSUInteger)maxLength;
 
+/**
+ * 压缩图片（使图片压缩后刚好小于指定大小，单位：KB）
+ * 保证图片清晰度，结合图片质量和大小进行压缩（最大长度128KB。传值，如：maxLength = 128 * 1024）
+ */
++ (UIImage *)br_compressImage:(UIImage *)image toByte:(NSUInteger)maxLength;
+
+/** 图片 转 base64字符串 */
++ (NSString *)br_base64StringWithImage:(UIImage *)image;
+
+/** base64字符串 转 图片 */
++ (UIImage *)br_imageWithBase64String:(NSString *)base64String;
+
 @end
 
 NS_ASSUME_NONNULL_END

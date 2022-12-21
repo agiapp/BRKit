@@ -143,6 +143,25 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return dic;
 }
 
+#pragma mark - 获取url的所有参数拼接的字典
+- (NSDictionary *)br_queryDictionary {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    // 传入url创建url组件类
+    NSURLComponents *urlComponents = [[NSURLComponents alloc] initWithString:self];
+    // 回调遍历所有参数，添加入字典
+    [urlComponents.queryItems enumerateObjectsUsingBlock:^(NSURLQueryItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [params setObject:obj.value forKey:obj.name];
+    }];
+    
+    return params;
+}
+
+#pragma mark - 获取url中指定参数的值
+- (NSString *)br_queryValueForKey:(NSString *)key {
+    NSDictionary *params = [self br_queryDictionary];
+    return [params objectForKey:key];
+}
+
 #pragma mark - 获取文本的大小
 - (CGSize)br_getTextSize:(UIFont *)font maxSize:(CGSize)maxSize mode:(NSLineBreakMode)lineBreakMode {
     NSMutableDictionary *attributes = [[NSMutableDictionary alloc]init];

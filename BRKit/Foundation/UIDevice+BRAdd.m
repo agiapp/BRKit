@@ -7,16 +7,12 @@
 //
 
 #import "UIDevice+BRAdd.h"
-#include <sys/socket.h> // Per msqr
 #include <sys/sysctl.h>
-#include <net/if.h>
 #include <net/if_dl.h>
 #import <sys/utsname.h>
-#import <SystemConfiguration/CaptiveNetwork.h>
-// 下面是获取IP需要的头文件
-#import <sys/ioctl.h>
-#include <ifaddrs.h>
+#import <net/if.h>
 #import <arpa/inet.h>
+#import <ifaddrs.h>
 
 @implementation UIDevice (BRAdd)
 
@@ -379,51 +375,56 @@ NSString *HomePodPlatform(NSString *platform) {
     return outstring;
 }
 
-#pragma mark - IP Address
-- (NSString *)br_ipAddresses {
-    int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    NSMutableArray *ips = [NSMutableArray array];
-    int BUFFERSIZE = 4096;
-    struct ifconf ifc;
-    char buffer[BUFFERSIZE], *ptr, lastname[IFNAMSIZ], *cptr;
-    struct ifreq *ifr, ifrcopy;
-    ifc.ifc_len = BUFFERSIZE;
-    ifc.ifc_buf = buffer;
+#pragma mark - 获取设备内网IP（局域网IP）此法只能获取到WiFi环境下的本地IP
+- (NSString *)br_deviceIPAddress {
+    NSString *address = @"手机移动网络";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
     
-    if (ioctl(sockfd, SIOCGIFCONF, &ifc) >= 0){
-        for(ptr = buffer; ptr < buffer + ifc.ifc_len; ){
-            ifr = (struct ifreq *)ptr;
-            int len = sizeof(struct sockaddr);
-            
-            if(ifr->ifr_addr.sa_len > len) {
-                len = ifr->ifr_addr.sa_len;
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        temp_addr = interfaces;
+        while (temp_addr != NULL) {
+            if( (*temp_addr).ifa_addr->sa_family == AF_INET) {
+                if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                }
             }
-            
-            ptr += sizeof(ifr->ifr_name) + len;
-            if(ifr->ifr_addr.sa_family != AF_INET) continue;
-            if((cptr = (char *)strchr(ifr->ifr_name, ':')) != NULL) *cptr = 0;
-            if(strncmp(lastname, ifr->ifr_name, IFNAMSIZ) == 0) continue;
-            
-            memcpy(lastname, ifr->ifr_name, IFNAMSIZ);
-            ifrcopy = *ifr;
-            ioctl(sockfd, SIOCGIFFLAGS, &ifrcopy);
-            
-            if((ifrcopy.ifr_flags & IFF_UP) == 0) continue;
-            
-            NSString *ip = [NSString stringWithFormat:@"%s", inet_ntoa(((struct sockaddr_in *)&ifr->ifr_addr)->sin_addr)];
-            [ips addObject:ip];
+            temp_addr = temp_addr->ifa_next;
         }
     }
+    freeifaddrs(interfaces);
+    // NSLog(@"手机的IP是：%@", address);
     
-    close(sockfd);
-    NSString *deviceIP = @"";
-    
-    for(int i=0; i < ips.count; i++) {
-        if(ips.count > 0) {
-            deviceIP = [NSString stringWithFormat:@"%@",ips.lastObject];
-        }
+    return address;
+}
+
+#pragma mark - 获取设备外网IP（公网IP）
+- (NSString *)br_WANIPAddress {
+    /**
+         这里只介绍获取公网ip的几个地址：
+         1、新浪：https://pv.sohu.com/cityjson?ie=utf-8
+         2、淘宝：https://www.taobao.com/help/getip.php
+         3、https://www.fbisb.com/ip.php
+         4、http://ifconfig.me/ip
+    */
+    NSURL *ipURL = [NSURL URLWithString:@"https://pv.sohu.com/cityjson?ie=utf-8"];
+    NSError *error = nil;
+    NSMutableString *ip = [NSMutableString stringWithContentsOfURL:ipURL encoding:NSUTF8StringEncoding error:&error];
+    // 判断返回字符串是否为所需数据
+    if ([ip hasPrefix:@"var returnCitySN = "]) {
+        // 对字符串进行处理，然后进行json解析，删除字符串多余字符串
+        NSRange range = NSMakeRange(0, 19);
+        [ip deleteCharactersInRange:range];
+        NSString * nowIp =[ip substringToIndex:ip.length - 1];
+        // 将字符串转换成二进制进行Json解析
+        NSData * data = [nowIp dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@",dict);
+        return dict[@"cip"] ? dict[@"cip"] : @"";
     }
-    return deviceIP;
+    return @"";
 }
 
 #pragma mark sysctlbyname utils
