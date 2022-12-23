@@ -497,9 +497,7 @@ NSString *HomePodPlatform(NSString *platform) {
 }
 
 #pragma mark - 获取广告唯一标识
-- (NSString *)br_getIDFAString {
-    __block NSString *idfaString = nil;
-    // 记录激活事件-使用 IDFA 用于精准渠道追踪
+- (void)br_getIDFAString:(void (^)(NSString *idfaString))successBlock failureBlock:(void (^)(void))failureBlock {
     if (@available(iOS 14, *)) {
         // iOS14及以上版本需要先请求权限
         /**
@@ -510,24 +508,24 @@ NSString *HomePodPlatform(NSString *platform) {
         [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
             // 获取到权限后，依然使用老方法获取idfa
             if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
-                idfaString = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
-                NSLog(@"%@", idfaString);
+                NSString *idfaString = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
+                successBlock ? successBlock(idfaString) : nil;
             } else {
                 NSLog(@"请在设置-隐私-跟踪中允许App请求跟踪");
+                failureBlock ? failureBlock() : nil;
             }
         }];
     } else {
         // iOS14以下版本依然使用老方法
         // 判断在设置-隐私里用户是否打开了广告跟踪
         if ([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]) {
-            idfaString = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
-            NSLog(@"%@", idfaString);
+            NSString *idfaString = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
+            successBlock ? successBlock(idfaString) : nil;
         } else {
             NSLog(@"请在设置-隐私-广告中打开广告跟踪功能");
+            failureBlock ? failureBlock() : nil;
         }
     }
-
-    return idfaString;
 }
 
 @end
