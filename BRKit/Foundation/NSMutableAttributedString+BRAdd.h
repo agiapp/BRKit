@@ -12,22 +12,17 @@
 /**
     使用例子：
  
-    NSString *text = @"说明:\n1、个人业绩为实时统计；\n2、奖励显示为T+1(当日办理隔日显示)；\n3、无邀请码的订单不在个人业绩统计范畴；\n4、如对奖金有疑问，请向上级反馈处理。";
-    NSMutableAttributedString *att=[[NSMutableAttributedString alloc]initWithString:text];
-    //设置字号14、颜色、行间距
-    att.br_font([UIFont systemFontOfSize:14.0]).br_color(k_Color_9B9B9B).br_lineSpacing(2);
+    NSString *text = @"这是一段富文本。Hello Word!";
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:text];
+    // 设置字号14、颜色、行间距
+    attributedStr.br_font([UIFont systemFontOfSize:14]).br_color([UIColor blackColor]).br_lineSpacing(2);
 
-    //把全部“为”字变成红色、字间距为10
-    [att br_changeSubStrings:@[@"为"] makeCalculators:^(NSMutableAttributedString *make) {
-       make.br_color([UIColor redColor]).br_kern(10);
+    // 把全部“Hello”字变成红色、字号16
+    [attributedStr br_changeSubStrings:@[@"为"] makeCalculators:^(NSMutableAttributedString *make) {
+       make.br_color([UIColor redColor]).br_font([UIFont systemFontOfSize:16]);
     }];
-
-    //把全部“@"个人",@"绩"变成绿色、字号19、设置笔画宽度（中空效果）
-    [att br_changeSubStrings:@[@"个人",@"绩"] makeCalculators:^(NSMutableAttributedString *make) {
-       make.br_color([UIColor greenColor]).br_font([UIFont systemFontOfSize:19]).br_strokeWidth(4);
-    }];
-
-    label.attributedText=att;
+ 
+    label.attributedText = attributedStr;
  
  */
 

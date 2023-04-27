@@ -504,8 +504,7 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 
 #pragma mark - 判断是否是有效的URL
 - (BOOL)br_isValidUrl {
-    NSString *regex = @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-    return [self br_checkStringWithRegex:regex];
+    return ([self br_isValidString] && [self hasPrefix:@"http"]);
 }
 
 #pragma mark - 判断是否是有效的银行卡号

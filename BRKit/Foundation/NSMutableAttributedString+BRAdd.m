@@ -29,7 +29,6 @@
  @param block   里面用make.各种想要的设置
  */
 - (void)br_changeSubStrings:(NSArray *)subStrings makeCalculators:(void (^)(NSMutableAttributedString * make))block{
-    
     for (NSString *rangeStr in subStrings) {
         
         NSMutableArray *array = [self br_getRangeWithTotalString:self.string SubString:rangeStr];
@@ -73,16 +72,12 @@
  *  @return 位置数组
  */
 - (NSMutableArray *)br_getRangeWithTotalString:(NSString *)totalString SubString:(NSString *)subString {
-    
-    
-    
     if (subString == nil && [subString isEqualToString:@""]) {
         return nil;
     }
     NSMutableArray *arrayRanges = [NSMutableArray array];
     
-    //方法一、NSRegularExpression
-    
+    // 方法一、NSRegularExpression
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:subString options:0 error:nil];
     NSArray *matches = [regex matchesInString:totalString options:0 range:NSMakeRange(0, totalString.length)];
     
@@ -92,130 +87,114 @@
     }
     return arrayRanges;
     
-    //方法二、[NSString componentsSeparatedByString:]分解得到数组，在用数组捣鼓出ranges
+    // 方法二、[NSString componentsSeparatedByString:]分解得到数组，在用数组捣鼓出ranges
     /*
-     NSArray *array=[totalString componentsSeparatedByString:subString];
-     NSInteger d=0;
-     for (int i=0; i<array.count-1; i++) {
-     
-     NSString *string=array[i];
-     NSRange range=NSMakeRange(d+string.length, subString.length);
-     d=NSMaxRange(range);
-     [arrayRanges addObject:[NSNumber valueWithRange:range]];
-     
-     }
-     return arrayRanges;
+         NSArray *array=[totalString componentsSeparatedByString:subString];
+         NSInteger d=0;
+         for (int i=0; i<array.count-1; i++) {
+         
+         NSString *string=array[i];
+         NSRange range=NSMakeRange(d+string.length, subString.length);
+         d=NSMaxRange(range);
+         [arrayRanges addObject:[NSNumber valueWithRange:range]];
+         
+         }
+         return arrayRanges;
      */
     
-    
-    //方法三、rangeOfString 查找
+    // 方法三、rangeOfString 查找
     /*
-     NSRange searchRange = NSMakeRange(0, [totalString length]);
-     NSRange range=NSMakeRange(0, 0);
-     while ((range = [totalString rangeOfString:subString options:0 range:searchRange]).location != NSNotFound) {
-     [arrayRanges addObject:[NSNumber valueWithRange:range]];
-     searchRange = NSMakeRange(NSMaxRange(range), searchRange.length - NSMaxRange(range));
-     }
-     return arrayRanges;
+         NSRange searchRange = NSMakeRange(0, [totalString length]);
+         NSRange range=NSMakeRange(0, 0);
+         while ((range = [totalString rangeOfString:subString options:0 range:searchRange]).location != NSNotFound) {
+         [arrayRanges addObject:[NSNumber valueWithRange:range]];
+         searchRange = NSMakeRange(NSMaxRange(range), searchRange.length - NSMaxRange(range));
+         }
+         return arrayRanges;
      */
-    
 }
 
-- (void)br_addAttribute:(NSString *)name value:(id)value{
-    
-    NSRange range=[self range];
-    
-    if (range.length>0) {
-        
+- (void)br_addAttribute:(NSString *)name value:(id)value {
+    NSRange range = [self range];
+    if (range.length > 0) {
         [self addAttribute:name value:value range:range];
-    }else{
+    } else {
         NSLog(@"AttributedString的string为空，注意!!!");
     }
-    
-    
 }
 
-//获取有效的range
-- (NSRange)range{
-    
-    NSRange range=NSMakeRange(0, 0);
-    NSString *string=self.string;
-    if (string&&string.length>0) {
-        
-        if (self.changeRange.length>0&&NSMaxRange(self.changeRange)<=string.length) {
-            //如果是需要修改的字符，就使用changeRange
-            range=self.changeRange;
-        }else{
-            //设置全部字符串
-            range=NSMakeRange(0, string.length);
+// 获取有效的range
+- (NSRange)range {
+    NSRange range = NSMakeRange(0, 0);
+    NSString *string = self.string;
+    if (string && string.length > 0) {
+        if (self.changeRange.length > 0 && NSMaxRange(self.changeRange) <= string.length) {
+            // 如果是需要修改的字符，就使用changeRange
+            range = self.changeRange;
+        } else {
+            // 设置全部字符串
+            range = NSMakeRange(0, string.length);
         }
     }
     return range;
 }
 
-- (NSMutableParagraphStyle *)br_paragraphStyle{
-    
-    NSRange range=[self range];
-    if (range.length>0) {
-        
+- (NSMutableParagraphStyle *)br_paragraphStyle {
+    NSRange range = [self range];
+    if (range.length > 0) {
         NSDictionary *dic = [self attributesAtIndex:0 effectiveRange:&range];
         NSMutableParagraphStyle *paragraphStyle=dic[@"NSParagraphStyle"];
-        
         //如果字符串里面没有paragraphStyle，new一个新的
         if (!paragraphStyle) {
-            paragraphStyle=[[NSMutableParagraphStyle alloc]init];
+            paragraphStyle = [[NSMutableParagraphStyle alloc]init];
         }
         return paragraphStyle;
-    }else{
+    } else {
         NSLog(@"AttributedString的string为空，注意!!!");
         return nil;
     }
 }
 
-#pragma mark -ChangeRange的get、set
-
--(void)setChangeRange:(NSRange)changeRange{
+#pragma mark - ChangeRange 的 get、set
+- (void)setChangeRange:(NSRange)changeRange {
     objc_setAssociatedObject(self, @selector(changeRange), [NSNumber valueWithRange:changeRange], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(NSRange)changeRange{
-    
+- (NSRange)changeRange {
     NSNumber *rangeNum = objc_getAssociatedObject(self, @selector(changeRange));
     NSRange range = [rangeNum rangeValue];
     return range;
 }
 
 #pragma mark - 设置各种配置参数
-//颜色
-- (NSMutableAttributedString *(^)(UIColor *))br_color{
-    
+// 颜色
+- (NSMutableAttributedString *(^)(UIColor *))br_color {
     return ^NSMutableAttributedString *(UIColor *obj) {
-        [self br_addAttribute:NSForegroundColorAttributeName  value:obj];
-        return self;
-    };
-}
-/**
- .br_bgColor(背景颜色)
- */
-- (NSMutableAttributedString *(^)(UIColor *))br_bgColor{
-    
-    return ^NSMutableAttributedString *(UIColor *obj) {
-        [self br_addAttribute:NSBackgroundColorAttributeName  value:obj];
+        [self br_addAttribute:NSForegroundColorAttributeName value:obj];
         return self;
     };
 }
 
-//字体
-- (NSMutableAttributedString *(^)(UIFont *))br_font{
+/**
+ .br_bgColor(背景颜色)
+ */
+- (NSMutableAttributedString *(^)(UIColor *))br_bgColor {
+    return ^NSMutableAttributedString *(UIColor *obj) {
+        [self br_addAttribute:NSBackgroundColorAttributeName value:obj];
+        return self;
+    };
+}
+
+// 字体
+- (NSMutableAttributedString *(^)(UIFont *))br_font {
     return ^NSMutableAttributedString *(UIFont *obj) {
         [self br_addAttribute:NSFontAttributeName value:obj];
         return self;
     };
 }
 
-//偏移量
-- (NSMutableAttributedString *(^)(CGFloat ))br_baselineOffset{
-    
+// 偏移量
+- (NSMutableAttributedString *(^)(CGFloat ))br_baselineOffset {
     return ^NSMutableAttributedString *(CGFloat obj) {
         [self br_addAttribute:NSBaselineOffsetAttributeName value:@(obj)];
         return self;
@@ -223,8 +202,7 @@
 }
 
 //.br_ligature(连体符)设置连体属性，0 表示没有连体字符，1 表示使用默认的连体字符
-- (NSMutableAttributedString *(^)(NSInteger))br_ligature{
-    
+- (NSMutableAttributedString *(^)(NSInteger))br_ligature {
     return ^NSMutableAttributedString *(NSInteger obj) {
         [self br_addAttribute:NSLigatureAttributeName value:@(obj)];
         return self;
@@ -342,18 +320,6 @@
         return self;
     };
 }
-
-//NSAttachmentAttributeName 设置文本附件,取值为NSTextAttachment对象,常用于文字图片混排
-/*
- NSTextAttachment *textAttachment01 = [[NSTextAttachment alloc] init];
- textAttachment01.image = [UIImage imageNamed: @"10000.jpeg"];  //设置图片源
- textAttachment01.bounds = CGRectMake(0, 0, 30, 30);          //设置图片位置和大小
- NSMutableAttributedString *attrStr01 = [[NSMutableAttributedString alloc] initWithString: originStr];
- [attrStr01 addAttribute: NSFontAttributeName value: [UIFont systemFontOfSize: 25] range: NSMakeRange(0, originStr.length)];
- NSAttributedString *attrStr11 = [NSAttributedString attributedStringWithAttachment: textAttachment01];
- [attrStr01 insertAttributedString: attrStr11 atIndex: 2];  //NSTextAttachment占用一个字符长度，插入后原字符串长度增加1
- _label01.attributedText = attrStr01;
- */
 
 #pragma mark -NSParagraphStyleAttributeName 设置文本段落排版格式
 //对齐
