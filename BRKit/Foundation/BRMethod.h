@@ -21,7 +21,7 @@ static inline BOOL br_isNullOrNil(id object) {
     if (object == nil || [object isEqual:[NSNull null]]) {
         return YES;
     }
-    if ([object isEqual:@"null"] || [object isEqual:@"(null)"]) {
+    if ([object isEqual:@"null"] || [object isEqual:@"NULL"] || [object isEqual:@"(null)"]) {
         return YES;
     }
     return NO;
@@ -36,14 +36,11 @@ static inline BOOL br_isNotNullOrNil(id object) {
 
 /**
  *  判断对象是否为空
- *  nil、NSNil、@"null"、@"(null)"、@""、@0、@[]、@{} 返回 YES
+ *  nil、NSNil、@"null"、@"(null)"、@""、@[]、@{} 返回 YES
  *  @return YES 为空，NO 为实例对象
  */
 static inline BOOL br_isEmptyObject(id object) {
     if (br_isNullOrNil(object)) {
-        return YES;
-    }
-    if ([object isKindOfClass:[NSNumber class]] && [object isEqualToNumber:@0]) {
         return YES;
     }
     if ([object respondsToSelector:@selector(length)] && [(NSData *)object length] == 0) {
@@ -100,6 +97,7 @@ static inline BOOL br_isValidPositiveNumber(id object) {
     
     return YES;
 }
+
 
 /** 获取非空字符串，可指定缺省值 */
 static inline NSString *br_nonullString(NSString *object, NSString *placeholder) {
