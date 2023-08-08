@@ -54,7 +54,7 @@ BRSYNTH_DUMMY_CLASS(NSArray_BRAdd)
 @implementation NSMutableArray (BRAdd)
 #pragma mark - 添加元素
 - (void)br_addObject:(id)anObject {
-    if (br_isEmpty(anObject)) {
+    if (br_isEmptyObject(anObject)) {
         return;
     }
     [self addObject:anObject];

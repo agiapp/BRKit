@@ -20,7 +20,7 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
     if ([NSJSONSerialization isValidJSONObject:self]) {
         NSError *error = nil;
         // 1.转化为 JSON 格式的 NSData
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:0 error:&error];
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:kNilOptions error:&error];
         if (error) {
             NSLog(@"字典转JSON字符串失败：%@", error);
         }
@@ -50,7 +50,7 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
 - (NSString *)br_toURLStringWithSortedDictionary:(BRDictionarySortType)type {
     NSArray *allKeyArr = [self allKeys];
     // 数组排序方法
-    NSArray *sortAllKeyArr = [allKeyArr sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    NSArray *sortAllKeyArr = [allKeyArr sortedArrayUsingComparator:^NSComparisonResult(id _Nonnull obj1, id _Nonnull obj2) {
     /*
         NSComparisonResult resuest = [obj1 compare:obj2]; 为从小到大,即升序;
         NSComparisonResult resuest = [obj2 compare:obj1]; 为从大到小,即降序;
@@ -99,10 +99,10 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
 
 #pragma mark - 给可变字典添加键值对
 - (void)br_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
-    if (br_isEmpty(aKey)) {
+    if (br_isEmptyObject(aKey)) {
         return;
     }
-    if (br_isEmpty(anObject) && ![anObject isEqual:@""]) {
+    if (br_isEmptyObject(anObject) && ![anObject isEqual:@""]) {
         return;
     }
     if ([anObject isKindOfClass:[NSString class]] && ![anObject br_isValidString]) {
