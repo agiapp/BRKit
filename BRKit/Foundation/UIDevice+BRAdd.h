@@ -10,6 +10,28 @@
 
 @interface UIDevice (BRAdd)
 
+/// 顶部安全区高度
++ (CGFloat)br_safeDistanceTop;
+
+/// 底部安全区高度
++ (CGFloat)br_safeDistanceBottom;
+
+/// 顶部状态栏高度（包括安全区）
++ (CGFloat)br_statusBarHeight;
+
+/// 导航栏高度
++ (CGFloat)br_navigationBarHeight;
+
+/// 状态栏+导航栏的高度
++ (CGFloat)br_navigationFullHeight;
+
+/// 底部导航栏高度
++ (CGFloat)br_tabBarHeight;
+
+/// 底部导航栏高度（包括安全区）
++ (CGFloat)br_tabBarFullHeight;
+
+
 /// 系统（如：iOS 13.5.1）
 - (NSString *)br_systemString;
 
