@@ -13,6 +13,7 @@
 #import <BRKit/BRKitMacro.h>
 #import <BRKit/BRMethod.h>
 #import <BRKit/NSString+BRAdd.h>
+#import <NSMutableAttributedString+BRAdd.h>
 #import <BRKit/NSArray+BRAdd.h>
 #import <BRKit/NSDictionary+BRAdd.h>
 #import <BRKit/NSDate+BRAdd.h>
@@ -34,6 +35,7 @@
 #import "BRKitMacro.h"
 #import "BRMethod.h"
 #import "NSString+BRAdd.h"
+#import "NSMutableAttributedString+BRAdd.h"
 #import "NSArray+BRAdd.h"
 #import "NSDictionary+BRAdd.h"
 #import "NSDate+BRAdd.h"

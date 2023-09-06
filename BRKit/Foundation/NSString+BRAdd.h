@@ -106,6 +106,23 @@ NS_ASSUME_NONNULL_BEGIN
 /** label富文本: 插入图片 */
 - (NSMutableAttributedString *)br_insertImage:(UIImage *)image bounds:(CGRect)bounds location:(NSInteger)location;
 
+/**
+ *  设置指定子字符串的样式
+ *  @param  string   子字符串（支持正则表达式）
+ *  @param  color    子字符串的字体颜色
+ *  @param  font     子字符串的字体大小
+ *  @return 富文本字符串
+ */
+- (NSMutableAttributedString *)br_setTextStyleOfSubString:(NSString *)subString color:(nullable UIColor *)color font:(nullable UIFont *)font;
+
+/**
+ *  在某个字符串中，获取子字符串的所有位置
+ *  @param string     总的字符串
+ *  @param subString  子字符串（支持正则表达式）
+ *  @return 位置数组
+ */
+- (NSArray *)br_getRangeArrayOfSubString:(NSString *)subString;
+
 /** label富文本: 设置不同字体和颜色 */
 - (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText changeFont:(nullable UIFont *)font changeTextColor:(nullable UIColor *)color;
 /** label富文本: 设置不同颜色和行高 */
@@ -120,9 +137,6 @@ NS_ASSUME_NONNULL_BEGIN
                                         changeFont:(nullable UIFont *)font
                                    changeTextColor:(nullable UIColor *)color
                                        lineSpacing:(CGFloat)lineSpacing;
-
-/** 获取字符串中多个相同字符串的所有range */
-- (NSArray *)br_rangeArrayOfSubString:(NSString *)subString;
 
 /** label富文本: HTML标签文本 */
 - (NSMutableAttributedString *)br_setTextHTMLString;

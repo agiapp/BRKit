@@ -12,17 +12,35 @@
 /**
     使用例子：
  
-    NSString *text = @"这是一段富文本。Hello Word!";
-    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:text];
-    // 设置字号14、颜色、行间距
-    attributedStr.br_font([UIFont systemFontOfSize:14]).br_color([UIColor blackColor]).br_lineSpacing(2);
-
-    // 把全部“Hello”字变成红色、字号16
-    [attributedStr br_changeSubStrings:@[@"为"] makeCalculators:^(NSMutableAttributedString *make) {
-       make.br_color([UIColor redColor]).br_font([UIFont systemFontOfSize:16]);
+    NSString *text = @"这是一段富文本，<em>测试</em>文本。Hello Word!";
+    // 创建 attributedString
+    //NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]initWithString:text];
+    NSMutableAttributedString *attributedString = NSMutableAttributedString.br_attributedString(text);
+ 
+    // 设置全部字符串样式（链式写法1）
+    attributedString.br_color([UIColor blackColor]).br_font([UIFont systemFontOfSize:16]).br_lineSpacing(5);
+    // 设置全部字符串样式（链式写法2）
+    [attributedString br_makeCalculators:^(NSMutableAttributedString *make) {
+        make.br_color([UIColor blackColor]);
+        make.br_font([UIFont systemFontOfSize:16]);
+        make.br_lineBreakMode(NSLineBreakByWordWrapping);
+        make.br_alignment(NSTextAlignmentCenter);
+        make.br_lineSpacing(5);
+        make.br_emTagString([UIColor redColor]); // <em>标签内文本标红显示
     }];
  
-    label.attributedText = attributedStr;
+    // 设置指定字符串样式
+    [attributedString br_changeSubStrings:@[@"Hello"] makeCalculators:^(NSMutableAttributedString *make) {
+        make.br_color([UIColor orangeColor]).br_font([UIFont systemFontOfSize:16]);
+    }];
+ 
+    // 设置<em>标签内文本样式
+    [attributedString br_changeTagString:@"em" makeCalculators:^(NSMutableAttributedString *make) {
+        make.br_color([UIColor redColor]);
+        make.br_font([UIFont systemFontOfSize:22]);
+    }];
+ 
+    label.attributedText = attributedString;
  
  */
 
@@ -36,24 +54,50 @@
 + (NSMutableAttributedString *(^)(NSString *text))br_attributedString;
 
 /**
- 改变某些文字的颜色 并单独设置其字体
- @param subStrings 想要变色的字符数组
- @param block   里面用make.各种想要的设置
+ *  设置字符串的样式
+ *  @param  block       里面用make.各种想要的设置
  */
-- (void)br_changeSubStrings:(NSArray *)subStrings makeCalculators:(void (^)(NSMutableAttributedString * make))block;
+- (void)br_makeCalculators:(void (^)(NSMutableAttributedString *make))block;
+
+/**
+ *  设置子字符串的样式
+ *  @param  subString   子字符串数（支持正则表达式）
+ *  @param  block       里面用make.各种想要的设置
+ */
+- (void)br_changeSubString:(NSString *)subString makeCalculators:(void (^)(NSMutableAttributedString *make))block;
+
+/**
+ *  设置多个子字符串的样式
+ *  @param  subStrings  子字符串数组（支持正则表达式）
+ *  @param  block       里面用make.各种想要的设置
+ */
+- (void)br_changeSubStrings:(NSArray *)subStrings makeCalculators:(void (^)(NSMutableAttributedString *make))block;
+
+/**
+ *  设置标签内字符串的样式
+ *  @param  tagString  标签字符串（如：em，表示设置<em></em>标签内字符串的样式）
+ *  @param  block   里面用make.各种想要的设置
+ */
+- (void)br_changeTagString:(NSString *)tagString makeCalculators:(void (^)(NSMutableAttributedString *make))block;
+
+/**
+ *  <em>标签内字符串标记颜色显示（一般用于搜索结果展示）
+ *  如：@"美国<em>苹果</em>公司"，@"苹果"关键词标红显示
+ */
+- (NSMutableAttributedString *(^)(UIColor *))br_emTagString;
 
 /**
  多个AttributedString连接
  */
 - (void)br_appendAttributedStrings:(NSArray *)attrStrings;
+
 /**
  多个AttributedString连接
  */
 + (NSMutableAttributedString *)br_appendAttributedStrings:(NSArray *)attrStrings;
 
 
-
-#pragma mark -基本设置
+#pragma mark - 基本设置
 // NSFontAttributeName                  设置字体属性，默认值：字体：Helvetica(Neue) 字号：12
 // NSForegroundColorAttributeNam        设置字体颜色，取值为 UIColor对象，默认值为黑色
 // NSBackgroundColorAttributeName       设置字体所在区域背景颜色，取值为 UIColor对象，默认值为nil, 透明色
@@ -74,7 +118,6 @@
 // NSVerticalGlyphFormAttributeName     设置文字排版方向，取值为 NSNumber 对象(整数)，0 表示横排文本，1 表示竖排文本
 // NSLinkAttributeName                  设置链接属性，点击后调用打开指定URL地址
 // NSAttachmentAttributeName            设置文本附件,取值为NSTextAttachment对象,常用于文字图片混排
-
 
 /**
  .color(文字颜色)
@@ -101,7 +144,6 @@
  */
 - (NSMutableAttributedString *(^)(NSInteger))br_ligature;
 
-
 /**
  .br_kern(字间距)，取值为 NSNumber 对象（整数），正值间距加宽，负值间距变窄
  */
@@ -123,7 +165,7 @@
 - (NSMutableAttributedString *(^)(NSUnderlineStyle))br_underlineStyle;
 
 /**
- NSUnderlineColorAttributeName      设置下划线颜色，取值为 UIColor 对象，默认值为黑色
+ NSUnderlineColorAttributeName 设置下划线颜色，取值为 UIColor 对象，默认值为黑色
  */
 - (NSMutableAttributedString *(^)(UIColor *))br_underlineColor;
 
@@ -172,20 +214,21 @@
  */
 - (NSMutableAttributedString *(^)(NSURL *))br_linkAttribute;
 
-#pragma mark -NSParagraphStyleAttributeName 设置文本段落排版格式
-//alignment             //对齐方式
-//lineSpacing              //行距
-//paragraphSpacing         //段距
-//firstLineHeadIndent     //首行缩进
-//headIndent             //缩进
-//tailIndent              //尾部缩进
-//lineBreakMode          //断行方式
-//maximumLineHeight      //最大行高
-//minimumLineHeight      //最低行高
-//paragraphSpacingBefore  //段首空间
-//baseWritingDirection      //句子方向
-//lineHeightMultiple      //可变行高,乘因数。
-//hyphenationFactor     //连字符属性
+
+#pragma mark - NSParagraphStyleAttributeName 设置文本段落排版格式
+// alignment                //对齐方式
+// lineSpacing              //行距
+// paragraphSpacing         //段距
+// firstLineHeadIndent      //首行缩进
+// headIndent               //缩进
+// tailIndent               //尾部缩进
+// lineBreakMode            //断行方式
+// maximumLineHeight        //最大行高
+// minimumLineHeight        //最低行高
+// paragraphSpacingBefore   //段首空间
+// baseWritingDirection     //句子方向
+// lineHeightMultiple       //可变行高,乘因数。
+// hyphenationFactor        //连字符属性
 
 /**
  .alignment(对齐)
@@ -205,47 +248,46 @@
 /**
  首行缩进
  */
-- (NSMutableAttributedString *(^)(CGFloat ))br_firstLineHeadIndent;
+- (NSMutableAttributedString *(^)(CGFloat))br_firstLineHeadIndent;
 
 /**
  缩进
  */
-- (NSMutableAttributedString *(^)(CGFloat ))br_headIndent;
+- (NSMutableAttributedString *(^)(CGFloat))br_headIndent;
 
 /**
  尾部缩进
  */
-- (NSMutableAttributedString *(^)(CGFloat ))br_tailIndent;
+- (NSMutableAttributedString *(^)(CGFloat))br_tailIndent;
 
 /**
  断行方式
  */
-- (NSMutableAttributedString *(^)(NSLineBreakMode ))br_lineBreakMode;
+- (NSMutableAttributedString *(^)(NSLineBreakMode))br_lineBreakMode;
 
 /**
  最大行高
  */
-- (NSMutableAttributedString *(^)(CGFloat ))br_maximumLineHeight;
+- (NSMutableAttributedString *(^)(CGFloat))br_maximumLineHeight;
 
 /**
  最低行高
  */
-- (NSMutableAttributedString *(^)(CGFloat ))br_minimumLineHeight;
+- (NSMutableAttributedString *(^)(CGFloat))br_minimumLineHeight;
 
 /**
  句子方向
  */
-- (NSMutableAttributedString *(^)(NSWritingDirection ))br_baseWritingDirection;
+- (NSMutableAttributedString *(^)(NSWritingDirection))br_baseWritingDirection;
 
 /**
- 可变行高,乘因数。
+ 可变行高,乘因数
  */
-- (NSMutableAttributedString *(^)(CGFloat ))br_lineHeightMultiple;
+- (NSMutableAttributedString *(^)(CGFloat))br_lineHeightMultiple;
 
 /**
- 连字符属性。
+ 连字符属性
  */
-- (NSMutableAttributedString *(^)(CGFloat ))br_hyphenationFactor;
-
+- (NSMutableAttributedString *(^)(CGFloat))br_hyphenationFactor;
 
 @end

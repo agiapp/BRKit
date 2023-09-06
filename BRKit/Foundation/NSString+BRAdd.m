@@ -239,6 +239,79 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return attrString;
 }
 
+/**
+ *  设置指定子字符串的样式
+ *  @param  string   子字符串（支持正则表达式）
+ *  @param  color    子字符串的字体颜色
+ *  @param  font     子字符串的字体大小
+ *  @return 富文本字符串
+ */
+- (NSMutableAttributedString *)br_setTextStyleOfSubString:(NSString *)subString color:(UIColor *)color font:(UIFont *)font {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self];
+    NSArray *rangeArr = [self br_getRangeArrayOfSubString:subString];
+    if (!rangeArr) {
+        return attributedString;
+    }
+    for (NSNumber *rangeObj in rangeArr) {
+        NSRange range = [rangeObj rangeValue];
+        if (color) {
+            // 设置不同颜色
+            [attributedString addAttribute:NSForegroundColorAttributeName value:color range:range];
+        }
+        if (font) {
+            // 设置不同字体
+            [attributedString addAttribute:NSFontAttributeName value:font range:range];
+        }
+    }
+
+    return attributedString;
+}
+
+/**
+ *  在某个字符串中，获取子字符串的所有位置
+ *  @param string     总的字符串
+ *  @param subString  子字符串（支持正则表达式）
+ *  @return 位置数组
+ */
+- (NSArray *)br_getRangeArrayOfSubString:(NSString *)subString {
+    if (subString == nil && [subString isEqualToString:@""]) {
+        return nil;
+    }
+    NSMutableArray *rangeArr = [[NSMutableArray alloc]init];
+    
+    // 方法1：使用正则表达式（更灵活）
+    NSString *regexPattern = subString;
+    // NSRegularExpressionCaseInsensitive 不区分大小写的
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexPattern options:NSRegularExpressionCaseInsensitive error:nil];
+    NSArray<NSTextCheckingResult *> *matches = [regex matchesInString:self options:0 range:NSMakeRange(0, self.length)];
+    // 遍历匹配结果，并将对应范围的文字设置为红色
+    // matches.objectEnumerator //正向枚举，正向遍历数组
+    for (NSTextCheckingResult *match in matches) {
+        NSRange matchRange = [match range];
+        [rangeArr addObject:[NSNumber valueWithRange:matchRange]];
+    }
+/*
+    // 方法2：[NSString componentsSeparatedByString:] 分解得到数组
+    NSArray *array = [self componentsSeparatedByString:subString];
+    NSInteger d = 0;
+    for (NSInteger i = 0; i < array.count - 1; i++) {
+        NSString *string = array[i];
+        NSRange range = NSMakeRange(d + string.length, subString.length);
+        d = NSMaxRange(range);
+        [rangeArr addObject:[NSNumber valueWithRange:range]];
+    }
+    
+    // 方法3：rangeOfString 查找
+    NSRange searchRange = NSMakeRange(0, [self length]);
+    NSRange range = NSMakeRange(0, 0);
+    while ((range = [self rangeOfString:subString options:0 range:searchRange]).location != NSNotFound) {
+        searchRange = NSMakeRange(NSMaxRange(range), searchRange.length - NSMaxRange(range));
+        [rangeArr addObject:[NSNumber valueWithRange:range]];
+    }
+*/
+    return [rangeArr copy];
+}
+
 #pragma mark - label富文本: 设置不同字体和颜色
 - (NSMutableAttributedString *)br_setChangeText:(NSString *)changeText
                                      changeFont:(UIFont *)font
@@ -303,24 +376,7 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
                                         changeFont:(nullable UIFont *)font
                                    changeTextColor:(nullable UIColor *)color
                                        lineSpacing:(CGFloat)lineSpacing {
-    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
-    if (![changeText br_isValidString]) {
-        return attrString;
-    }
-    NSArray *rangeArr = [self br_rangeArrayOfSubString:changeText];
-    if (rangeArr && rangeArr.count > 0) {
-        for (NSInteger i = 0; i < rangeArr.count; i++) {
-            NSRange range = [rangeArr[i] rangeValue];
-            if (font) {
-                // 设置不同字体
-                [attrString addAttribute:NSFontAttributeName value:font range:range];
-            }
-            if (color) {
-                // 设置不同颜色
-                [attrString addAttribute:NSForegroundColorAttributeName value:color range:range];
-            }
-        }
-    }
+    NSMutableAttributedString *attrString = [self br_setTextStyleOfSubString:changeText color:color font:font];
     if (lineSpacing > 0) {
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         // 行间距
@@ -330,21 +386,6 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     }
     
     return attrString;
-}
-
-#pragma mark - 获取字符串中多个相同字符串的所有range
-- (NSArray *)br_rangeArrayOfSubString:(NSString *)subString {
-    NSMutableArray *rangeArr = [NSMutableArray array];
-    NSString *string1 = [self stringByAppendingString:subString];
-    NSString *temp = nil;
-    for (NSInteger i = 0; i < (self.length - subString.length + 1); i++) {
-        temp = [string1 substringWithRange:NSMakeRange(i, subString.length)];
-        if ([temp isEqualToString:subString]) {
-            NSRange range = {i, subString.length};
-            [rangeArr addObject: [NSValue valueWithRange:range]];
-        }
-    }
-    return [rangeArr copy];
 }
 
 #pragma mark - label富文本: HTML标签文本（HTMLString 转化为NSAttributedString）
