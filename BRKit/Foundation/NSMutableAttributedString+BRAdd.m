@@ -11,6 +11,7 @@
 #import <objc/runtime.h>
 
 @interface NSMutableAttributedString ()
+/** 记录要改变的Range（即当前要修改的文本范围），为空时就设置的是全部字符串 */
 @property(nonatomic, assign) NSRange changeRange;
 
 @end
@@ -33,7 +34,7 @@
  */
 - (void)br_makeCalculators:(void (^)(NSMutableAttributedString *make))block {
     // block 链式调用
-    block(self);
+    block ? block(self) : nil;
 }
 
 /**
@@ -42,14 +43,14 @@
  *  @param  block       里面用make.各种想要的设置
  */
 - (void)br_changeSubString:(NSString *)subString makeCalculators:(void (^)(NSMutableAttributedString *make))block {
-    NSMutableArray *rangeArr = [self.string br_getRangeArrayOfSubString:subString];
+    NSArray *rangeArr = [self.string br_getRangeArrayOfSubString:subString];
     for (NSNumber *rangeObj in rangeArr) {
         // 设置修改range
         self.changeRange = [rangeObj rangeValue];
         // block 链式调用
-        block(self);
+        block ? block(self) : nil;
     }
-    // 设置为空
+    // 重置为空，为空就设置全部字符串
     self.changeRange = NSMakeRange(0, 0);
 }
 
@@ -60,15 +61,15 @@
  */
 - (void)br_changeSubStrings:(NSArray *)subStrings makeCalculators:(void (^)(NSMutableAttributedString *make))block {
     for (NSString *subString in subStrings) {
-        NSMutableArray *rangeArr = [self.string br_getRangeArrayOfSubString:subString];
+        NSArray *rangeArr = [self.string br_getRangeArrayOfSubString:subString];
         for (NSNumber *rangeObj in rangeArr) {
             // 设置修改range
             self.changeRange = [rangeObj rangeValue];
             // block 链式调用
-            block(self);
+            block ? block(self) : nil;
         }
     }
-    // 设置为空
+    // 重置为空，为空就设置全部字符串
     self.changeRange = NSMakeRange(0, 0);
 }
 
@@ -96,10 +97,9 @@
         // 设置修改range
         self.changeRange = keywordRange;
         // block 链式调用
-        block(self);
+        block ? block(self) : nil;
     }
-    
-    // 设置为空
+    // 重置为空，为空就设置全部字符串
     self.changeRange = NSMakeRange(0, 0);
 }
 
@@ -161,22 +161,6 @@
     }
 }
 
-// 获取有效的range
-- (NSRange)range {
-    NSRange range = NSMakeRange(0, 0);
-    NSString *string = self.string;
-    if (string && string.length > 0) {
-        if (self.changeRange.length > 0 && NSMaxRange(self.changeRange) <= string.length) {
-            // 如果是需要修改的字符，就使用changeRange
-            range = self.changeRange;
-        } else {
-            // 设置全部字符串
-            range = NSMakeRange(0, string.length);
-        }
-    }
-    return range;
-}
-
 - (NSMutableParagraphStyle *)br_paragraphStyle {
     NSRange range = [self range];
     if (range.length > 0) {
@@ -193,22 +177,22 @@
     }
 }
 
-#pragma mark - ChangeRange 的 get、set
-- (void)setChangeRange:(NSRange)changeRange {
-    objc_setAssociatedObject(self, @selector(changeRange), [NSNumber valueWithRange:changeRange], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSRange)changeRange {
-    NSNumber *rangeNum = objc_getAssociatedObject(self, @selector(changeRange));
-    NSRange range = [rangeNum rangeValue];
-    return range;
-}
-
 #pragma mark - 设置各种配置参数
 // 颜色
 - (NSMutableAttributedString *(^)(UIColor *))br_color {
     return ^NSMutableAttributedString *(UIColor *obj) {
         [self br_addAttribute:NSForegroundColorAttributeName value:obj];
+        return self;
+    };
+}
+
+// 颜色（指定范围）
+- (NSMutableAttributedString *(^)(UIColor *, NSRange))br_colorRange {
+    return ^NSMutableAttributedString *(UIColor *color, NSRange range) {
+        self.changeRange = range;
+        [self br_addAttribute:NSForegroundColorAttributeName value:color];
+        // 重置为空，为空就设置全部字符串
+        self.changeRange = NSMakeRange(0, 0);
         return self;
     };
 }
@@ -223,8 +207,19 @@
 
 // 字体
 - (NSMutableAttributedString *(^)(UIFont *))br_font {
-    return ^NSMutableAttributedString *(UIFont *obj) {
-        [self br_addAttribute:NSFontAttributeName value:obj];
+    return ^NSMutableAttributedString *(UIFont *font) {
+        [self br_addAttribute:NSFontAttributeName value:font];
+        return self;
+    };
+}
+
+// 字体（指定范围）
+- (NSMutableAttributedString *(^)(UIFont *, NSRange))br_fontRange {
+    return ^NSMutableAttributedString *(UIFont *font, NSRange range) {
+        self.changeRange = range;
+        [self br_addAttribute:NSFontAttributeName value:font];
+        // 重置为空，为空就设置全部字符串
+        self.changeRange = NSMakeRange(0, 0);
         return self;
     };
 }
@@ -477,6 +472,33 @@
         [self br_addAttribute:NSParagraphStyleAttributeName value:style];
         return self;
     };
+}
+
+#pragma mark - ChangeRange 的 get、set
+- (void)setChangeRange:(NSRange)changeRange {
+    objc_setAssociatedObject(self, @selector(changeRange), [NSNumber valueWithRange:changeRange], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSRange)changeRange {
+    NSNumber *rangeNum = objc_getAssociatedObject(self, @selector(changeRange));
+    NSRange range = [rangeNum rangeValue];
+    return range;
+}
+
+// 获取有效的range（当前要修改的文本范围）
+- (NSRange)range {
+    NSRange range = NSMakeRange(0, 0);
+    NSString *string = self.string;
+    if (string && string.length > 0) {
+        if (self.changeRange.length > 0 && NSMaxRange(self.changeRange) <= string.length) {
+            // 如果是需要修改的字符，就使用changeRange
+            range = self.changeRange;
+        } else {
+            // 设置全部字符串
+            range = NSMakeRange(0, string.length);
+        }
+    }
+    return range;
 }
 
 @end

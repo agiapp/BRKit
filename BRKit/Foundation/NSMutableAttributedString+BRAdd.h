@@ -125,6 +125,11 @@
 - (NSMutableAttributedString *(^)(UIColor *))br_color;
 
 /**
+ .br_colorRange(颜色, 文本范围)
+ */
+- (NSMutableAttributedString *(^)(UIColor *, NSRange))br_colorRange;
+
+/**
  .br_bgColor(背景颜色)
  */
 - (NSMutableAttributedString *(^)(UIColor *))br_bgColor;
@@ -133,6 +138,11 @@
  .font(字体)
  */
 - (NSMutableAttributedString *(^)(UIFont *))br_font;
+
+/**
+ .br_fontRange(字体, 文本范围)
+ */
+- (NSMutableAttributedString *(^)(UIFont *, NSRange))br_fontRange;
 
 /**
  .br_offset(偏移量) 正值上偏，负值下偏

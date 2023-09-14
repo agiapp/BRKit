@@ -98,7 +98,6 @@ static inline BOOL br_isValidPositiveNumber(id object) {
     return YES;
 }
 
-
 /** 获取非空字符串，可指定缺省值 */
 static inline NSString *br_nonullString(NSString *object, NSString *placeholder) {
     if (br_isValidString(object)) {
@@ -151,11 +150,27 @@ static inline NSString *br_stringFromObject(id object) {
         return @"";
     } else if ([object isKindOfClass:[NSString class]]) {
         return object;
-    } else if ([object respondsToSelector:@selector(stringValue)]){
+    } else if ([object respondsToSelector:@selector(stringValue)]) {
         return [object stringValue];
     } else {
         return [object description];
     }
+}
+
+/** 处理有效参数（有效字符串） */
+static inline NSString *br_filterValidString(NSString *string) {
+    if (br_isValidString(string)) {
+        return string;
+    }
+    return nil;
+}
+
+/** 处理有效参数（参数ID，数值大于0）*/
+static inline id br_filterValidID(id object) {
+    if (br_isValidPositiveNumber(object)) {
+        return object;
+    }
+    return nil;
 }
 
 #endif /* BRMethod_h */
