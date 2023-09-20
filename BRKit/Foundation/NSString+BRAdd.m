@@ -241,7 +241,7 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 
 /**
  *  设置指定子字符串的样式
- *  @param  string   子字符串（支持正则表达式）
+ *  @param  string   子字符串
  *  @param  color    子字符串的字体颜色
  *  @param  font     子字符串的字体大小
  *  @return 富文本字符串
@@ -270,7 +270,7 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 /**
  *  在某个字符串中，获取子字符串的所有位置
  *  @param string     总的字符串
- *  @param subString  子字符串（支持正则表达式）
+ *  @param subString  子字符串
  *  @return 位置数组
  */
 - (NSArray *)br_getRangeArrayOfSubString:(NSString *)subString {
@@ -279,16 +279,21 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     }
     NSMutableArray *rangeArr = [[NSMutableArray alloc]init];
     
-    // 方法1：使用正则表达式（更灵活）
-    NSString *regexPattern = subString;
-    // NSRegularExpressionCaseInsensitive 不区分大小写的
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexPattern options:NSRegularExpressionCaseInsensitive error:nil];
-    NSArray<NSTextCheckingResult *> *matches = [regex matchesInString:self options:0 range:NSMakeRange(0, self.length)];
-    // 遍历匹配结果，并将对应范围的文字设置为红色
-    // matches.objectEnumerator //正向枚举，正向遍历数组
-    for (NSTextCheckingResult *match in matches) {
-        NSRange matchRange = [match range];
-        [rangeArr addObject:[NSNumber valueWithRange:matchRange]];
+    // 方法1：使用字符串搜索函数查找：rangeOfString
+    // 1.使用 NSString 类中的 range(of:options:range:) 方法，在字符串 A 中查找字符串 B 的第一个匹配位置。
+    // 2.如果找到了匹配位置，则继续循环调用 range(of:options:range:) 方法，设定搜索的起始位置为上一个匹配位置的后面，直到没有更多的匹配为止。
+    NSInteger searchStartIndex = 0;
+    NSInteger foundIndex = -1;
+    while (true) {
+        NSRange searchRange = NSMakeRange(searchStartIndex, self.length - searchStartIndex);
+        NSRange range = [self rangeOfString:subString options:0 range:searchRange];
+        if (range.location != NSNotFound) {
+            foundIndex = range.location;
+            searchStartIndex = range.location + range.length;
+            [rangeArr addObject:[NSNumber valueWithRange:range]];
+        } else {
+            break;
+        }
     }
 /*
     // 方法2：[NSString componentsSeparatedByString:] 分解得到数组
@@ -301,12 +306,16 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
         [rangeArr addObject:[NSNumber valueWithRange:range]];
     }
     
-    // 方法3：rangeOfString 查找
-    NSRange searchRange = NSMakeRange(0, [self length]);
-    NSRange range = NSMakeRange(0, 0);
-    while ((range = [self rangeOfString:subString options:0 range:searchRange]).location != NSNotFound) {
-        searchRange = NSMakeRange(NSMaxRange(range), searchRange.length - NSMaxRange(range));
-        [rangeArr addObject:[NSNumber valueWithRange:range]];
+    // 方法3：使用正则表达式（需要注意：如果有特殊字符，需要转义处理，才能匹配）
+    NSString *regexPattern = subString;
+    // NSRegularExpressionCaseInsensitive 不区分大小写的
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexPattern options:NSRegularExpressionCaseInsensitive error:nil];
+    NSArray<NSTextCheckingResult *> *matches = [regex matchesInString:self options:0 range:NSMakeRange(0, self.length)];
+    // 遍历匹配结果，并将对应范围的文字设置为红色
+    // matches.objectEnumerator //正向枚举，正向遍历数组
+    for (NSTextCheckingResult *match in matches) {
+        NSRange matchRange = [match range];
+        [rangeArr addObject:[NSNumber valueWithRange:matchRange]];
     }
 */
     return [rangeArr copy];

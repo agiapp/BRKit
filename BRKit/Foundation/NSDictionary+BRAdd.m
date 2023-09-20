@@ -99,7 +99,10 @@ BRSYNTH_DUMMY_CLASS(NSDictionary_BRAdd)
 
 #pragma mark - 给可变字典添加键值对
 - (void)br_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
-    if (br_isEmptyObject(aKey) || br_isEmptyObject(anObject)) {
+    if (br_isEmptyObject(aKey)) {
+        return;
+    }
+    if (br_isEmptyObject(anObject) && ![anObject isEqual:@""]) {
         return;
     }
     [self setObject:anObject forKey:aKey];

@@ -17,4 +17,7 @@
 /** 输入文本的格式(正则表达式) */
 @property (nonatomic, copy) NSString *br_regex;
 
+/** 是否清除空格和换行符 */
+@property (nonatomic, assign) BOOL br_clearFormat;
+
 @end

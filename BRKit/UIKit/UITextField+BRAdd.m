@@ -23,6 +23,7 @@
 @dynamic br_maxLength;
 @dynamic br_maxPoint;
 @dynamic br_regex;
+@dynamic br_clearFormat;
 
 - (void)setBr_maxLength:(NSInteger)br_maxLength {
     BR_Objc_setObject(@selector(br_maxLength), @(br_maxLength));
@@ -33,7 +34,27 @@
     return [BR_Objc_getObject integerValue];
 }
 
+- (void)setBr_clearFormat:(BOOL)br_clearFormat {
+    BR_Objc_setObject(@selector(br_clearFormat), @(br_clearFormat));
+    [self addTarget:self action:@selector(handleTextFieldTextDidChangeAction) forControlEvents:UIControlEventEditingChanged];
+}
+
+- (NSInteger)br_clearFormat {
+    return [BR_Objc_getObject boolValue];
+}
+
 - (void)handleTextFieldTextDidChangeAction {
+    if (self.br_clearFormat) {
+        NSCharacterSet *charSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        // 判断是否有空格或换行符
+        BOOL containsWhitespace = [self.text rangeOfCharacterFromSet:charSet].location != NSNotFound;
+        if (containsWhitespace) {
+            NSLog(@"去除空格字符");
+            // 过滤空格或换行符
+            self.text = [[self.text componentsSeparatedByCharactersInSet:charSet] componentsJoinedByString:@""];
+        }
+    }
+    
     NSString *toBeginString = self.text;
     // 获取高亮部分
     UITextRange *selectRange = [self markedTextRange];

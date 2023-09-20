@@ -61,14 +61,14 @@
 
 /**
  *  设置子字符串的样式
- *  @param  subString   子字符串数（支持正则表达式）
+ *  @param  subString   子字符串数
  *  @param  block       里面用make.各种想要的设置
  */
 - (void)br_changeSubString:(NSString *)subString makeCalculators:(void (^)(NSMutableAttributedString *make))block;
 
 /**
  *  设置多个子字符串的样式
- *  @param  subStrings  子字符串数组（支持正则表达式）
+ *  @param  subStrings  子字符串数组
  *  @param  block       里面用make.各种想要的设置
  */
 - (void)br_changeSubStrings:(NSArray *)subStrings makeCalculators:(void (^)(NSMutableAttributedString *make))block;
