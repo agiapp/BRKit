@@ -39,7 +39,7 @@
     [self addTarget:self action:@selector(handleTextFieldTextDidChangeAction) forControlEvents:UIControlEventEditingChanged];
 }
 
-- (NSInteger)br_clearFormat {
+- (BOOL)br_clearFormat {
     return [BR_Objc_getObject boolValue];
 }
 

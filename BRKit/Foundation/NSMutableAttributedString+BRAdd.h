@@ -26,7 +26,7 @@
         make.br_lineBreakMode(NSLineBreakByWordWrapping);
         make.br_alignment(NSTextAlignmentCenter);
         make.br_lineSpacing(5);
-        make.br_emTagString([UIColor redColor]); // <em>标签内文本标红显示
+        make.br_emTagString([UIColor redColor]); // em 标签内文本标红显示
     }];
  
     // 设置指定字符串样式
@@ -34,7 +34,7 @@
         make.br_color([UIColor orangeColor]).br_font([UIFont systemFontOfSize:16]);
     }];
  
-    // 设置<em>标签内文本样式
+    // 设置 em 标签内文本样式
     [attributedString br_changeTagString:@"em" makeCalculators:^(NSMutableAttributedString *make) {
         make.br_color([UIColor redColor]);
         make.br_font([UIFont systemFontOfSize:22]);
@@ -81,7 +81,7 @@
 - (void)br_changeTagString:(NSString *)tagString makeCalculators:(void (^)(NSMutableAttributedString *make))block;
 
 /**
- *  <em>标签内字符串标记颜色显示（一般用于搜索结果展示）
+ *  em 标签内字符串标记颜色显示（一般用于搜索结果展示）
  *  如：@"美国<em>苹果</em>公司"，@"苹果"关键词标红显示
  */
 - (NSMutableAttributedString *(^)(UIColor *))br_emTagString;

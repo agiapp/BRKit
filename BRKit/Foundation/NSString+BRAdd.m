@@ -241,9 +241,9 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 
 /**
  *  设置指定子字符串的样式
- *  @param  string   子字符串
- *  @param  color    子字符串的字体颜色
- *  @param  font     子字符串的字体大小
+ *  @param  subString   子字符串
+ *  @param  color       子字符串的字体颜色
+ *  @param  font        子字符串的字体大小
  *  @return 富文本字符串
  */
 - (NSMutableAttributedString *)br_setTextStyleOfSubString:(NSString *)subString color:(UIColor *)color font:(UIFont *)font {
@@ -269,7 +269,6 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
 
 /**
  *  在某个字符串中，获取子字符串的所有位置
- *  @param string     总的字符串
  *  @param subString  子字符串
  *  @return 位置数组
  */

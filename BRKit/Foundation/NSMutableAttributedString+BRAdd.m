@@ -104,7 +104,7 @@
 }
 
 /**
- *  <em>标签内字符串标记颜色显示（一般用于搜索结果展示）
+ *  em 标签内字符串标记颜色显示（一般用于搜索结果展示）
  *  如：@"美国<em>苹果</em>公司"，@"苹果"关键词标红显示
  */
 - (NSMutableAttributedString *(^)(UIColor *))br_emTagString {
