@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   # 框架的名称
   s.name         = "BRKit"
   # 框架的版本号
-  s.version      = "2.1.0"
+  s.version      = "2.1.1"
   # 框架的简单介绍
   s.summary      = "A collection of iOS UIKit, Foundation and other extensions."
   # 框架的详细描述(详细介绍，要比简介长)
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
                     A collection of iOS UIKit, Foundation and other extensions, Support the Objective - C language.
                 DESC
   # 框架的主页
-  s.homepage     = "https://github.com/91renb/BRKit"
+  s.homepage     = "https://github.com/agiapp/BRKit"
   # 证书类型
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "9.0"
 
   # GitHib下载地址和版本
-  s.source       = { :git => "https://github.com/91renb/BRKit.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/agiapp/BRKit.git", :tag => s.version.to_s }
 
   s.public_header_files = 'BRKit/BRKit.h'
 
@@ -44,6 +44,8 @@ Pod::Spec.new do |s|
   
   # 框架包含的资源包
   # s.resources  = ""
+  # 隐私清单
+  s.resource_bundles = { 'BRKit.Privacy' => 'BRKit/PrivacyInfo.xcprivacy' }
 
   # 框架要求ARC环境下使用
   s.requires_arc = true

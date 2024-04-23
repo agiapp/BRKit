@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45C2FA982BD789020093928B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 45C2FA972BD789020093928B /* PrivacyInfo.xcprivacy */; };
 		45F57E4425B01F5C00CB613A /* UIView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E1E25B01F5C00CB613A /* UIView+BRAdd.m */; };
 		45F57E4525B01F5C00CB613A /* UIImageView+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E2025B01F5C00CB613A /* UIImageView+BRAdd.m */; };
 		45F57E4625B01F5C00CB613A /* UIColor+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F57E2225B01F5C00CB613A /* UIColor+BRAdd.m */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45C2FA972BD789020093928B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		45F57E1E25B01F5C00CB613A /* UIView+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BRAdd.m"; sourceTree = "<group>"; };
 		45F57E1F25B01F5C00CB613A /* UIImage+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BRAdd.h"; sourceTree = "<group>"; };
 		45F57E2025B01F5C00CB613A /* UIImageView+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BRAdd.m"; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				45F57E4325B01F5C00CB613A /* BRKit.h */,
 				45F57E3025B01F5C00CB613A /* Foundation */,
 				45F57E1D25B01F5C00CB613A /* UIKit */,
+				45C2FA972BD789020093928B /* PrivacyInfo.xcprivacy */,
 			);
 			path = BRKit;
 			sourceTree = SOURCE_ROOT;
@@ -245,6 +248,7 @@
 			files = (
 				C5E29E24208839E700AE642D /* LaunchScreen.storyboard in Resources */,
 				C5E29E21208839E700AE642D /* Assets.xcassets in Resources */,
+				45C2FA982BD789020093928B /* PrivacyInfo.xcprivacy in Resources */,
 				C5E29E1F208839E500AE642D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
