@@ -94,10 +94,16 @@
     return BR_Objc_getObject;
 }
 
-#pragma mark - 限制输入框输入格式
+#pragma mark - UITextFieldDelegate 限制输入框输入格式
+/// 用于控制（允许或拒绝）文本字段的内容变化
+/// 用途：限制文本输入长度、格式等；这个方法在用户通过键盘输入、粘贴或删除文本时都会被调用
+/// - Parameters:
+///   - textField: 触发此事件的文本字段
+///   - range: 将要被替换的字符范围（位置和长度）
+///   - string: 将要插入的新字符串（如果是删除操作，这个字符串是空的）
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if ([self.br_regex br_isValidString]) {
-        // 即将键入或者粘贴的string
+        // 允许删除
         if (!string.length) {
             return YES;
         }
@@ -105,7 +111,10 @@
         // 检测改变过的文本是否匹配正则表达式，如果匹配表示可以键入，否则不能键入
         return [textString br_checkStringWithRegex:self.br_regex];
     }
+    // 可以键入（允许文本改变）
     return YES;
+    // 不可以键入（拒绝文本改变）
+    // return NO;
 }
 
 @end

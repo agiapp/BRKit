@@ -157,17 +157,33 @@ static inline NSString *br_stringFromObject(id object) {
     }
 }
 
-/** 处理有效参数（有效字符串） */
-static inline NSString *br_filterValidString(NSString *string) {
+/** 处理请求参数中的字符串（有效字符串） */
+static inline NSString *br_paramValidString(NSString *string) {
     if (br_isValidString(string)) {
         return string;
     }
     return nil;
 }
 
-/** 处理有效参数（参数ID，数值大于0）*/
-static inline id br_filterValidID(id object) {
+/** 处理请求参数中的数字ID（数值 > 0，支持字符串/NSNumber 输入）*/
+static inline NSNumber *br_paramNumberID(id object) {
     if (br_isValidPositiveNumber(object)) {
+        if ([object isKindOfClass:[NSString class]]) {
+            // string 转 number（高精度计算的场景，避免精度丢失）
+            NSNumber *number = [NSDecimalNumber decimalNumberWithString:object];
+            return number;
+        }
+        return object;
+    }
+    return nil;
+}
+
+/** 处理请求参数中的字符串ID（数值 > 0，支持字符串/NSNumber 输入）*/
+static inline NSString *br_paramStringID(id object) {
+    if (br_isValidPositiveNumber(object)) {
+        if ([object isKindOfClass:[NSNumber class]]) {
+            return [object stringValue];
+        }
         return object;
     }
     return nil;
