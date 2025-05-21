@@ -189,4 +189,24 @@ static inline NSString *br_paramStringID(id object) {
     return nil;
 }
 
+/**
+ 拼接标题、值和后缀（自动处理空值/零值，返回 "标题：值后缀" 或 "标题：--"）
+ @param title 标题（必填）
+ @param value 字段值（支持 NSNumber/NSString，空值/零值显示为 "--"）
+ @param suffix 后缀（可选，如单位、符号等）
+ @return 拼接后的字符串，格式为 "标题：值后缀" 或 "标题：--"
+ */
+static inline NSString *BRJoinedTitleValueSuffix(NSString *title, id value, NSString *suffix) {
+    if (br_isNotEmptyObject(value)) {
+        if (br_isValidString(value) && ![value isEqualToString:@"0"]) {
+            return [NSString stringWithFormat:@"%@：%@%@", title, value, suffix ?: @""];
+        } else if ([value isKindOfClass:[NSNumber class]] && ![value isEqualToNumber:@0]) {
+            // 安全处理方式：修复精度丢失问题
+            NSDecimalNumber *decNumber = [NSDecimalNumber decimalNumberWithString:[value stringValue]];
+            return [NSString stringWithFormat:@"%@：%@%@", title, [decNumber stringValue], suffix ?: @""];
+        }
+    }
+    return [NSString stringWithFormat:@"%@：--", title];
+}
+
 #endif /* BRMethod_h */
