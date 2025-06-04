@@ -112,7 +112,8 @@ static inline NSString *br_nonullNumber(NSNumber *object, NSString *placeholder)
         return placeholder ? placeholder : @"--";
     }
     // 修复网络数据解析小数位精度丢失问题（建议：后台不要传浮点类型数字，直接传字符串）
-    NSString *doubleString = [NSString stringWithFormat:@"%lf", object.doubleValue];
+    // 使用高精度数值（NSNumber 转 NSDecimalNumber）
+    NSString *doubleString = [NSString stringWithFormat:@"%lf", [object doubleValue]];
     NSDecimalNumber *decNumber = [NSDecimalNumber decimalNumberWithString:doubleString];
     return [decNumber stringValue];
 }
@@ -197,16 +198,15 @@ static inline NSString *br_paramStringID(id object) {
  @return 拼接后的字符串，格式为 "标题：值后缀" 或 "标题：--"
  */
 static inline NSString *BRJoinedTitleValueSuffix(NSString *title, id value, NSString *suffix) {
+    title = br_isValidString(title) ? [NSString stringWithFormat:@"%@：", title] : @"";
     if (br_isNotEmptyObject(value)) {
         if (br_isValidString(value) && ![value isEqualToString:@"0"]) {
-            return [NSString stringWithFormat:@"%@：%@%@", title, value, suffix ?: @""];
-        } else if ([value isKindOfClass:[NSNumber class]] && ![value isEqualToNumber:@0]) {
-            // 安全处理方式：修复精度丢失问题
-            NSDecimalNumber *decNumber = [NSDecimalNumber decimalNumberWithString:[value stringValue]];
-            return [NSString stringWithFormat:@"%@：%@%@", title, [decNumber stringValue], suffix ?: @""];
+            return [NSString stringWithFormat:@"%@%@%@", title, value, suffix ?: @""];
+        } else if ([value isKindOfClass:[NSNumber class]] && ![value isEqualToNumber:@0] && ![value isEqualToNumber:@(-1)]) {
+            return [NSString stringWithFormat:@"%@%@%@", title, br_nonullNumber(value, nil), suffix ?: @""];
         }
     }
-    return [NSString stringWithFormat:@"%@：--", title];
+    return [NSString stringWithFormat:@"%@--", title];
 }
 
 #endif /* BRMethod_h */
