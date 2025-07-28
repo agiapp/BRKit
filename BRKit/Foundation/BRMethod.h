@@ -124,10 +124,10 @@ static inline NSString *br_getDateYMDString(NSString *dateString, NSString *plac
         if ([dateString containsString:@"*"]) {
             return dateString;
         }
-        if (dateString.length >= 10) {
+        if (dateString.length >= 4) {
             NSString *yearStr = [dateString substringToIndex:4];
             if ([yearStr integerValue] > 1900) {
-                return [dateString substringToIndex:10];
+                return [dateString substringToIndex:MIN(10, dateString.length)];
             }
         }
     }

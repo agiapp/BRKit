@@ -156,6 +156,23 @@ NS_ASSUME_NONNULL_BEGIN
 /** 获取段落文本的高度 */
 - (CGFloat)br_getParagraphTextHeight:(UIFont *)font width:(CGFloat)width;
 
+/**
+ * 美化HTML字符串，添加必要的HTML结构、meta标签和基础样式
+ *
+ * @param htmlString 原始HTML字符串
+ * @return 美化后的完整HTML字符串
+ */
++ (NSString *)beautifyHTMLString:(NSString *)htmlString;
+
+/**
+ * 美化HTML字符串，并允许自定义CSS样式
+ *
+ * @param htmlString 原始HTML字符串
+ * @param customCSS 自定义CSS样式（可为nil）
+ * @return 美化后的完整HTML字符串
+ */
++ (NSString *)beautifyHTMLString:(NSString *)htmlString withCustomCSS:(nullable NSString *)customCSS;
+
 
 ///==================================================
 ///             正则表达式

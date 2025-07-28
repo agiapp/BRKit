@@ -504,6 +504,63 @@ BRSYNTH_DUMMY_CLASS(NSString_BRAdd)
     return rect.size.height;
 }
 
+#pragma mark - 美化HTML字符串，添加必要的HTML结构、meta标签和基础样式
++ (NSString *)beautifyHTMLString:(NSString *)htmlString {
+    return [self beautifyHTMLString:htmlString withCustomCSS:nil];
+}
+
+#pragma mark - 美化HTML字符串，并允许自定义CSS样式
++ (NSString *)beautifyHTMLString:(NSString *)htmlString withCustomCSS:(NSString *)customCSS {
+    if (!htmlString || htmlString.length == 0) {
+        return @"";
+    }
+    
+    // 默认基础样式
+    NSString *baseCSS = @"body{width:100%; height:100%;font-size:16px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding:10px; line-height:1.6; color:#333;}"
+    ".main-box{width:90%;margin:auto;}"
+    "table{width: 100%; border-collapse: collapse; margin-bottom: 15px; overflow-x: auto; display: block;}"
+    "table td{border: 1px solid #e6e6e6; padding: 10px;}"
+    "tr:nth-child(odd) { background-color: #f8f8f8; }"
+    "@media (prefers-color-scheme: dark) {"
+    "body { background-color: #1c1c1e; color: #ffffff; }"
+    "table td { border-color: #444; }"
+    "tr:nth-child(odd) { background-color: #2c2c2e; }"
+    "}";
+    
+    // 合并自定义样式
+    NSString *finalCSS = baseCSS;
+    if (customCSS && customCSS.length > 0) {
+        finalCSS = [baseCSS stringByAppendingString:customCSS];
+    }
+    
+    // 确保有body标签
+    if (![htmlString containsString:@"<body>"]) {
+        htmlString = [NSString stringWithFormat:@"<body><div class='main-box'>%@</div></body>", htmlString];
+    }
+    
+    // 处理head部分
+    NSString *headerString = @"<meta charset='UTF-8'>"
+    "<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>"
+    "<meta name='apple-mobile-web-app-capable' content='yes'>"
+    "<style type='text/css'>%@</style>";
+    
+    headerString = [NSString stringWithFormat:headerString, finalCSS];
+    
+    if (![htmlString containsString:@"<head>"]) {
+        htmlString = [NSString stringWithFormat:@"<head>%@</head>%@", headerString, htmlString];
+    } else {
+        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<head>"
+                                                          withString:[NSString stringWithFormat:@"<head>%@", headerString]];
+    }
+    
+    // 确保有完整的HTML结构
+    if (![htmlString containsString:@"<html"]) {
+        htmlString = [NSString stringWithFormat:@"<!DOCTYPE html><html lang='zh-CN'>%@</html>", htmlString];
+    }
+    
+    return htmlString;
+}
+
 ///==================================================
 ///             正则表达式
 ///==================================================
