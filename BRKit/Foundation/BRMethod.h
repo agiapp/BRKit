@@ -98,6 +98,19 @@ static inline BOOL br_isValidPositiveNumber(id object) {
     return YES;
 }
 
+/** 判断是否是有效ID */
+static inline BOOL br_isValidID(id value) {
+    if (br_isEmptyObject(value)) {
+        return NO;
+    }
+    if ([value isKindOfClass:[NSString class]]) {
+        return br_isValidString(value) && ![value isEqualToString:@"0"] && ![value isEqualToString:@"-1"];
+    } else if ([value isKindOfClass:[NSNumber class]]) {
+        return ![value isEqualToNumber:@0] && ![value isEqualToNumber:@(-1)];
+    }
+    return YES;
+}
+
 /** 获取非空字符串，可指定缺省值 */
 static inline NSString *br_nonullString(NSString *object, NSString *placeholder) {
     if (br_isValidString(object)) {
